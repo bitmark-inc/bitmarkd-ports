@@ -1,0 +1,4 @@
+A simple restrictedproxy to limit bitcoin RPC access
+to only functions required by bitmarkd
+
+WWW: https://github.com/bitmark-inc/miniature-spoon

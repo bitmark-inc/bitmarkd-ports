@@ -1,0 +1,118 @@
+#!/bin/sh
+# $FreeBSD$
+
+# PROVIDE: miniature-spoon
+# REQUIRE: LOGIN cleanvar
+# KEYWORD: shutdown
+
+# Configuration settings in /etc/rc.conf:
+#
+# miniature-spoon_enable (bool):
+#   Set to "NO" by default.
+#   Set it to "YES" to enable miniature-spoon
+#
+# miniature-spoon_user (str):
+#   Set to "%%MINIATURE-SPOON_USER%%" by default.
+#   User to run process as and for data ownership.
+#
+# miniature-spoon_group (str):
+#   Set to "%%MINIATURE-SPOON_GROUP%%" by default.
+#   Group for data file ownership.
+#
+# miniature-spoon_config_file (str):
+#   Set to "%%PREFIX%%/etc/${name}.conf" by default.
+#   The master configuration file.
+#
+# miniature-spoon_run_dir (str):
+#   Set to "%%MINIATURE-SPOON_RUN%%" by default.
+#   The root for the pid files.
+#
+# miniature-spoonlimits_enable (bool):
+#   Set to "NO" by default.
+#   Set it to yes to run `limits ${miniature-spoonlimits_args}` just before
+#   miniature-spoon starts.
+#
+# miniature-spoonlimits_args (str):
+#   Default to "-e -U %%MINIATURE-SPOON_USER%%"
+#   Arguments of pre-start limits run.
+
+. /etc/rc.subr
+
+name="miniature-spoon"
+rcvar=miniature-spoon_enable
+
+load_rc_config ${name}
+
+: ${miniature-spoon_enable:="NO"}
+: ${miniature-spoon_user:="%%MINIATURE-SPOON_USER%%"}
+: ${miniature-spoon_group:="%%MINIATURE-SPOON_GROUP%%"}
+: ${miniature-spoon_config_file:="%%PREFIX%%/etc/${name}.conf"}
+: ${miniature-spoon_run_dir:="%%MINIATURE-SPOON_RUN%%"}
+: ${miniature-spoonlimits_enable:="NO"}
+: ${miniature-spoonlimits_args:="-e -U ${miniature-spoon_user}"}
+
+start_precmd="${name}_precmd"
+restart_precmd="${name}_checkconfig"
+stop_postcmd="${name}_poststop"
+keygen_cmd="${name}_initialise"
+keygen_precmd="${name}_checkconfig"
+
+#extra_commands='initialise reload configtest'
+extra_commands='keygen'
+
+pidfile="${miniature-spoon_run_dir}/${name}.pid"
+
+required_files="${miniature-spoon_config_file}"
+
+_miniature-spoon_program="%%PREFIX%%/sbin/miniature-spoon"
+_miniature-spoon_arguments="--quiet --config-file=${miniature-spoon_config_file}"
+
+command="/usr/sbin/daemon"
+command_args="-f -P ${pidfile} -r -- ${_miniature-spoon_program} ${_miniature-spoon_arguments}"
+#procname=${_miniature-spoon_program} # do not override procname as program runs under daemon
+
+
+miniature-spoon_checkdirs()
+{
+  local dir
+  for dir in "${miniature-spoon_run_dir}"
+  do
+    [ -d "${dir}" ] || install -d -o "${miniature-spoon_user}" -g "${miniature-spoon_group}" -m 770 "${dir}"
+  done
+  cd "${miniature-spoon_data_dir}"
+}
+
+miniature-spoon_checkconfig()
+{
+  miniature-spoon_checkdirs
+
+  #echo "Performing sanity check on miniature-spoon configuration:"
+  #eval ${command} ${miniature-spoon_flags} -t
+}
+
+miniature-spoon_precmd()
+{
+  miniature-spoon_checkconfig
+
+  if checkyesno miniature-spoonlimits_enable
+  then
+    eval $(/usr/bin/limits ${miniature-spoonlimits_args}) 2>/dev/null
+  else
+    return 0
+  fi
+}
+
+miniature-spoon_poststop()
+{
+    rm -f "${pidfile}"
+}
+
+miniature-spoon_keygen()
+{
+  for c in generate-identity generate-rpc-cert generate-mine-cert
+  do
+    su -m "${miniature-spoon_user}" -c "${_miniature-spoon_program} ${_miniature-spoon_arguments} ${c}"
+  done
+}
+
+run_rc_command "$1"
