@@ -1,22 +1,24 @@
 # Created by: Christopher Hall <hsw@bitmark.com>
 # $FreeBSD$
 
-PORTNAME=	bitmark-daemon
+PORTNAME=	bitmarkd
 #PORTVERSION=	1.0.0
 #DISTVERSIONPREFIX=	v
-PORTVERSION=	bf7c854
-
+PORTVERSION=	2b01b6c
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
-COMMENT=	The Bitmark distributed property daemon
+COMMENT=	Bitmark distributed property daemon
 
 LICENSE=	ISCL
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
+LIB_DEPENDS=	libucl.so:${PORTSDIR}/textproc/libucl \
+		libzmq.so:${PORTSDIR}/net/libzmq4
 BUILD_DEPENDS=	go:${PORTSDIR}/lang/go
 
+USES=		pkgconfig
 ONLY_FOR_ARCHS=	i386 amd64
-
 
 USE_GITHUB=	yes
 
@@ -40,7 +42,7 @@ GH_PROJECT=	bitmarkd:bitmarkd \
 		snappy:golang_snappy \
 		zmq4:zmq4
 
-GH_TAGNAME=	bf7c854:bitmarkd \
+GH_TAGNAME=	2b01b6c:bitmarkd \
 		dee6fef:bilateralrpc \
 		c8407fd:certgen \
 		1d600d0:exitwithstatus \
@@ -55,20 +57,23 @@ GH_TAGNAME=	bf7c854:bitmarkd \
 
 STRIP=		# stripping can break go binaries
 
-PLIST_FILES=	sbin/bitmarkd \
-		etc/bitmarkd.conf.sample
+USERS=		bitmarkd
+GROUPS=		bitmarkd
+BITMARKD_RUN=	/var/run/bitmarkd
+BITMARKD_DATA=	/var/lib/bitmarkd
 
-post-patch:
-.for account in bitmark-inc agl cihub golang pebbe syndtr
-	@${MKDIR} ${WRKSRC}/src/github.com/${account}
-.endfor
+#PLIST_FILES=	"@sample %%ETCDIR%%/bitmarkd.conf.sample" ## if want etc/Bitmarkd/bitmarkd.conf.sample
+PLIST_FILES=	"@sample etc/bitmarkd.conf.sample"
+PLIST_FILES+=	sbin/bitmarkd
 
-	${MKDIR} ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME}
-.for src in LICENSE \
-		README.md \
-		announce \
+USE_RC_SUBR=	bitmarkd
+SUB_LIST+=	BITMARKD_USER=bitmarkd \
+		BITMARKD_GROUP=bitmarkd \
+		BITMARKD_RUN=${BITMARKD_RUN} \
+		BITMARKD_DATA=${BITMARKD_DATA}
+
+BITMARKD_ITEMS=	announce \
 		background \
-		bitmarkd.conf-sample \
 		bitmarkd.go \
 		block \
 		certificates.go \
@@ -95,8 +100,17 @@ post-patch:
 		transaction \
 		util \
 		version.go
+
+post-patch:
+.for account in bitmark-inc agl cihub golang pebbe syndtr
+	@${MKDIR} ${WRKSRC}/src/github.com/${account}
+.endfor
+
+	${MKDIR} ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME}
+.for src in ${BITMARKD_ITEMS}
 	@${MV} ${WRKSRC}/${src} ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME}
 .endfor
+
 	@${MV} ${WRKSRC_bilateralrpc} ${WRKSRC}/src/github.com/bitmark-inc/bilateralrpc
 	@${MV} ${WRKSRC_certgen} ${WRKSRC}/src/github.com/bitmark-inc/certgen
 	@${MV} ${WRKSRC_exitwithstatus} ${WRKSRC}/src/github.com/bitmark-inc/exitwithstatus
@@ -109,16 +123,12 @@ post-patch:
 	@${MV} ${WRKSRC_zmq4} ${WRKSRC}/src/github.com/pebbe/zmq4
 	@${MV} ${WRKSRC_golang_snappy} ${WRKSRC}/src/github.com/golang/snappy
 
-
 do-build:
-#	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME} && ${SETENV} GOPATH=${WRKSRC} go install ./...
 	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME} && ${SETENV} GOPATH=${WRKSRC} go install .
-
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/bitmarkd ${STAGEDIR}${PREFIX}/sbin
 #	${INSTALL_MAN} ${WRKSRC}/man/bitmarkd.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
 	${INSTALL_DATA} ${WRKSRC}/bitmarkd.conf.sample ${STAGEDIR}${PREFIX}/etc/bitmarkd.conf.sample
-
 
 .include <bsd.port.mk>
