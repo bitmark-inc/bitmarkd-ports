@@ -4,7 +4,7 @@
 PORTNAME=	bitmarkd
 #PORTVERSION=	1.0.0
 #DISTVERSIONPREFIX=	v
-PORTVERSION=	2b01b6c
+PORTVERSION=	45b0a46
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -42,8 +42,7 @@ GH_PROJECT=	bitmarkd:bitmarkd \
 		snappy:golang_snappy \
 		zmq4:zmq4
 
-GH_TAGNAME=	2b01b6c:bitmarkd \
-		dee6fef:bilateralrpc \
+GH_TAGNAME=	dee6fef:bilateralrpc \
 		c8407fd:certgen \
 		1d600d0:exitwithstatus \
 		3ac2803:go_libucl \

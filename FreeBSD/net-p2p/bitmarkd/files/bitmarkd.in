@@ -67,6 +67,9 @@ extra_commands='keygen'
 
 pidfile="${bitmarkd_run_dir}/${name}.pid"
 
+# bitmarkd creates it own PID file so need to remove  if stale
+lock_file="${bitmarkd_data_dir}/${name}.pid"
+
 required_files="${bitmarkd_config_file}"
 
 _bitmarkd_program="%%PREFIX%%/sbin/bitmarkd"
@@ -99,6 +102,17 @@ bitmarkd_precmd()
 {
   bitmarkd_checkconfig
 
+  if [ -e "${lock_file}" ]
+  then
+    pid=$(check_pidfile "${lock_file}" "${_bitmarkd_program}")
+    if [ -n "${pid}" ]
+    then
+      echo "another bitmarkd is ruunning on pid: ${pid}"
+    else
+      rm -f "${lock_file}"
+    fi
+  fi
+
   if checkyesno bitmarkdlimits_enable
   then
     eval $(/usr/bin/limits ${bitmarkdlimits_args}) 2>/dev/null
@@ -110,6 +124,7 @@ bitmarkd_precmd()
 bitmarkd_poststop()
 {
     rm -f "${pidfile}"
+    rm -f "${lock_file}"
 }
 
 bitmarkd_keygen()

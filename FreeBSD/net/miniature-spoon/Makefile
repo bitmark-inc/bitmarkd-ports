@@ -4,7 +4,7 @@
 PORTNAME=	miniature-spoon
 #PORTVERSION=	1.0.0
 #DISTVERSIONPREFIX=	v
-PORTVERSION=	06d7fd7
+PORTVERSION=	35fc3b2
 CATEGORIES=	net
 
 MAINTAINER=	hsw@bitmark.com
@@ -22,7 +22,7 @@ USE_GITHUB=	yes
 
 GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_PROJECT=	miniature-spoon:miniature_spoon
-#GH_TAGNAME=	06d7fd7:miniature_spoon
+#GH_TAGNAME=	35fc3b2:miniature_spoon
 
 STRIP=		# stripping can break go binaries
 
@@ -35,12 +35,13 @@ PLIST_FILES=	"@sample etc/miniature-spoon.conf.sample"
 PLIST_FILES+=	sbin/miniature-spoon
 
 USE_RC_SUBR=	miniature-spoon
-SUB_LIST+=	MINIATURE-SPOON_USER=nobody \
-		MINIATURE-SPOON_GROUP=nogroup \
-		MINIATURE-SPOON_RUN=${MINIATURE-SPOON_RUN}
+SUB_LIST+=	MINIATURE_SPOON_USER=nobody \
+		MINIATURE_SPOON_GROUP=nogroup \
+		MINIATURE_SPOON_RUN=${MINIATURE-SPOON_RUN}
 
 MINIATURE-SPOON_ITEMS=	\
 		doc.go \
+		droppriv.go \
 		handler.go \
 		main.go \
 		rpc.go \
