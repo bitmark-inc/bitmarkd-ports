@@ -3,22 +3,32 @@
 # then tar into a master archive
 # this script must be in the root directory of this repository to work
 
-this_dir=$(dirname "$0")
-
 ERROR()
 {
   echo error: $*
   exit 1
 }
 
+USAGE()
+{
+  [ -z "$1" ] && echo error: $*
+  echo usage: $(basename "$0") work-dir
+  exit 1
+}
+
+# check argument
+work_dir="$1"; shift
+[ -z "${work_dir}" ] && USAGE "missing argument"
+[ -d "${work_dir}" ] || USAGE "missing work directory: ${work_dir}"
+
 # set initial directory
-cd "${this_dir}" || ERROR "cannot change to directory: ${this_dir}"
-this_dir="${PWD}"
+cd "${work_dir}" || ERROR "cannot change to directory: ${work_dir}"
+work_dir="${PWD}"
 
 # need this to work
 libucl=vstakhov-libucl-0.7.3_GH0.tar.gz
 libucl_url=https://codeload.github.com/vstakhov/libucl/tar.gz/0.7.3
-libucl_dir="${this_dir}/cache"
+libucl_dir="${work_dir}/cache"
 
 # fetch and cache libucl source
 mkdir -p "${libucl_dir}"
@@ -76,7 +86,7 @@ make_mega_package()
 
   # to cache the individual archives
   local archive_dir
-  archive_dir="${this_dir}/archives"
+  archive_dir="${work_dir}/archives"
   rm -rf "${archive_dir}"
   mkdir -p "${archive_dir}"
 
@@ -115,7 +125,7 @@ make_mega_package()
 
   # make the mega-package
   local master_file
-  master_file="${this_dir}/${project}_${version}+dfsg${debian_version}.orig.tar.gz"
+  master_file="${work_dir}/${project}_${version}+dfsg${debian_version}.orig.tar.gz"
   rm -f "${master_file}"
   echo "creating: ${master_file}"
   tar czf "${master_file}" -C "${archive_dir}" .
@@ -133,7 +143,7 @@ make_mega_package()
 
   printf 'APP_NAME = %s\n' "${project}" >> "${versions_mk}"
 
-  cd_or_error "${this_dir}"
+  cd_or_error "${work_dir}"
 }
 
 # create all projects
