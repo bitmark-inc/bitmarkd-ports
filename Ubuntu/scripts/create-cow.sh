@@ -23,7 +23,7 @@ cow="${base}/base.cow"
 if [ ! -f "${cow}" ]
 then
   # create new chroot base image
-  sudo cowbuilder --create --basepath "/var/cache/pbuilder/${dist}-${arch}/base.cow" --distribution squeeze --debootstrapopts --arch --debootstrapopts "${arch}"
+  sudo cowbuilder --create --basepath "/var/cache/pbuilder/${dist}-${arch}/base.cow" --distribution "${dist}" --debootstrapopts --arch --debootstrapopts "${arch}"
   [ $? -ne 0 ] && ERROR "cowbuilder --create failed"
 
 else
