@@ -16,7 +16,7 @@ ERROR()
 script_dir=$(dirname "$0")
 
 # directory for various configuration files
-files_dir="${script_dir}/files"
+files_dir="${script_dir}/../files"
 [ -d "${files_dir}" ] || ERROR "missing files directory: ${files_dir}"
 
 # base directory
