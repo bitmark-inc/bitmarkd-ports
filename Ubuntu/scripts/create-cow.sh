@@ -19,11 +19,14 @@ base="/var/cache/pbuilder/${dist}-${arch}"
 # base image file
 cow="${base}/base.cow"
 
+# ensure the configuration is up to date
+cp -p ../files/dot.pbuilderrc "${HOME}/.pbuilderrc"
+
 # create or update the base image
-if [ ! -f "${cow}" ]
+if [ ! -d "${cow}" ]
 then
   # create new chroot base image
-  sudo cowbuilder --create --basepath "/var/cache/pbuilder/${dist}-${arch}/base.cow" --distribution "${dist}" --debootstrapopts --arch --debootstrapopts "${arch}"
+  sudo HOME="${HOME}" cowbuilder --create --basepath "/var/cache/pbuilder/${dist}-${arch}/base.cow" --distribution "${dist}" --debootstrapopts --arch --debootstrapopts "${arch}"
   [ $? -ne 0 ] && ERROR "cowbuilder --create failed"
 
 else
@@ -35,7 +38,7 @@ else
 
 fi
 
-# Eample of builing a specific package
+# Example of builing a specific package
 #
 #   # build a package
 #   dget -x http://ftp.de.debian.org/debian/pool/main/n/nano/nano_2.2.6-1.dsc
