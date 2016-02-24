@@ -12,6 +12,13 @@ ERROR()
   exit 1
 }
 
+# directory of this script
+script_dir=$(dirname "$0")
+
+# directory for various configuration files
+files_dir="${script_dir}/files"
+[ -d "${files_dir}" ] || ERROR "missing files directory: ${files_dir}"
+
 # base directory
 base="/var/cache/pbuilder/${dist}-${arch}"
 [ -d "${base}" ] || sudo mkdir -p "/var/cache/pbuilder/${dist}-${arch}"
@@ -20,7 +27,7 @@ base="/var/cache/pbuilder/${dist}-${arch}"
 cow="${base}/base.cow"
 
 # ensure the configuration is up to date
-cp -p ../files/dot.pbuilderrc "${HOME}/.pbuilderrc"
+cp -p "${files_dir}/dot.pbuilderrc" "${HOME}/.pbuilderrc"
 
 # create or update the base image
 if [ ! -d "${cow}" ]
