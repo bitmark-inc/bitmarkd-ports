@@ -41,7 +41,7 @@ else
   # update the chroot
   #   setting HOME is necessary as sudo strips environment variables for security reasons
   #   otherwise cowbuilder will not find the ~/.pbuilderrc
-  [ X"${created}" = X"no" ] && sudo HOME="${HOME}" DIST="${dist}" ARCH="${arch}" cowbuilder --update
+  sudo HOME="${HOME}" DIST="${dist}" ARCH="${arch}" cowbuilder --update
 
 fi
 
