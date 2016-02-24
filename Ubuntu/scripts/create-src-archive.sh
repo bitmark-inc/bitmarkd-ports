@@ -143,7 +143,11 @@ make_mega_package()
 
   printf 'APP_NAME = %s\n' "${project}" >> "${versions_mk}"
 
+  # back to work dir to create debian files
   cd_or_error "${work_dir}"
+
+  dpkg-source -b --diff-ignore='.*' "${project_dir}"
+
 }
 
 # create all projects
