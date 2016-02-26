@@ -104,10 +104,10 @@ cd_or_error()
 
 make_mega_package()
 {
-  local account_path project debian_version dfsg
+  local account_path project debian_suffix dfsg
   account_path="$1"; shift
   project="$1"; shift
-  debian_version="$1"; shift
+  debian_suffix="$1"; shift
   dfsg="$1"; shift
 
   echo "processing project: ${project}"
@@ -138,7 +138,8 @@ make_mega_package()
   today=$(date -u +'%Y%m%d')
   [ -n "${hash}" ] && version="${version}+${today}.${depth}+git${hash}"
   [ "${dfsg}" -ne 0 ] && version="${version}+dfsg"
-  [ -n "${debian_version}" ] && version="${version}-${debian_version}"
+  debian_version="${version}"
+  [ -n "${debian_suffix}" ] && version="${debian_version}-${debian_suffix}"
 
   # display the final version string
   echo "package version: ${version}"
@@ -199,6 +200,9 @@ make_mega_package()
 
   done
 
+  # back to project
+  cd_or_error "${project_dir}"
+
   # auto detect version? from git tags perhaps
   # hash=$(git log -n 1 --pretty='%h')
 
@@ -223,18 +227,18 @@ make_mega_package()
   printf 'APP_NAME = %s\n' "${project}" >> "${versions_mk}"
 
   # force the current version
-  git checkout "${debian_dir}/changelog"
-  dch --newversion="${version}" 'set build version'
+  git checkout debian/changelog
+  dch --newversion="${debian_version}" 'set build version'
   dch --release 'set release'
 
   # back to work dir to create debian files
   cd_or_error "${work_dir}"
-
   dpkg-source -b --diff-ignore='.*' "${project_dir}"
 
   # restore the changelog
-  git checkout "${debian_dir}/changelog"
-
+  cd_or_error "${project_dir}"
+  git checkout debian/changelog
+  cd_or_error "${work_dir}"
 }
 
 # create all projects
