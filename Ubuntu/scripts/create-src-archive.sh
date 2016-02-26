@@ -12,16 +12,74 @@ ERROR()
 USAGE()
 {
   [ -z "$1" ] || echo error: $*
-  echo usage: $(basename "$0") work-dir
+  echo usage: $(basename "$0") '<options> <projects...>'
+  echo '       --help           -h         this message'
+  echo '       --verbose        -v         more messages'
+  echo '       --account=ACC    -a ACC     github account name'
+  echo '       --work-dir=DIR   -w DIR     working directory'
+  echo '       --debug          -d         show debug information'
   exit 1
 }
 
-# check argument
-work_dir="$1"; shift
-[ -z "${work_dir}" ] && USAGE "missing argument"
+# main program
+
+verbose=no
+account=
+work_dir=
+
+getopt=/usr/local/bin/getopt
+[ -x "${getopt}" ] || getopt=getopt
+args=$(${getopt} -o hva:w:d --long=help,verbose,account:,work-dir:,debug -- "$@") ||exit 1
+
+# replace the arguments with the parsed values
+eval set -- "${args}"
+
+while :
+do
+  case "$1" in
+    (-v|--verbose)
+      verbose=yes
+      ;;
+
+    (-a|--account)
+      account=$2
+      shift
+      ;;
+
+    (-w|--work-dir)
+      work_dir=$2
+      shift
+      ;;
+
+    (-d|--debug)
+      debug=yes
+      ;;
+
+    (--)
+      shift
+      break
+      ;;
+
+    (*)
+      USAGE invalid argument $1
+      ;;
+  esac
+  shift
+done
+
+# check have arguments
+[ $# -eq 0 ] && USAGE missing arguments
+
+# validate options
+[ -z "${account}" ] && USAGE "missing --account argument"
+[ -z "${work_dir}" ] && USAGE "missing --work-dir argument"
 [ -d "${work_dir}" ] || USAGE "missing work directory: ${work_dir}"
 
-# set initial directory
+[ X"${debug}" = X"yes" ] && set -x
+
+account_path="github.com/${account}"
+
+# set initial directory and make absolute path
 cd "${work_dir}" || ERROR "cannot change to directory: ${work_dir}"
 work_dir="${PWD}"
 
@@ -32,13 +90,10 @@ libucl_dir="${work_dir}/cache"
 
 # fetch and cache libucl source
 mkdir -p "${libucl_dir}"
-[ -f "${libucl_dir}/${libucl}" ] || curl -o  "${libucl_dir}/${libucl}" "${libucl_url}"
+[ -f "${libucl_dir}/${libucl}" ] || curl -o "${libucl_dir}/${libucl}" "${libucl_url}"
 
-# define supported projects
-project_list='bitmarkd miniature-spoon'
-account_path=github.com/bitmark-inc
+# check the go path
 go_src_dir="${GOPATH}/src"
-
 [ -d "${go_src_dir}" ] || ERROR "missing GO source dir: ${go_src_dir}"
 
 cd_or_error()
@@ -167,17 +222,25 @@ make_mega_package()
 
   printf 'APP_NAME = %s\n' "${project}" >> "${versions_mk}"
 
+  # force the current version
+  git checkout "${debian_dir}/changelog"
+  dch --newversion="${version}" 'set build version'
+  dch --release 'set release'
+
   # back to work dir to create debian files
   cd_or_error "${work_dir}"
 
   dpkg-source -b --diff-ignore='.*' "${project_dir}"
+
+  # restore the changelog
+  git checkout "${debian_dir}/changelog"
 
 }
 
 # create all projects
 debian_version=1
 dfsg=0
-for project in ${project_list}
+for project in $*
 do
   make_mega_package "${account_path}" "${project}" "${debian_version}" "${dfsg}"
 done
