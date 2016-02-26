@@ -11,7 +11,7 @@ ERROR()
 
 USAGE()
 {
-  [ -z "$1" ] && echo error: $*
+  [ -z "$1" ] || echo error: $*
   echo usage: $(basename "$0") work-dir
   exit 1
 }
@@ -49,13 +49,11 @@ cd_or_error()
 
 make_mega_package()
 {
-  local account_path project
+  local account_path project debian_version dfsg
   account_path="$1"; shift
   project="$1"; shift
-
-  local version debian version
-  version='0.0.0'
-  debian_version=1
+  debian_version="$1"; shift
+  dfsg="$1"; shift
 
   echo "processing project: ${project}"
 
@@ -63,6 +61,32 @@ make_mega_package()
   local project_dir
   project_dir="${go_src_dir}/${account_path}/${project}"
   cd_or_error "${project_dir}"
+
+  # NOTE: full version string is: <MAJOR>.<MINOR>+<YYYMMDD>.<COUNT>+git<HASH>+dfsg-<DEBIAN-VERSION>
+
+  # get the most recent git tag
+  #   allowd tag values: <MAJOR>.<MINOR>  v<MAJOR>.<MINOR>  V<MAJOR>.<MINOR>
+  # if tag is N commits deep the the following suffix is added:
+  #   -<N>-g<HASH>
+  local tag
+  tag=$(git describe --tags | egrep '^[vV]?[[:digit:]]+\.[[:digit:]]+(-[[:digit:]]+-g[[:xdigit:]]+)?$' | sed 's/^[vV]//;s/-g/ /;s/-/ /g')
+  [ -z "${tag}" ] && ERROR "no valid git tag found for: ${project}"
+
+  # extract major.minor depth hash
+  local version depth hash
+  version="$(printf '%s' "${tag}" | awk '{print $1}')"
+  depth="$(printf '%s' "${tag}" | awk '{print $2}')"
+  hash="$(printf '%s' "${tag}" | awk '{print $3}')"
+
+  # if version tag is deeper then add date.depth, git-hash, optional dfsg and debian version suffix
+  local today debian_version
+  today=$(date -u +'%Y%m%d')
+  [ -n "${hash}" ] && version="${version}+${today}.${depth}+git${hash}"
+  [ "${dfsg}" -ne 0 ] && version="${version}+dfsg"
+  [ -n "${debian_version}" ] && version="${version}-${debian_version}"
+
+  # display the final version string
+  echo "package version: ${version}"
 
   # check that there is a debian directory
   local debian_dir
@@ -125,7 +149,7 @@ make_mega_package()
 
   # make the mega-package
   local master_file
-  master_file="${work_dir}/${project}_${version}+dfsg${debian_version}.orig.tar.gz"
+  master_file="${work_dir}/${project}_${version}.orig.tar.gz"
   rm -f "${master_file}"
   echo "creating: ${master_file}"
   tar czf "${master_file}" -C "${archive_dir}" .
@@ -151,7 +175,9 @@ make_mega_package()
 }
 
 # create all projects
+debian_version=1
+dfsg=0
 for project in ${project_list}
 do
-  make_mega_package "${account_path}" "${project}"
+  make_mega_package "${account_path}" "${project}" "${debian_version}" "${dfsg}"
 done
