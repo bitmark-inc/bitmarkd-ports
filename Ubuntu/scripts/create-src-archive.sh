@@ -139,7 +139,7 @@ make_mega_package()
   [ -n "${hash}" ] && version="${version}+${today}.${depth}+git${hash}"
   [ "${dfsg}" -ne 0 ] && version="${version}+dfsg"
   debian_version="${version}"
-  [ -n "${debian_suffix}" ] && version="${debian_version}-${debian_suffix}"
+  [ -n "${debian_suffix}" ] && debian_version="${debian_version}-${debian_suffix}"
 
   # display the final version string
   echo "package version: ${version}"
