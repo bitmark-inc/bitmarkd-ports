@@ -155,8 +155,15 @@ make_mega_package()
   fi
 
   # compute all dependencies and extract unique items
-  local depends
-  depends=$(go list -f '{{join .Deps "\n"}}' . | (
+  local depends dirs
+  dirs=$(local f
+         for f in *
+         do
+           [ -f "${f}" ] && [ X"${f%.go}" != X"${f}" ] && echo '.'
+           [ -d "${f}" ] && [ -f "${f}/build-deb" ] && echo "${f}"
+         done | sort -u)
+
+  depends=$(go list -f '{{join .Deps "\n"}}' ${dirs} | (
              while read dep
              do
                dir="${GOPATH}/src/${dep}"
