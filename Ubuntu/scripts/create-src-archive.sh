@@ -233,13 +233,14 @@ make_mega_package()
 
 
   # if multi directory create a list of APPS
-  local d multi
+  local item multi
   multi=no
-  for d in ${dirs}
+  for item in ${dirs}
   do
-    [ X"." = X"${d}" ] && continue
+    [ X"." = X"${item}" ] && continue
+    [ X"./" = X"${item}" ] && continue
     multi=yes
-    printf 'APPS += %s\n' "${project}" >> "${versions_mk}"
+    printf 'APPS += %s\n' "${item#./}" >> "${versions_mk}"
   done
 
   if [ X"yes" = X"${multi}" ]
