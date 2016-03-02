@@ -231,7 +231,25 @@ make_mega_package()
 
   printf 'LIBUCL = %s\n' "${libucl}" >> "${versions_mk}"
 
-  printf 'APP_NAME = %s\n' "${project}" >> "${versions_mk}"
+
+  # if multi directory create a list of APPS
+  local d multi
+  multi=no
+  for d in ${dirs}
+  do
+    [ X"." = X"${d}" ] && continue
+    multi=yes
+    printf 'APPS += %s\n' "${project}" >> "${versions_mk}"
+  done
+
+  if [ X"yes" = X"${multi}" ]
+  then
+    # if multi the use SRC_NAME as the name of the repo
+    printf 'SRC_NAME = %s\n' "${project}" >> "${versions_mk}"
+  else
+    # if single project the just set APP_NAME
+    printf 'APP_NAME = %s\n' "${project}" >> "${versions_mk}"
+  fi
 
   # force the current version
   git checkout debian/changelog
