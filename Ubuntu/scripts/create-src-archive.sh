@@ -160,7 +160,7 @@ make_mega_package()
          for f in *
          do
            [ -f "${f}" ] && [ X"${f%.go}" != X"${f}" ] && echo '.'
-           [ -d "${f}" ] && [ -f "${f}/build-deb" ] && echo "${f}"
+           [ -d "${f}" ] && [ -f "${f}/build-deb" ] && echo "./${f}"
          done | sort -u)
 
   depends=$(go list -f '{{join .Deps "\n"}}' ${dirs} | (
