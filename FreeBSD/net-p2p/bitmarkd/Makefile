@@ -2,9 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-#PORTVERSION=	1.0.0
-#DISTVERSIONPREFIX=	v
-PORTVERSION=	45b0a46
+PORTVERSION=	1.1
+DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -25,34 +24,36 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT \
 		agl:ed25519 \
 		cihub:seelog \
+		golang:snappy \
 		pebbe:zmq4 \
-		syndtr:goleveldb \
-		golang:golang_snappy
+		syndtr:goleveldb
 
-GH_PROJECT=	bitmarkd:bitmarkd \
+GH_PROJECT=	ed25519:ed25519 \
 		bilateralrpc:bilateralrpc \
+		bitmarkd:bitmarkd \
 		certgen:certgen \
-		ed25519:ed25519 \
 		exitwithstatus:exitwithstatus \
+		getoptions:getoptions \
 		go-libucl:go_libucl \
-		goleveldb:goleveldb \
 		listener:listener \
 		logger:logger \
 		seelog:seelog \
-		snappy:golang_snappy \
-		zmq4:zmq4
+		snappy:snappy \
+		zmq4:zmq4 \
+		goleveldb:goleveldb
 
-GH_TAGNAME=	dee6fef:bilateralrpc \
+GH_TAGNAME=	278e1ec:ed25519 \
+		dee6fef:bilateralrpc \
 		c8407fd:certgen \
 		1d600d0:exitwithstatus \
-		3ac2803:go_libucl \
+		508de09:getoptions \
+		6e53e8a:go_libucl \
 		5b92961:listener \
-		cd56291:logger \
-		278e1ec:ed25519 \
-		1a9d62f:goleveldb \
-		5841159:seelog \
-		723cc1e:golang_snappy \
-		943819a:zmq4
+		9cf06da:logger \
+		3549fbb:seelog \
+		5f1c01d:snappy \
+		83e3214:zmq4 \
+		ad0d8b2:goleveldb
 
 STRIP=		# stripping can break go binaries
 
