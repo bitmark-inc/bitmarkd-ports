@@ -30,7 +30,6 @@ GH_ACCOUNT=	bitmark-inc:DEFAULT \
 
 GH_PROJECT=	ed25519:ed25519 \
 		bilateralrpc:bilateralrpc \
-		bitmarkd:bitmarkd \
 		certgen:certgen \
 		exitwithstatus:exitwithstatus \
 		getoptions:getoptions \
