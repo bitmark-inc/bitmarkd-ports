@@ -83,7 +83,6 @@ BITMARKD_ITEMS=	announce \
 		doc.go \
 		fault \
 		gnomon \
-		issue-generator \
 		keypair.go \
 		limitedset \
 		main.go \
@@ -119,7 +118,7 @@ post-patch:
 	@${MV} ${WRKSRC_goleveldb} ${WRKSRC}/src/github.com/syndtr/goleveldb
 	@${MV} ${WRKSRC_seelog} ${WRKSRC}/src/github.com/cihub/seelog
 	@${MV} ${WRKSRC_zmq4} ${WRKSRC}/src/github.com/pebbe/zmq4
-	@${MV} ${WRKSRC_golang_snappy} ${WRKSRC}/src/github.com/golang/snappy
+	@${MV} ${WRKSRC_snappy} ${WRKSRC}/src/github.com/golang/snappy
 
 do-build:
 	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME} && ${SETENV} GOPATH=${WRKSRC} go install .

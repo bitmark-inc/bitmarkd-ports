@@ -20,14 +20,14 @@ ONLY_FOR_ARCHS=	i386 amd64
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_PROJECT=	miniature-spoon:miniature_spoon
+#GH_PROJECT=	miniature-spoon:miniature_spoon ## -> dup distinfo by: make makesum
 #GH_TAGNAME=	35fc3b2:miniature_spoon
 
 STRIP=		# stripping can break go binaries
 
 USERS=		nobody
 GROUPS=		nogroup
-MINIATURE-SPOON_RUN=	/var/run/miniature-spoon
+MINIATURE_SPOON_RUN=	/var/run/miniature-spoon
 
 #PLIST_FILES=	"@sample %%ETCDIR%%/miniature-spoon.conf.sample" ## if want etc/Miniature-Spoon/miniature-spoon.conf.sample
 PLIST_FILES=	"@sample etc/miniature-spoon.conf.sample"
@@ -36,7 +36,7 @@ PLIST_FILES+=	sbin/miniature-spoon
 USE_RC_SUBR=	miniature-spoon
 SUB_LIST+=	MINIATURE_SPOON_USER=nobody \
 		MINIATURE_SPOON_GROUP=nogroup \
-		MINIATURE_SPOON_RUN=${MINIATURE-SPOON_RUN}
+		MINIATURE_SPOON_RUN=${MINIATURE_SPOON_RUN}
 
 MINIATURE-SPOON_ITEMS=	\
 		doc.go \
