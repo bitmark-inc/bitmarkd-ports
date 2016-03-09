@@ -108,17 +108,18 @@ post-patch:
 	@${MV} ${WRKSRC}/${src} ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME}
 .endfor
 
+	@${MV} ${WRKSRC_ed25519} ${WRKSRC}/src/github.com/agl/ed25519
 	@${MV} ${WRKSRC_bilateralrpc} ${WRKSRC}/src/github.com/bitmark-inc/bilateralrpc
 	@${MV} ${WRKSRC_certgen} ${WRKSRC}/src/github.com/bitmark-inc/certgen
 	@${MV} ${WRKSRC_exitwithstatus} ${WRKSRC}/src/github.com/bitmark-inc/exitwithstatus
+	@${MV} ${WRKSRC_getoptions} ${WRKSRC}/src/github.com/bitmark-inc/getoptions
 	@${MV} ${WRKSRC_go_libucl} ${WRKSRC}/src/github.com/bitmark-inc/go-libucl
 	@${MV} ${WRKSRC_listener} ${WRKSRC}/src/github.com/bitmark-inc/listener
 	@${MV} ${WRKSRC_logger} ${WRKSRC}/src/github.com/bitmark-inc/logger
-	@${MV} ${WRKSRC_ed25519} ${WRKSRC}/src/github.com/agl/ed25519
-	@${MV} ${WRKSRC_goleveldb} ${WRKSRC}/src/github.com/syndtr/goleveldb
 	@${MV} ${WRKSRC_seelog} ${WRKSRC}/src/github.com/cihub/seelog
-	@${MV} ${WRKSRC_zmq4} ${WRKSRC}/src/github.com/pebbe/zmq4
 	@${MV} ${WRKSRC_snappy} ${WRKSRC}/src/github.com/golang/snappy
+	@${MV} ${WRKSRC_zmq4} ${WRKSRC}/src/github.com/pebbe/zmq4
+	@${MV} ${WRKSRC_goleveldb} ${WRKSRC}/src/github.com/syndtr/goleveldb
 
 do-build:
 	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME} && ${SETENV} GOPATH=${WRKSRC} go install .
