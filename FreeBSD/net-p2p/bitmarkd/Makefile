@@ -73,7 +73,6 @@ SUB_LIST+=	BITMARKD_USER=bitmarkd \
 
 BITMARKD_ITEMS=	announce \
 		background \
-		bitmarkd.go \
 		block \
 		certificates.go \
 		chain \
@@ -83,11 +82,11 @@ BITMARKD_ITEMS=	announce \
 		difficulty \
 		doc.go \
 		fault \
-		getoptions \
 		gnomon \
 		issue-generator \
 		keypair.go \
 		limitedset \
+		main.go \
 		messagebus \
 		mine \
 		mode \
