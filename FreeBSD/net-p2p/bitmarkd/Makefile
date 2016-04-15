@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	1.1
+PORTVERSION=	1.2
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -42,7 +42,7 @@ GH_PROJECT=	ed25519:ed25519 \
 		goleveldb:goleveldb
 
 GH_TAGNAME=	278e1ec:ed25519 \
-		dee6fef:bilateralrpc \
+		7ac3707:bilateralrpc \
 		c8407fd:certgen \
 		1d600d0:exitwithstatus \
 		508de09:getoptions \
