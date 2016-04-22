@@ -44,6 +44,7 @@ MINIATURE-SPOON_ITEMS=	\
 		droppriv.go \
 		handler.go \
 		main.go \
+		read.go \
 		rpc.go \
 		version.go
 
@@ -56,6 +57,8 @@ post-patch:
 .for src in ${MINIATURE-SPOON_ITEMS}
 	@${MV} ${WRKSRC}/${src} ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME}
 .endfor
+
+	@${MV} ${WRKSRC_go_libucl} ${WRKSRC}/src/github.com/bitmark-inc/go-libucl
 
 do-build:
 	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME} && ${SETENV} GOPATH=${WRKSRC} go install .
