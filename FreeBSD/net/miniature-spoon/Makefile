@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	miniature-spoon
-PORTVERSION=	1.1
+PORTVERSION=	1.2
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net
 
@@ -12,6 +12,7 @@ COMMENT=	Restricted bitcoin RPC proxy
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+LIB_DEPENDS=	libucl.so:${PORTSDIR}/textproc/libucl
 BUILD_DEPENDS=	go:${PORTSDIR}/lang/go
 
 #USES=		pkgconfig
@@ -20,8 +21,8 @@ ONLY_FOR_ARCHS=	i386 amd64
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-#GH_PROJECT=	miniature-spoon:miniature_spoon ## -> dup distinfo by: make makesum
-#GH_TAGNAME=	35fc3b2:miniature_spoon
+GH_PROJECT=	go-libucl:go_libucl
+GH_TAGNAME=	6e53e8a:go_libucl
 
 STRIP=		# stripping can break go binaries
 
