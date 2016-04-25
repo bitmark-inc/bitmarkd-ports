@@ -96,7 +96,7 @@ BITMARKD_ITEMS=	announce \
 		stub-server.go \
 		transaction \
 		util \
-		version.go
+		version
 
 post-patch:
 .for account in bitmark-inc agl cihub golang pebbe syndtr
