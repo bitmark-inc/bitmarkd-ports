@@ -14,7 +14,7 @@ USAGE()
   echo '       --help               -h             this message'
   echo '       --network=net        -n net         Connect to which bitmark network bitmark|testing|local [testing]'
   echo '       --cli-config=dir     -c dir        *bitmark-cli config directory'
-  echo '       --wallet-config=file -w file       *bitmark-wallet wallet directory [current dir]'
+  echo '       --pay-config=file    -w file       *bitmark-pay config file'
   echo '       --identity=name      -i name        bitmark-cli identity [default identity]'
   echo ''
   echo ' setup  setup bitmark-onestep     '
@@ -36,7 +36,7 @@ USAGE()
 password=""
 network="testing"
 cliConfig=""
-walletConfig=""
+payConfig=""
 identity=""
 connect=""
 description=""
@@ -48,7 +48,7 @@ receiver=""
 
 getopt=/usr/local/bin/getopt
 [ -x "${getopt}" ] || getopt=getopt
-args=$(${getopt} -o hp:n:c:w:i:x:d:a:f:q:t:r: --long=help,password:,network:,cli-config:,wallet-config:,identity:,connect:,description:,asset:,fingerprint:,quantity:,txid:,receiver: -- "$@") ||exit 1
+args=$(${getopt} -o hp:n:c:w:i:x:d:a:f:q:t:r: --long=help,password:,network:,cli-config:,pay-config:,identity:,connect:,description:,asset:,fingerprint:,quantity:,txid:,receiver: -- "$@") ||exit 1
 
 eval set -- "${args}"
 
@@ -71,9 +71,9 @@ do
       [ -z "${cliConfig}" ] && USAGE cli-config cannot be blank
       shift
       ;;
-    (-w|--wallet-config)
-      walletConfig="$2"
-      [ -z "${walletConfig}" ] && USAGE wallet-config cannot be blank
+    (-w|--pay-config)
+      payConfig="$2"
+      [ -z "${payConfig}" ] && USAGE pay-config cannot be blank
       shift
       ;;
     (-i|--identity)
@@ -135,42 +135,42 @@ done
 
 # check general required options
 [ -z "${cliConfig}" ] && ERROR cli-config is required
-[ -z "${walletConfig}" ] && ERROR wallet-config is required
+[ -z "${payConfig}" ] && ERROR pay-config is required
 
 bin='./bin'
 bitmarkCli=bitmark-cli
-bitmarkWallet="java -jar -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF ${bin}/bitmarkPayService"
+bitmarkPay="java -jar -Dorg.apache.logging.log4j.simplelog.StatusLogger.level=OFF ${bin}/bitmarkPayService"
 
 cleanup()
 {
-  walletPassword=""
+  payPassword=""
   stty echo
 }
 trap cleanup INT EXIT
 
-walletPassword=""
-getWalletPassword()
+payPassword=""
+getPayPassword()
 {
   stty -echo
-  if [ -z "${walletPassword}" ]
+  if [ -z "${payPassword}" ]
   then
-    read -p "wallet password: " walletPassword
+    read -p "pay password: " payPassword
   fi
   stty echo
   echo ''
 }
 
-# set bitmark-wallet network
-walletNetwork=''
+# set bitmark-pay network
+payNetwork=''
 case ${network} in
   (bitmark)
-    walletNetwork='livenet'
+    payNetwork='livenet'
     ;;
   (testing)
-    walletNetwork='regtest'
+    payNetwork='regtest'
   ;;
   (local)
-    walletNetwork='local'
+    payNetwork='local'
     ;;
   (*)
     ERROR invalid network arguments
@@ -178,7 +178,7 @@ case ${network} in
 esac
 
 cliFlags="--config ${cliConfig}"
-walletFlags="--net=${walletNetwork} --config=${walletConfig}"
+payFlags="--net=${payNetwork} --config=${payConfig}"
 
 # run command
 case $1 in
@@ -191,10 +191,10 @@ case $1 in
     echo '---- setup bitmark-cli ----'
     ${bitmarkCli} ${cliFlags} setup --network ${network} --connect ${connect} --description ${description}
 
-    # setup bitmark-wallet
-    echo '---- setup bitmark-wallet ----'
-    ${bitmarkWallet} ${walletFlags} encrypt
-    ${bitmarkWallet} ${walletFlags} address
+    # setup bitmark-pay
+    echo '---- setup bitmark-pay ----'
+    ${bitmarkPay} ${payFlags} encrypt
+    ${bitmarkPay} ${payFlags} address
     ;;
   (issue)
     # check issue options
@@ -213,13 +213,13 @@ case $1 in
     [ -z "${paymentAddress}" ] && ERROR issue asset failed
 
     # pay the issue ids to the address
-    walletFlags="${walletFlags} --stdin"
+    payFlags="${payFlags} --stdin"
     echo '---- pay issues ----'
-    getWalletPassword
+    getPayPassword
     for issueId in $(echo ${issueIds} | jq -r '.[]')
     do
       echo "---- paying ${issueId} ----"
-      printf '%s\n' "${walletPassword}" | ${bitmarkWallet} ${walletFlags} pay "${issueId}" "${paymentAddress}"
+      printf '%s\n' "${payPassword}" | ${bitmarkPay} ${payFlags} pay "${issueId}" "${paymentAddress}"
     done
     cleanup
     ;;
@@ -238,11 +238,11 @@ case $1 in
     echo "${paymentAddress}"
 
     # pay to the address
-    walletFlags="${walletFlags} --stdin"
+    payFlags="${payFlags} --stdin"
     echo '--- pay transfer ----'
-    getWalletPassword
+    getPayPassword
     echo "---- paying ${transferId} ----"
-    printf '%s\n' "${walletPassword}" | ${bitmarkWallet} ${walletFlags} pay "${transferId}" "${paymentAddress}"
+    printf '%s\n' "${payPassword}" | ${bitmarkPay} ${payFlags} pay "${transferId}" "${paymentAddress}"
     cleanup
     ;;
   (*)
