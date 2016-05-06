@@ -16,6 +16,8 @@ USAGE()
   echo '       --cli-config=dir     -c dir        *bitmark-cli config directory'
   echo '       --pay-config=file    -w file       *bitmark-pay config file'
   echo '       --identity=name      -i name        bitmark-cli identity [default identity]'
+  echo '       --password=pwd       -p pwd         bitmark-cli identity password'
+  echo '       --pay-password=pwd   -s pwd         bitmark-pay password'
   echo ''
   echo ' setup  setup bitmark-onestep     '
   echo '       --connect=IP:PORT    -x IP:PORT    *bitmarkd host/IP and port, HOST:PORT'
@@ -33,11 +35,13 @@ USAGE()
   exit 1
 }
 
-password=""
+
 network="testing"
 cliConfig=""
 payConfig=""
 identity=""
+password=""
+payPassword=""
 connect=""
 description=""
 asset=""
@@ -48,7 +52,7 @@ receiver=""
 
 getopt=/usr/local/bin/getopt
 [ -x "${getopt}" ] || getopt=getopt
-args=$(${getopt} -o hp:n:c:w:i:x:d:a:f:q:t:r: --long=help,password:,network:,cli-config:,pay-config:,identity:,connect:,description:,asset:,fingerprint:,quantity:,txid:,receiver: -- "$@") ||exit 1
+args=$(${getopt} -o hp:s:n:c:w:i:x:d:a:f:q:t:r: --long=help,password:,pay-password:,network:,cli-config:,pay-config:,identity:,connect:,description:,asset:,fingerprint:,quantity:,txid:,receiver: -- "$@") ||exit 1
 
 eval set -- "${args}"
 
@@ -59,6 +63,11 @@ do
     (-p|--password)
       password="$2"
       [ -z "${password}" ] && USAGE password cannot be blank
+      shift
+      ;;
+    (-s|--pay-password)
+      payPassword="$2"
+      [ -z "${payPassword}" ] && USAGE password cannot be blank
       shift
       ;;
     (-n|--network)
@@ -148,7 +157,6 @@ cleanup()
 }
 trap cleanup INT EXIT
 
-payPassword=""
 getPayPassword()
 {
   stty -echo
@@ -164,13 +172,13 @@ getPayPassword()
 payNetwork=''
 case ${network} in
   (bitmark)
-    payNetwork='livenet'
+    payNetwork='bitmark'
     ;;
   (testing)
-    payNetwork='regtest'
+    payNetwork='testing'
   ;;
   (local)
-    payNetwork='local'
+    payNetwork='local_bitcoin_reg'
     ;;
   (*)
     ERROR invalid network arguments
@@ -179,6 +187,18 @@ esac
 
 cliFlags="--config ${cliConfig}"
 payFlags="--net=${payNetwork} --config=${payConfig}"
+
+# if password is not empty, add it to cliFlags
+if [ -n "${password}" ] 
+then
+  cliFlags="${cliFlags} --password ${password}"
+fi
+
+# if payPassword is not empty, add it to payFlags
+if [ -n "${payPassword}" ]
+then
+  payFlags="${payFlags} --password=${payPassword}"
+fi
 
 # run command
 case $1 in
