@@ -10,30 +10,30 @@ RUN curl -s http://118.163.122.209:8192/apt/wily-sign.publickey | apt-key add -
 RUN echo 'deb http://118.163.122.209:8192/apt wily main' > /etc/apt/sources.list.d/bitmark.list
 RUN echo 'deb-src http://118.163.122.209:8192/apt wily main' >> /etc/apt/sources.list.d/bitmark.list
 
-# install bitmarkd bitmark-cli bitmark-mgmt
+# install bitmarkd bitmark-cli bitmark-webgui
 RUN apt-get -y update
-RUN apt-get -y install openjdk-8-jre jq bitmarkd bitmark-cli bitmark-mgmt
+RUN apt-get -y install openjdk-8-jre jq bitmarkd bitmark-cli bitmark-webgui
 
 # create bitmark group and user
 RUN addgroup bitmark
 RUN adduser --home /home/bitmark \
               --gecos "Bitmark user" \
-              --ingroup bitmark bitmark 
+              --ingroup bitmark bitmark
 
 # setup bitmarkd
 RUN bitmarkd --config-file=/etc/bitmarkd.conf generate-identity
 RUN bitmarkd --config-file=/etc/bitmarkd.conf generate-rpc-cert
 RUN bitmarkd --config-file=/etc/bitmarkd.conf generate-mine-cert
 
-# copy bitmarkWallet and modify owner 
+# copy bitmarkWallet and modify owner
 COPY bin /home/bitmark/bin/
 COPY config /home/bitmark/config/
 RUN chown -R bitmark:bitmark /home/bitmark
 
-# setup bitmark-mgmt
-RUN bitmark-mgmt -c /etc/bitmark-mgmt.conf setup -d /var/lib/bitmark-mgmt
-RUN chown -R bitmark:bitmark /etc/bitmark-mgmt.conf
-RUN chown -R bitmark:bitmark /var/lib/bitmark-mgmt
+# setup bitmark-webgui
+RUN bitmark-webgui -c /etc/bitmark-webgui.conf setup -d /var/lib/bitmark-webgui
+RUN chown -R bitmark:bitmark /etc/bitmark-webgui.conf
+RUN chown -R bitmark:bitmark /var/lib/bitmark-webgui
 
 WORKDIR /home/bitmark
 
