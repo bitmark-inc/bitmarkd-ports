@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <configuration>
-	<data_directory>./bitmark-pay/testing</data_directory>
+	<data_directory>/home/bitmark/bitmark-pay/testing</data_directory>
 	<bitcoin>
 		<peers>
 			<ip port="17002">172.16.23.241</ip>
