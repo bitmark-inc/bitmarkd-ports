@@ -3,7 +3,10 @@ FROM ubuntu:wily
 RUN apt-get -y update
 
 # install necessary packages
-RUN apt-get -y install vim curl apt-utils
+RUN apt-get -y install vim curl apt-utils software-properties-common
+
+# install bitcoin repository
+RUN apt-add-repository ppa:bitcoin/bitcoin
 
 # install bitmark key and apt repository
 RUN curl -s http://118.163.122.209:8192/apt/wily-sign.publickey | apt-key add -
@@ -12,7 +15,10 @@ RUN echo 'deb-src http://118.163.122.209:8192/apt wily main' >> /etc/apt/sources
 
 # install bitmarkd bitmark-cli bitmark-webgui
 RUN apt-get -y update
-RUN apt-get -y install openjdk-8-jre jq bitmarkd bitmark-cli bitmark-webgui
+RUN apt-get -y install bitcoind openjdk-8-jre jq bitmarkd bitmark-cli bitmark-webgui
+
+# add bitcoind config
+COPY bitcoin/bitcoin.conf /root/.bitcoin/bitcoin.conf
 
 # create bitmark group and user
 RUN addgroup bitmark
