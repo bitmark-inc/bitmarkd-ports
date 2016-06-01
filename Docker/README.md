@@ -151,7 +151,7 @@ Login to the `bitmark-webgui`, it will show you the bitmarkd configuration, clic
 2. `proxy`: link to a bitcoin proxy. The proxy must link to bitcoin network in bitmark
 3. `BitmarkInc-proxy`: proxy provided by Bitmark, connect to bitcoin network in bitmark
 
--set the address to `modifyThisAddressLater123456789`, and click `Save`. We will modify the address after the bitmark-pay setup is done.
+- Set the address to `modifyThisAddressLater123456789`, and click `Save`. We will modify the address after the bitmark-pay setup is done.
 
 #### step 2: Setup bitmark-cli, bitmark-pay
 Go to the `Issue and Transfer Bitmark` page by clicking the `Issue&Transfer` in navigator bar:
@@ -196,7 +196,6 @@ bitcoin-cli sendtoaddress <bitcoinAddress> 10.0
 ```
 bitcoin-cli generate 3
 ```
-- issue/transfer bitmark through `bitmark-webgui`
 
 ### prerequisites for Testing Chain
 - Asking bitmark to send some bitcoin to your address
