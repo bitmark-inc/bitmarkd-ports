@@ -11,9 +11,9 @@
 
 ## Chain
 Bitmark provide three diffrent chains to let the `bitmarkd` join in. They are `local`, `testing`, `bitmark`.
-- `local`: link to your own bitmark network and bitcoin
-- `testing`: link to bitmark test network, to pay the transactions, please contact us
-- `bitmark`: link to the real bitmark network, pay the transactions with real bitcoin
+- `local`: create private bitmark network and bitcoin
+- `testing`: link to public test bitmark network, to pay the transactions, please contact us
+- `bitmark`: link to public bitmark network, pay the transactions with real bitcoin
 
 Here is a table to indicate what bitmark chain corresponds to what bitcoin chain
 ```
