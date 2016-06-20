@@ -28,9 +28,9 @@ RUN adduser --home /home/bitmark \
 
 # setup bitmarkd
 COPY config/bitmarkd/ /etc/
-RUN chown -R bitmarkd:bitmarkd /etc/bitmark-LOCAL.conf
-RUN chown -R bitmarkd:bitmarkd /etc/bitmark-TESTING.conf
-RUN chown -R bitmarkd:bitmarkd /etc/bitmark-BITMARK.conf
+RUN chown -R bitmarkd:bitmarkd /etc/bitmarkd-LOCAL.conf
+RUN chown -R bitmarkd:bitmarkd /etc/bitmarkd-TESTING.conf
+RUN chown -R bitmarkd:bitmarkd /etc/bitmarkd-BITMARK.conf
 
 # setup bitmarkd for local chain
 RUN bitmarkd --config-file=/etc/bitmarkd-LOCAL.conf generate-identity
