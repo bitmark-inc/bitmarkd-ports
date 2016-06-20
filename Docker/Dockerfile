@@ -27,13 +27,29 @@ RUN adduser --home /home/bitmark \
               --ingroup bitmark bitmark
 
 # setup bitmarkd
-RUN bitmarkd --config-file=/etc/bitmarkd.conf generate-identity
-RUN bitmarkd --config-file=/etc/bitmarkd.conf generate-rpc-cert
-RUN bitmarkd --config-file=/etc/bitmarkd.conf generate-mine-cert
+COPY config/bitmarkd/ /etc/
+RUN chown -R bitmarkd:bitmarkd /etc/bitmark-LOCAL.conf
+RUN chown -R bitmarkd:bitmarkd /etc/bitmark-TESTING.conf
+RUN chown -R bitmarkd:bitmarkd /etc/bitmark-BITMARK.conf
+
+# setup bitmarkd for local chain
+RUN bitmarkd --config-file=/etc/bitmarkd-LOCAL.conf generate-identity
+RUN bitmarkd --config-file=/etc/bitmarkd-LOCAL.conf generate-rpc-cert
+RUN bitmarkd --config-file=/etc/bitmarkd-LOCAL.conf generate-mine-cert
+
+# setup bitmarkd for testing chain
+RUN bitmarkd --config-file=/etc/bitmarkd-TESTING.conf generate-identity
+RUN bitmarkd --config-file=/etc/bitmarkd-TESTING.conf generate-rpc-cert
+RUN bitmarkd --config-file=/etc/bitmarkd-TESTING.conf generate-mine-cert
+
+# setup bitmarkd for bitmark chain
+RUN bitmarkd --config-file=/etc/bitmarkd-BITMARK.conf generate-identity
+RUN bitmarkd --config-file=/etc/bitmarkd-BITMARK.conf generate-rpc-cert
+RUN bitmarkd --config-file=/etc/bitmarkd-BITMARK.conf generate-mine-cert
 
 # copy bitmarkWallet and modify owner
 COPY bin /home/bitmark/bin/
-COPY config /home/bitmark/config/
+COPY config/bitmark-pay /home/bitmark/config/bitmark-pay
 RUN chown -R bitmark:bitmark /home/bitmark
 
 # setup bitmark-webgui
