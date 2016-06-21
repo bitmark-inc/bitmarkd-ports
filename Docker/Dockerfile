@@ -33,16 +33,19 @@ RUN chown -R bitmarkd:bitmarkd /etc/bitmarkd-TESTING.conf
 RUN chown -R bitmarkd:bitmarkd /etc/bitmarkd-BITMARK.conf
 
 # setup bitmarkd for local chain
+RUN mkdir /var/lib/bitmarkd/local
 RUN bitmarkd --config-file=/etc/bitmarkd-LOCAL.conf generate-identity
 RUN bitmarkd --config-file=/etc/bitmarkd-LOCAL.conf generate-rpc-cert
 RUN bitmarkd --config-file=/etc/bitmarkd-LOCAL.conf generate-mine-cert
 
 # setup bitmarkd for testing chain
+RUN mkdir /var/lib/bitmarkd/testing
 RUN bitmarkd --config-file=/etc/bitmarkd-TESTING.conf generate-identity
 RUN bitmarkd --config-file=/etc/bitmarkd-TESTING.conf generate-rpc-cert
 RUN bitmarkd --config-file=/etc/bitmarkd-TESTING.conf generate-mine-cert
 
 # setup bitmarkd for bitmark chain
+RUN mkdir /var/lib/bitmarkd/bitmark
 RUN bitmarkd --config-file=/etc/bitmarkd-BITMARK.conf generate-identity
 RUN bitmarkd --config-file=/etc/bitmarkd-BITMARK.conf generate-rpc-cert
 RUN bitmarkd --config-file=/etc/bitmarkd-BITMARK.conf generate-mine-cert
