@@ -36,9 +36,16 @@ sudo docker pull bitmark/bitmark-node
 ## Start bitmark-webgui
 `bitmark-webgui` is a package in `bitmark-node` image, it provides web interfaces for you to setup, issue, transfer and pay bitmark. We would start it while we run up the `bitmark-node` container.
 Here is the command looks like, you can just copy-paste this command line, or change the option value as you want.
+
+For Linux user
 ```
 sudo docker run --detach --name bitmarkNode -p 2150:2150 -p 2140:2140 -p 2130:2130 bitmark/bitmark-node bitmark-webgui -c /etc/bitmark-webgui.conf start
 ```
+For Mac user, you need to run this command to start the bitmark-webgui
+```
+sudo docker run --detach --name bitmarkNode -P -p 2150:2150 -p 2140:2140 -p 2130:2130 bitmark/bitmark-node bitmark-webgui -c /etc/bitmark-webgui.conf start
+```
+
 The options meaning:
 - `--detach`: run the container in background
 - `--name bitmarkNode`: name the container bitmarkNode. You can modify the name
@@ -47,56 +54,55 @@ The options meaning:
 - `-p 2130:2130`: expose the container port 2130. This port is for `bitmarkd`
 - `bitmark-webgui -c /etc/bitmark-webgui.conf start`: command to start `bitmark-webgui`
 
-Open the `https://localhost:2150` or `https://host-ip:2150` in browser and it will show you the login page. The default password is `bitmark-webgui`, you can reset it after you login.
+Open the `https://localhost:2150` or `https://host-ip:2150` or `https://dockerVM-ip:2150` in FireFox and it will show you the login page. The default password is `bitmark-webgui`, you can reset it after you login.
 
-Do not use Chrome, it will have a problem because we use self signed certification.
+Some browsers (such as Chrome) will show you message like "This site can’t provide a secure connection"  because we use self signed certification. Please use FireFox and then click `Advanced` -> `Add Exception...` -> uncheck `Permanently store this exception` -> `Confirm Security Exception`. Then it will show you a login page.
 
 ## Setup through web GUI
-This section will tell you how to setup bitmark-cli, bitmark-pay and bitmarkd through `bitmark-webgui`. Before you start, make a decision of what bitmark chain you would like to use. Here are some requirements for different chain.
+Before you start, make a decision of what bitmark chain you would like to use. Here are some requirements for different chain.
 - `Local`: if you want to run your own bitmark system, choose this bitmark chain
 - `Testing`: this chain provides you a playground of bitmark, like bitcoin testnet
 - `Bitmark`: connect to real bitmark network, issue and transfer your digital property
 
-### Local Chain
-#### prerequisite
-- start `bitmark-webgui` (check the container status is up)
-- start `bitcoind` for the container, execute the command in terminal
+Note: For local chain, you might need to prepare a miner, otherwise you cannot do transfer bitmark without it
+
+### step 1: Create New Bitmark Account or access existing one
+If you don't have any bitmark account, please click the create button to create a new bitmark account. If you already have a bitmark account and want to access it, click the other button.
+
+#### Create new bitmark account:
+1. If you decide to create a new bitmark account, then you need to choose the bitmark chain you'd like to join first, then the bitmark-webgui will generate an keypair for you. Store the privateKey in a safe place, if you lost the privateKey, you will lost the account permanently and there is no way to get it back.
+2. After you save your account privateKey, press next, and you will need to type a passcode to protect the privateKey for this session.
+3. After you setup the passcode, you will go to the main page. The page shows default bitmarkd config. (go to step 2)
+
+#### Access existing bitmark account:
+This is a very simple page, select the chain you would like to join, fill in your privateKey and passcode, then you can press Go button and go to the main page.
+Note: Make sure you access the privateKey to the same chain when the time the key was created
+
+### step 2: Setup bitmark config
+1. For `local` and `testing` chain, we need to get the bitcoin address to setup the bitmark first. It's simple to get the bitcoin address, click `Issue` in the nav bar and you will see there shows you a bitcoin address, please copy it.
+2. Clicking `Config` button to go to the `edit` page and make changes.
+
+#### for local chain:
+- In `Bitcoin` setction, paste the `Bitcoin Address` you just copied into `address` field
+- Click `Save`, then you will go back to the main page
+
+#### for testing chain:
+- In `Bitmark Peer` section, add `connect` field to connect to other `bitmarkd`.
 ```
-sudo docker exec -d bitmarkNode bitcoind
-```
-- (optional) prepare a miner. You cannot do transfer bitmark without setting up a miner
+           PublicKey                        |   Address
+====================================================================
+ .*}yF[u7o]viv.JrvLpC7pOW8Z+r^CHWnqALjTiy	|	172.16.23.227:2548
+ ```
 
-#### step 1: Check and setup bitmarkd configuration
-Login to the `bitmark-webgui`, it will show you the bitmarkd configuration, clicking `Config` button to go to the `edit` page and make changes.
-- In `Bitmark RPC` section, check the chain is `Local`.
-- In `Bitcoin` section, set the `username` to `btcuser`, the password to `p@ssw0rd`, and the address to `modifyThisAddressLater123456789`, and click `Save`. We will modify the address after the bitmark-pay setup is done.
+- In `Bitcoin` section, there are 3 ways to link to bitcoin:
+1. `local-bitcoin`: link to your local bitcoin. The `bitcoind` must link to bitcoin network in bitmark
+2. `proxy`: link to a bitcoin proxy. The proxy must link to bitcoin network in bitmark
+3. `BitmarkInc-proxy`: proxy provided by Bitmark, connect to bitcoin network in bitmark
 
-#### step 2: Setup bitmark-cli, bitmark-pay
-Go to the `Issue and Transfer Bitmark` page by clicking the `Issue&Transfer` in navigator bar:
-- In `Setup` setction, you can choose any address which `Bitmark RPC` will listen in the `connect` field. If you did not modify the `Bitmark RPC` section in last step, you can put `127.0.0.1:2130` in this field.
-- Fill out all fields. The length of password should greater than 8
-- Click `submit`
-- Wait for a while and then you will see the `Info` section.
-- Copy the `Bitcoin Address`
-
-#### step 3: Setup bitcoind address
-Go to the main page by clicking the `bitmark` in navigator bar:
-- Click `Config` to go the the `edit` page
 - In `Bitcoin` setction, paste the `Bitcoin Address` you just copied into `address` field
 - Click `Save`
 
-#### step 4: Start bitmarkd
-Go to the main page by clicking the `bitmark` in navigator bar:
-- Check all the bitmark configuration again
-- Click `start`
-
-### Testing Chain
-#### prerequisite
-- start `bitmark-webgui`
-
-#### step 1: Check and setup bitmarkd configuration
-Login to the `bitmark-webgui`, it will show you the bitmarkd configuration, clicking `Config` button to go to the `edit` page and make changes.
-- In `Bitmark RPC` section, check the chain, set it to `Testing`.
+#### for bitmark chain:
 - In `Bitmark Peer` section, add `connect` field to connect to other `bitmarkd`.
 ```
            PublicKey                        |   Address
@@ -110,63 +116,11 @@ Login to the `bitmark-webgui`, it will show you the bitmarkd configuration, clic
 2. `proxy`: link to a bitcoin proxy. The proxy must link to bitcoin network in bitmark
 3. `BitmarkInc-proxy`: proxy provided by Bitmark, connect to bitcoin network in bitmark
 
-- Set the address to `modifyThisAddressLater123456789`, and click `Save`. We will modify the address after the `bitmark-pay` setup is done.
-
-#### step 2: Setup bitmark-cli, bitmark-pay
-Go to the `Issue and Transfer Bitmark` page by clicking the `Issue&Transfer` in navigator bar:
-- In `Setup` setction, you can choose any address in `listen` field of `Bitmark RPC` section for the `connect` field. If you did not modify the `Bitmark RPC` section in last step, you can put `127.0.0.1:2130` in this field.
-- Fill out all fields. The length of password should greater than 8
-- Click `submit`
-- Wait for a while and then you will see the info. Copy the `Bitcoin Address`
-
-#### step 3: Setup bitcoind address
-Go to the main page by clicking the `bitmark` in navigator bar:
-- Click `Config` to go the the `edit` page
-- In `Bitcoin` setction, paste the `Bitcoin Address` you just copied into `address` field
+- In `Bitcoin` setction, paste the `Bitcoin Address` you just copied into `address` field, or you can use your exsiting bitcoin address in livenet
 - Click `Save`
 
-#### step 4: Start bitmarkd
-Go to the main page by clicking the `bitmark` in navigator bar:
-- Check all the bitmark configuration again
-- Click `start`
-- Waiting until the `mode` field in `Bitmark Info` becomes `Normal`
 
-### Bitmark Chain
-#### prerequisite
-- start `bitmark-webgui`
-
-#### step 1: Check and setup bitmarkd configuration
-Login to the `bitmark-webgui`, it will show you the bitmarkd configuration, clicking `Config` button to go to the `edit` page and make changes.
-- In `Bitmark RPC` section, check the chain, set it to `Bitmark`.
-- In `Bitmark Peer` section, add `connect` field to connect to other `bitmarkd`.
-```
-           PublicKey                        |   Address
-====================================================================
- .*}yF[u7o]viv.JrvLpC7pOW8Z+r^CHWnqALjTiy	|	172.16.23.227:2548
- ```
-
-- In `Bitcoin` section, there are 3 ways to link to bitcoin:
-
-1. `local-bitcoin`: link to your local bitcoin. The `bitcoind` must link to bitcoin network in bitmark
-2. `proxy`: link to a bitcoin proxy. The proxy must link to bitcoin network in bitmark
-3. `BitmarkInc-proxy`: proxy provided by Bitmark, connect to bitcoin network in bitmark
-
-- Set the address to `modifyThisAddressLater123456789`, and click `Save`. We will modify the address after the bitmark-pay setup is done.
-
-#### step 2: Setup bitmark-cli, bitmark-pay
-Go to the `Issue and Transfer Bitmark` page by clicking the `Issue&Transfer` in navigator bar:
-- In `Setup` setction, you can choose any address which `Bitmark RPC` will listen for the `connect` field. If you did not modify the `Bitmark RPC` section in last step, you can put `127.0.0.1:2130` in this field.
-- Fill up the all fields. The length of password should greater than 8
-- Click `submit`
-- Wait for a while and then you will see the info. Copy the `Bitcoin Address`
-
-#### step 3: Setup bitcoind address
-Go to the main page by clicking the `bitmark` in navigator bar:
-- Click `Config` to go the the `edit` page
-- In `Bitcoin` setction, paste the `Bitcoin Address` you just copied into `address` field
-- Click `Save`
-
-#### step 4: Start bitmarkd
+### step 3: Start bitmarkd
 Go to the main page by clicking the `bitmark` in navigator bar:
 - Check all the bitmark configuration again
 - Click `start`
