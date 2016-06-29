@@ -3,7 +3,11 @@
 	<data_directory>/home/bitmark/bitmark-pay/testing</data_directory>
 	<bitcoin>
 		<peers>
-			<ip port="17002">172.16.23.241</ip>
+			<ip port="17002">118.163.120.176</ip>
+			<ip port="17002">118.163.120.177</ip>
+			<ip port="17002">118.163.120.178</ip>
+			<ip port="17002">118.163.120.179</ip>
+			<ip port="17002">118.163.120.180</ip>
 		</peers>
 	</bitcoin>
 </configuration>
