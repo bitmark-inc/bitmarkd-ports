@@ -87,13 +87,6 @@ Note: Make sure you access the privateKey to the same chain when the time the ke
 - Click `Save`, then you will go back to the main page
 
 #### for testing chain:
-- In `Bitmark Peer` section, add `connect` field to connect to other `bitmarkd`.
-```
-           PublicKey                        |   Address
-====================================================================
- .*}yF[u7o]viv.JrvLpC7pOW8Z+r^CHWnqALjTiy	|	172.16.23.227:2548
- ```
-
 - In `Bitcoin` section, there are 3 ways to link to bitcoin:
 1. `local-bitcoin`: link to your local bitcoin. The `bitcoind` must link to bitcoin network in bitmark
 2. `proxy`: link to a bitcoin proxy. The proxy must link to bitcoin network in bitmark
@@ -103,13 +96,6 @@ Note: Make sure you access the privateKey to the same chain when the time the ke
 - Click `Save`
 
 #### for bitmark chain:
-- In `Bitmark Peer` section, add `connect` field to connect to other `bitmarkd`.
-```
-           PublicKey                        |   Address
-====================================================================
- .*}yF[u7o]viv.JrvLpC7pOW8Z+r^CHWnqALjTiy	|	172.16.23.227:2548
- ```
-
 - In `Bitcoin` section, there are 3 ways to link to bitcoin:
 
 1. `local-bitcoin`: link to your local bitcoin. The `bitcoind` must link to bitcoin network in bitmark
