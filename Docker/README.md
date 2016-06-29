@@ -18,7 +18,7 @@ Bitmark provide three diffrent chains to let the `bitmarkd` join in. They are `l
 Here is a table to indicate what bitmark chain corresponds to what bitcoin chain
 ```
   bitmark chain |   bitcoin chain
-=========================================
+================+========================
   local         |   regtest
   testing       |   regtest (from bitmark)
   bitmark       |   livenet
