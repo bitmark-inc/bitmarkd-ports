@@ -118,7 +118,8 @@ Go to the main page by clicking the `bitmark` in navigator bar:
 - the `bitmarkd` is running
 - the `bitmarkd` status is `Normal`
 
-### prerequisites for Local chain
+### prerequisites
+#### for Local chain
 Before you do issue, you need to send some bitcoin to your `Bitcoin Address`:
 - get the bitmarkNode container bash
 ```
@@ -137,10 +138,10 @@ bitcoin-cli sendtoaddress <bitcoinAddress> 10.0
 bitcoin-cli generate 3
 ```
 
-### prerequisites for Testing Chain
+#### for Testing Chain
 - Asking bitmark to send some bitcoin to your address
 
-### prerequisites for Bitmark
+#### for Bitmark
 - Send some bitcoin to the bitcoin address
 
 ### issue/transfer bitmark through `bitmark-webgui`
