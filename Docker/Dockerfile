@@ -62,4 +62,4 @@ RUN chown -R bitmark:bitmark /var/lib/bitmark-webgui
 
 WORKDIR /home/bitmark
 
-EXPOSE 2150 2140
+EXPOSE 2160 2150 2140 2130
