@@ -39,17 +39,17 @@ Here is the command looks like, you can just copy-paste this command line, or ch
 
 For Linux user
 ```
-sudo docker run --detach --name bitmarkNode -p 2150:2150 -p 2140:2140 -p 2130:2130 bitmark/bitmark-node bitmark-webgui -c /etc/bitmark-webgui.conf start
+sudo docker run --detach --name bitmarkNode -p 2160:2160 -p 2150:2150 -p 2140:2140 -p 2130:2130 bitmark/bitmark-node bitmark-webgui -c /etc/bitmark-webgui.conf start
 ```
 For Mac user, you need to run this command to start the bitmark-webgui
 ```
-sudo docker run --detach --name bitmarkNode -P -p 2150:2150 -p 2140:2140 -p 2130:2130 bitmark/bitmark-node bitmark-webgui -c /etc/bitmark-webgui.conf start
+sudo docker run --detach --name bitmarkNode -P -p 2160:2160 -p 2150:2150 -p 2140:2140 -p 2130:2130 bitmark/bitmark-node bitmark-webgui -c /etc/bitmark-webgui.conf start
 ```
 
 The options meaning:
 - `--detach`: run the container in background
 - `--name bitmarkNode`: name the container bitmarkNode. You can modify the name
-- `-p 2150:2150`: expose the container port 2150 to host port 2150. This port is for `bitamrk-webgui`. You can change the host port by replacing `2150:2150` to `port-u-want:2150`
+- `-p 2160:2160 -p 2150:2150`: expose the container port 2150 to host port 2150. This port is for `bitamrk-webgui`. You can change the host port by replacing `2150:2150` to `port-u-want:2150`
 - `-p 2140:2140`: expose the container port 2140. This port is for `cpu-miner`
 - `-p 2130:2130`: expose the container port 2130. This port is for `bitmarkd`
 - `bitmark-webgui -c /etc/bitmark-webgui.conf start`: command to start `bitmark-webgui`
