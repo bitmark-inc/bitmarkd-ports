@@ -33,7 +33,6 @@ Welcome()
        ;;
     *) ERROR invalid network ;;
   esac
-  echo "networ: ${network}"
 
   InitVariable
 
