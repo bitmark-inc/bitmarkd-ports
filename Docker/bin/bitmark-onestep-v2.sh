@@ -25,10 +25,10 @@ Welcome()
   echo ''
 
   case ${network} in
-    1) echo 'testing' 
+    1) echo 'testing'
        network='testing'
        ;;
-    2) echo 'bitmark' 
+    2) echo 'bitmark'
        network='bitmark'
        ;;
     *) ERROR invalid network ;;
@@ -49,7 +49,7 @@ Welcome()
   case ${service} in
     1) Setup ;;
     2) Issue ;;
-    3) echo 'transfer' ;;
+    3) Transfer ;;
     *) ERROR Service not support ;;
   esac
 }
@@ -77,9 +77,9 @@ Setup ()
   description="admin"
 
   cliFlags="--config ${cliConfig}"
-  cliFlags="${cliFlags} --identity ${identity}" 
+  cliFlags="${cliFlags} --identity ${identity}"
   cliPassword=""
-  
+
   # get and verify password
   while [ -z cliPassword -o ${#cliPassword} -lt 8 ]
   do
@@ -91,7 +91,7 @@ Setup ()
       echo ''
     fi
   done
-  
+
   echo ''
   verifyPassword=$(GetPassword 'verify password')
   echo ''
@@ -104,18 +104,18 @@ Setup ()
   echo '---- setup bitmark-cli ----'
   ${bitmarkCli} ${cliFlags} --password "${cliPassword}" setup --network ${network} --connect ${connect} --description ${description} || rm ${cliConfig}
   echo ''
-  
+
   keyPairResult=$(${bitmarkCli} ${cliFlags} --password "${cliPassword}" keypair)
   privateKey=$(echo "${keyPairResult}" | jq -r '.private_key')
   echo 'Please right down your private key to a secure place. There is no way to get the private key back.'
   echo "${privateKey}"
   echo ''
   read -p 'type any key to continue ...' c
-  
+
   # setup bitmark-pay
   echo '---- setup bitmark-pay ----'
   ${bitmarkPay} --net="${network}" --config="${payConfig}" --password="${privateKey}"  encrypt
-  echo ''  
+  echo ''
   ${bitmarkPay} --net="${network}" --config="${payConfig}" info
   echo ''
 
@@ -130,7 +130,7 @@ RemoveFile()
 {
   response="N"
   read -p 'config file is existed, do you want to delete it? (y/N) ' response
-  if [ "${response}" = "y" ] 
+  if [ "${response}" = "y" ]
   then
     echo "Remove file ..."
     rm $1
@@ -155,18 +155,18 @@ Issue()
   # get issue field
   while [ true ]
   do
-    asset=$(GetIssueField 'asset name')
-    description=$(GetIssueField 'description')
-    filePath=$(GetIssueField 'file path')
-    filePath=$(realpath "${filePath}") 
+    asset=$(GetRequiredField 'asset name')
+    description=$(GetRequiredField 'description')
+    filePath=$(GetRequiredField 'file path')
+    filePath=$(realpath "${filePath}")
     while [ ! -f "${filePath}" ]
     do
       echo "${filePath} not exists"
-      filePath=$(GetIssueField 'file path')
-      filePath=$(realpath "${filePath}") 
+      filePath=$(GetRequiredField 'file path')
+      filePath=$(realpath "${filePath}")
     done
-    quantity=$(GetIssueField 'quantity')
-     
+    quantity=$(GetRequiredField 'quantity')
+
     echo ''
     echo '==== asset info ===='
     echo "asset name: ${asset}"
@@ -176,7 +176,7 @@ Issue()
     echo ''
     read -p 'issue this asset? (y/N) ' issue
     [ "y" = "${issue}" ] && break
-  done  
+  done
 
   fingerprint=$(sha512sum "${filePath}")
   fingerprint=$(echo "${fingerprint}" | awk -F ' ' '{print $1}')
@@ -205,13 +205,40 @@ Issue()
     echo "---- paying ${issueId} ----"
     printf '%s\n' "${payPassword}" | ${bitmarkPay} --net="${network}" --config="${payConfig}" --password="${privateKey}" pay "${issueId}" "${paymentAddress}"
   done
-  
+
   # cleanup
   cliPassword=''
   privateKey=''
 }
 
-GetIssueField()
+Transfer()
+{
+  # check transfer options
+  echo ''
+  echo 'Please enter the txId you would like to transfer'
+  txid=$(GetRequiredField 'txid')
+  receiver=$(GetRequiredField 'receiver')
+
+  cliFlags="--config ${cliConfig}"
+  cliFlags="${cliFlags} --identity ${identity}"
+
+  echo "---- transfer ${txid} ----"
+  result=$(${bitmarkCli} ${cliFlags} transfer --txid ${txid} --receiver ${receiver})
+  echo "${result}"
+  transferId=$(echo "${result}" | jq -r '.transferId')
+  paymentAddress=$(echo "${result}" | jq -r '.paymentAddress[0].address')
+  [ -z "${paymentAddress}" ] && ERROR transfer transaction failed
+  echo "${paymentAddress}"
+
+  exit 0
+  # pay to the address
+  payFlags="${payFlags} --stdin"
+  echo '--- pay transfer ----'
+  echo "---- paying ${transferId} ----"
+  printf '%s\n' "${payPassword}" | ${bitmarkPay} ${payFlags} pay "${transferId}" "${paymentAddress}"
+}
+
+GetRequiredField()
 {
   value=''
   while [ -z "${value}" ]
