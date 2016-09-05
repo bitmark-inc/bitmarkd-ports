@@ -1,0 +1,138 @@
+#!/bin/sh
+# $FreeBSD$
+
+# PROVIDE: bitmarkd
+# REQUIRE: LOGIN cleanvar
+# KEYWORD: shutdown
+
+# Configuration settings in /etc/rc.conf:
+#
+# bitmarkd_enable (bool):
+#   Set to "NO" by default.
+#   Set it to "YES" to enable bitmarkd
+#
+# bitmarkd_user (str):
+#   Set to "%%BITMARKD_USER%%" by default.
+#   User to run process as and for data ownership.
+#
+# bitmarkd_group (str):
+#   Set to "%%BITMARKD_GROUP%%" by default.
+#   Group for data file ownership.
+#
+# bitmarkd_config_file (str):
+#   Set to "%%PREFIX%%/etc/${name}.conf" by default.
+#   The master configuration file.
+#
+# bitmarkd_data_dir (str):
+#   Set to "%%BITMARKD_DATA%%" by default.
+#   The root of the data store.
+#
+# bitmarkd_run_dir (str):
+#   Set to "%%BITMARKD_RUN%%" by default.
+#   The root for the pid and socket files.
+#
+# bitmarkdlimits_enable (bool):
+#   Set to "NO" by default.
+#   Set it to yes to run `limits ${bitmarkdlimits_args}` just before
+#   bitmarkd starts.
+#
+# bitmarkdlimits_args (str):
+#   Default to "-e -U %%BITMARKD_USER%%"
+#   Arguments of pre-start limits run.
+
+. /etc/rc.subr
+
+name="bitmarkd"
+rcvar=bitmarkd_enable
+
+load_rc_config ${name}
+
+: ${bitmarkd_enable:="NO"}
+: ${bitmarkd_user:="%%BITMARKD_USER%%"}
+: ${bitmarkd_group:="%%BITMARKD_GROUP%%"}
+: ${bitmarkd_config_file:="%%PREFIX%%/etc/${name}.conf"}
+: ${bitmarkd_data_dir:="%%BITMARKD_DATA%%"}
+: ${bitmarkd_run_dir:="%%BITMARKD_RUN%%"}
+: ${bitmarkdlimits_enable:="NO"}
+: ${bitmarkdlimits_args:="-e -U ${bitmarkd_user}"}
+
+start_precmd="${name}_precmd"
+restart_precmd="${name}_checkconfig"
+stop_postcmd="${name}_poststop"
+keygen_cmd="${name}_initialise"
+keygen_precmd="${name}_checkconfig"
+
+#extra_commands='initialise reload configtest'
+extra_commands='keygen'
+
+pidfile="${bitmarkd_run_dir}/${name}.pid"
+
+# bitmarkd creates it own PID file so need to remove  if stale
+lock_file="${bitmarkd_data_dir}/${name}.pid"
+
+required_files="${bitmarkd_config_file}"
+
+_bitmarkd_program="%%PREFIX%%/sbin/bitmarkd"
+_bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file}"
+
+command="/usr/sbin/daemon"
+command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
+#procname=${_bitmarkd_program} # do not override procname as program runs under daemon
+
+
+bitmarkd_checkdirs()
+{
+  local dir
+  for dir in "${bitmarkd_data_dir}" "${bitmarkd_run_dir}"
+  do
+    [ -d "${dir}" ] || install -d -o "${bitmarkd_user}" -g "${bitmarkd_group}" -m 770 "${dir}"
+  done
+  cd "${bitmarkd_data_dir}"
+}
+
+bitmarkd_checkconfig()
+{
+  bitmarkd_checkdirs
+
+  #echo "Performing sanity check on bitmarkd configuration:"
+  #eval ${command} ${bitmarkd_flags} -t
+}
+
+bitmarkd_precmd()
+{
+  bitmarkd_checkconfig
+
+  if [ -e "${lock_file}" ]
+  then
+    pid=$(check_pidfile "${lock_file}" "${_bitmarkd_program}")
+    if [ -n "${pid}" ]
+    then
+      echo "another bitmarkd is ruunning on pid: ${pid}"
+    else
+      rm -f "${lock_file}"
+    fi
+  fi
+
+  if checkyesno bitmarkdlimits_enable
+  then
+    eval $(/usr/bin/limits ${bitmarkdlimits_args}) 2>/dev/null
+  else
+    return 0
+  fi
+}
+
+bitmarkd_poststop()
+{
+    rm -f "${pidfile}"
+    rm -f "${lock_file}"
+}
+
+bitmarkd_keygen()
+{
+  for c in generate-identity generate-rpc-cert generate-mine-cert
+  do
+    su -m "${bitmarkd_user}" -c "${_bitmarkd_program} ${_bitmarkd_arguments} ${c}"
+  done
+}
+
+run_rc_command "$1"
