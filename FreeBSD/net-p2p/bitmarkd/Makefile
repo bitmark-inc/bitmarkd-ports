@@ -95,7 +95,7 @@ BITMARKD_ITEMS=	account \
 		zmqutil
 
 post-patch:
-.for account in bitmark-inc agl cihub golang pebbe syndtr
+.for account in bitmark-inc cihub golang pebbe syndtr
 	@${MKDIR} ${WRKSRC}/src/github.com/${account}
 .endfor
 
