@@ -71,6 +71,7 @@ BITMARKD_ITEMS=	account \
 		block \
 		blockdigest \
 		blockrecord \
+		blockring \
 		chain \
 		command \
 		configuration \
@@ -85,6 +86,7 @@ BITMARKD_ITEMS=	account \
 		mode \
 		payment \
 		peer \
+		pending \
 		proof \
 		reservoir \
 		rpc \
