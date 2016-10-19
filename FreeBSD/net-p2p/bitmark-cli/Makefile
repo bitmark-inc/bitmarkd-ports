@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark-cli
-PORTVERSION=	3.1
+PORTVERSION=	3.2
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -22,17 +22,17 @@ ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:bitmarkd:v3.0:bitmarkd \
+GH_TUPLE=	bitmark-inc:bitmarkd:cb8cf78:bitmarkd \
 		bitmark-inc:exitwithstatus:1d600d0:exitwithstatus \
 		bitmark-inc:go-argon2:c995b93:go_argon2 \
 		bitmark-inc:go-libucl:6e53e8a:go_libucl \
 		bitmark-inc:logger:9cf06da:logger \
-		cihub:seelog:752ef64:seelog \
+		cihub:seelog:175e6e3:seelog \
 		codegangsta:cli:55f715e:cli \
 		golang:snappy:d9eb7a3:snappy \
 		pebbe:zmq4:eccbb48:zmq4 \
-		syndtr:goleveldb:8d31aaf:goleveldb \
-		golang:crypto:d172538:crypto
+		syndtr:goleveldb:6b4daa5:goleveldb \
+		golang:crypto:5f4e837:crypto
 
 STRIP=		# stripping can break go binaries
 
