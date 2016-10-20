@@ -1,3 +1,5 @@
-TIMESTAMP = 1476352386
-SHA256 (bitmark-inc-bitmark-pay-v3.0_GH0.tar.gz) = 63465fda9993767a40e48f273872402e31550962b5f6b7557c28f47e479281fd
-SIZE (bitmark-inc-bitmark-pay-v3.0_GH0.tar.gz) = 13177
+TIMESTAMP = 1476935471
+SHA256 (bitmark/FreeBSD-bitmark-pay-3.0-maven-repository.tar.gz) = 1724c51000b2081a5d3cfbc4095eda7945856f9dc8e868695ca1c93247c863a1
+SIZE (bitmark/FreeBSD-bitmark-pay-3.0-maven-repository.tar.gz) = 19753408
+SHA256 (bitmark/bitmark-inc-bitmark-pay-v3.0_GH0.tar.gz) = 63465fda9993767a40e48f273872402e31550962b5f6b7557c28f47e479281fd
+SIZE (bitmark/bitmark-inc-bitmark-pay-v3.0_GH0.tar.gz) = 13177

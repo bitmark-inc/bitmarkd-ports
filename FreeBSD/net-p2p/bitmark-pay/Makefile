@@ -5,6 +5,10 @@ PORTNAME=	bitmark-pay
 PORTVERSION=	3.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p java
+MASTER_SITES=	LOCAL/bitmark/:maven \
+		https://bitmark.com/downloads/:maven
+DISTFILES=	FreeBSD-${PORTNAME}-${PORTVERSION}-maven-repository.tar.gz:maven
+DIST_SUBDIR=	bitmark
 
 MAINTAINER=	hsw@bitmark.com
 COMMENT=	Bitmark distributed property payment client
