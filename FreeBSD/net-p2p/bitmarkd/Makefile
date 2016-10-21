@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	3.2
+PORTVERSION=	3.3
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -39,8 +39,8 @@ GH_TUPLE=	bitmark-inc:certgen:c8407fd:certgen \
 
 STRIP=		# stripping can break go binaries
 
-#USERS=		bitmarkd prooferd
-#GROUPS=		bitmarkd prooferd
+USERS=		bitmarkd prooferd
+GROUPS=		bitmarkd prooferd
 BITMARKD_RUN=	/var/run/bitmarkd
 BITMARKD_DATA=	/var/lib/bitmarkd
 PROOFERD_RUN=	/var/run/prooferd
@@ -52,6 +52,10 @@ BINARY_COMMANDS=	bitmarkd prooferd
 PLIST_FILES+=	"@sample etc/${command}.conf.sample"
 PLIST_FILES+=	sbin/${command}
 .endfor
+PLIST_FILES+=	@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) ${BITMARKD_DATA}
+PLIST_FILES+=	@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) ${BITMARKD_RUN}
+PLIST_FILES+=	@dir(%%UPDATERD_USER%%,%%UPDATERD_GROUP%%,) ${UPDATERD_DATA}
+PLIST_FILES+=	@dir(%%UPDATERD_USER%%,%%UPDATERD_GROUP%%,) ${UPDATERD_RUN}
 
 USE_RC_SUBR=	bitmarkd prooferd
 SUB_LIST+=	BITMARKD_USER=bitmarkd \

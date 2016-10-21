@@ -59,7 +59,7 @@ load_rc_config ${name}
 start_precmd="${name}_precmd"
 restart_precmd="${name}_checkconfig"
 stop_postcmd="${name}_poststop"
-keygen_cmd="${name}_initialise"
+keygen_cmd="${name}_keygen"
 keygen_precmd="${name}_checkconfig"
 
 #extra_commands='initialise reload configtest'
@@ -78,6 +78,9 @@ _bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file}"
 command="/usr/sbin/daemon"
 command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
 #procname=${_bitmarkd_program} # do not override procname as program runs under daemon
+
+# list of items for keygen
+generate_list='gen-peer-identity gen-proof-identity gen-rpc-cert'
 
 
 bitmarkd_checkdirs()
@@ -129,7 +132,7 @@ bitmarkd_poststop()
 
 bitmarkd_keygen()
 {
-  for c in generate-identity generate-rpc-cert generate-mine-cert
+  for c in ${generate_list}
   do
     su -m "${bitmarkd_user}" -c "${_bitmarkd_program} ${_bitmarkd_arguments} ${c}"
   done

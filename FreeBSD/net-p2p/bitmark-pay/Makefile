@@ -5,8 +5,7 @@ PORTNAME=	bitmark-pay
 PORTVERSION=	3.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p java
-MASTER_SITES=	LOCAL/bitmark/:maven \
-		https://bitmark.com/downloads/:maven
+MASTER_SITES=	http://df.bitmark.com:8080/files/:maven
 DISTFILES=	FreeBSD-${PORTNAME}-${PORTVERSION}-maven-repository.tar.gz:maven
 DIST_SUBDIR=	bitmark
 
