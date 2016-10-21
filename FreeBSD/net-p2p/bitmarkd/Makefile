@@ -52,13 +52,22 @@ BINARY_COMMANDS=	bitmarkd prooferd
 PLIST_FILES+=	"@sample etc/${command}.conf.sample"
 PLIST_FILES+=	sbin/${command}
 .endfor
-PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) ${BITMARKD_DATA}"
-PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) ${BITMARKD_RUN}"
-PLIST_FILES+=	"@dir(%%UPDATERD_USER%%,%%UPDATERD_GROUP%%,) ${UPDATERD_DATA}"
-PLIST_FILES+=	"@dir(%%UPDATERD_USER%%,%%UPDATERD_GROUP%%,) ${UPDATERD_RUN}"
+PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_DATA%%"
+PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_RUN%%"
+PLIST_FILES+=	"@dir(%%PROOFERD_USER%%,%%PROOFERD_GROUP%%,) %%PROOFERD_DATA%%"
+PLIST_FILES+=	"@dir(%%PROOFERD_USER%%,%%PROOFERD_GROUP%%,) %%PROOFERD_RUN%%"
+PLIST_FILES+=	"@dir /var/lib"
 
 USE_RC_SUBR=	bitmarkd prooferd
 SUB_LIST+=	BITMARKD_USER=bitmarkd \
+		BITMARKD_GROUP=bitmarkd \
+		BITMARKD_RUN=${BITMARKD_RUN} \
+		BITMARKD_DATA=${BITMARKD_DATA} \
+		PROOFERD_USER=prooferd \
+		PROOFERD_GROUP=prooferd \
+		PROOFERD_RUN=${PROOFERD_RUN} \
+		PROOFERD_DATA=${PROOFERD_DATA}
+PLIST_SUB+=	BITMARKD_USER=bitmarkd \
 		BITMARKD_GROUP=bitmarkd \
 		BITMARKD_RUN=${BITMARKD_RUN} \
 		BITMARKD_DATA=${BITMARKD_DATA} \
@@ -136,5 +145,9 @@ do-install:
 #	${INSTALL_MAN} ${WRKSRC}/man/${command}.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
 	${INSTALL_DATA} ${WRKSRC}/src/github.com/bitmark-inc/bitmarkd/command/${command}/${command}.conf.sample ${STAGEDIR}${PREFIX}/etc/${command}.conf.sample
 .endfor
+	${MKDIR} ${STAGEDIR}${BITMARKD_RUN}
+	${MKDIR} ${STAGEDIR}${BITMARKD_DATA}
+	${MKDIR} ${STAGEDIR}${PROOFERD_RUN}
+	${MKDIR} ${STAGEDIR}${PROOFERD_DATA}
 
 .include <bsd.port.mk>
