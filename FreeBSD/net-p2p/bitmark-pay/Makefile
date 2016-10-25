@@ -15,7 +15,7 @@ COMMENT=	Bitmark distributed property payment client
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	mvn:devel/maven-wrapper
+BUILD_DEPENDS=	${LOCALBASE}/share/java/maven33/bin/mvn:devel/maven33
 RUN_DEPENDS=	${LOCALBASE}/bin/getopt:misc/getopt
 
 USE_GITHUB=	yes
@@ -23,6 +23,7 @@ GH_ACCOUNT=	bitmark-inc:DEFAULT
 
 USE_JAVA=	yes
 JAVA_VERSION=	1.8+
+MAKE_ENV+=	PATH="${LOCALBASE}/share/java/maven33/bin/:${PATH}"
 
 PLIST_FILES+=	bin/bitmark-pay \
 		${JAVAJARDIR}/bitmarkPayService-${PORTVERSION}.jar
