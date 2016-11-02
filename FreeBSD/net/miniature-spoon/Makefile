@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	miniature-spoon
-PORTVERSION=	1.2
+PORTVERSION=	2.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net
 
@@ -21,8 +21,7 @@ ONLY_FOR_ARCHS=	i386 amd64
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_PROJECT=	go-libucl:go_libucl
-GH_TAGNAME=	6e53e8a:go_libucl
+GH_TUPLE=	bitmark-inc:go-libucl:6e53e8a:go_libucl
 
 STRIP=		# stripping can break go binaries
 
