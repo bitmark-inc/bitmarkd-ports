@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	3.4
+PORTVERSION=	3.5
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -99,7 +99,6 @@ BITMARKD_ITEMS=	account \
 		mode \
 		payment \
 		peer \
-		pending \
 		proof \
 		reservoir \
 		rpc \
