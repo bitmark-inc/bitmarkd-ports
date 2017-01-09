@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark-pay
-PORTVERSION=	3.0
+PORTVERSION=	3.1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p java
 MASTER_SITES=	http://repo.bitmark.com:8080/files/:maven
