@@ -22,11 +22,11 @@ ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:bitmarkd:a94ff1b:bitmarkd \
-		bitmark-inc:exitwithstatus:1d600d0:exitwithstatus \
-		bitmark-inc:go-argon2:c995b93:go_argon2 \
-		bitmark-inc:go-libucl:6e53e8a:go_libucl \
-		bitmark-inc:logger:99a911f:logger \
+GH_TUPLE=	bitmark-inc:bitmarkd:v3.21:bitmarkd \
+		bitmark-inc:exitwithstatus:v1.1:exitwithstatus \
+		bitmark-inc:go-argon2:v1.0:go_argon2 \
+		bitmark-inc:go-libucl:v1.0:go_libucl \
+		bitmark-inc:logger:v1.0:logger \
 		cihub:seelog:7bfb793:seelog \
 		codegangsta:cli:55f715e:cli \
 		golang:snappy:d9eb7a3:snappy \
@@ -39,6 +39,7 @@ STRIP=		# stripping can break go binaries
 PLIST_FILES+=	bin/bitmark-cli
 
 BITMARK_CLI_ITEMS=	\
+		agent.go \
 		configuration \
 		fault \
 		check_commands.go \
