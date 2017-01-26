@@ -24,13 +24,13 @@ ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:certgen:c8407fd:certgen \
-		bitmark-inc:exitwithstatus:1d600d0:exitwithstatus \
-		bitmark-inc:getoptions:898aef2:getoptions \
-		bitmark-inc:go-argon2:c995b93:go_argon2 \
-		bitmark-inc:go-libucl:6e53e8a:go_libucl \
-		bitmark-inc:listener:5b92961:listener \
-		bitmark-inc:logger:99a911f:logger \
+GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen \
+		bitmark-inc:exitwithstatus:v1.1:exitwithstatus \
+		bitmark-inc:getoptions:v1.0:getoptions \
+		bitmark-inc:go-argon2:v1.0:go_argon2 \
+		bitmark-inc:go-libucl:v1.0:go_libucl \
+		bitmark-inc:listener:v1.2:listener \
+		bitmark-inc:logger:v1.0:logger \
 		cihub:seelog:7bfb793:seelog \
 		golang:snappy:d9eb7a3:snappy \
 		pebbe:zmq4:86a3013:zmq4 \
