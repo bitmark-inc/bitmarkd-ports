@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	3.25
+PORTVERSION=	3.26
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -88,6 +88,7 @@ BITMARKD_ITEMS=	account \
 		chain \
 		command \
 		configuration \
+		constants \
 		counter \
 		currency \
 		debian \
