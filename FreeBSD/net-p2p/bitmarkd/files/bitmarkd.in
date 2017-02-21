@@ -67,8 +67,12 @@ extra_commands='keygen'
 
 pidfile="${bitmarkd_run_dir}/${name}.pid"
 
-# bitmarkd creates it own PID file so need to remove  if stale
+# bitmarkd creates its own PID file so need to remove if stale
 lock_file="${bitmarkd_data_dir}/${name}.pid"
+
+# to record any outputs such as the stack trace on crash
+stdout_file="${bitmarkd_data_dir}/${name}.stdout"
+stderr_file="${bitmarkd_data_dir}/${name}.stderr"
 
 required_files="${bitmarkd_config_file}"
 
@@ -76,7 +80,7 @@ _bitmarkd_program="%%PREFIX%%/sbin/bitmarkd"
 _bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file}"
 
 command="/usr/sbin/daemon"
-command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
+command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments} 1>> ${stdout_file} 2>> ${stderr_file}"
 #procname=${_bitmarkd_program} # do not override procname as program runs under daemon
 
 # list of items for keygen
@@ -110,7 +114,7 @@ bitmarkd_precmd()
     pid=$(check_pidfile "${lock_file}" "${_bitmarkd_program}")
     if [ -n "${pid}" ]
     then
-      echo "another bitmarkd is ruunning on pid: ${pid}"
+      echo "another bitmarkd is running on pid: ${pid}"
     else
       rm -f "${lock_file}"
     fi
