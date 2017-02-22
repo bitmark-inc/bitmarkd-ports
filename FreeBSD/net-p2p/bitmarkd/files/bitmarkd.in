@@ -80,7 +80,8 @@ _bitmarkd_program="%%PREFIX%%/sbin/bitmarkd"
 _bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file}"
 
 command="/usr/sbin/daemon"
-command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments} 1>> ${stdout_file} 2>> ${stderr_file}"
+#command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
+command_args="-P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments} 1>> ${stdout_file} 2>> ${stderr_file}"
 #procname=${_bitmarkd_program} # do not override procname as program runs under daemon
 
 # list of items for keygen

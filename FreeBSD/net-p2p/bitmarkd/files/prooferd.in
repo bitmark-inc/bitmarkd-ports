@@ -70,13 +70,18 @@ pidfile="${prooferd_run_dir}/${name}.pid"
 # prooferd creates it own PID file so need to remove  if stale
 lock_file="${prooferd_data_dir}/${name}.pid"
 
+# to record any outputs such as the stack trace on crash
+stdout_file="${bitmarkd_data_dir}/${name}.stdout"
+stderr_file="${bitmarkd_data_dir}/${name}.stderr"
+
 required_files="${prooferd_config_file}"
 
 _prooferd_program="%%PREFIX%%/sbin/prooferd"
 _prooferd_arguments="--quiet --config-file=${prooferd_config_file}"
 
 command="/usr/sbin/daemon"
-command_args="-f -P ${pidfile} -r -- ${_prooferd_program} ${_prooferd_arguments}"
+#command_args="-f -P ${pidfile} -r -- ${_prooferd_program} ${_prooferd_arguments}"
+command_args="-P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments} 1>> ${stdout_file} 2>> ${stderr_file}"
 #procname=${_prooferd_program} # do not override procname as program runs under daemon
 
 
