@@ -1,6 +1,6 @@
-TIMESTAMP = 1487662109
-SHA256 (bitmark-inc-bitmarkd-v3.28_GH0.tar.gz) = bbd66209259bfd50c5f97687e3119896cb37ea715e43978e6b46558abca2c245
-SIZE (bitmark-inc-bitmarkd-v3.28_GH0.tar.gz) = 232468
+TIMESTAMP = 1488332899
+SHA256 (bitmark-inc-bitmarkd-v3.29_GH0.tar.gz) = 04e1a733f8294535806c30355cae13f19015717a59de3dc5208e66a1b440434d
+SIZE (bitmark-inc-bitmarkd-v3.29_GH0.tar.gz) = 232676
 SHA256 (bitmark-inc-certgen-v1.0_GH0.tar.gz) = ed0fa1d610cc9784ed05c808c04164745a56e9e36b63e33a74f3ac57863caa83
 SIZE (bitmark-inc-certgen-v1.0_GH0.tar.gz) = 2296
 SHA256 (bitmark-inc-exitwithstatus-v1.1_GH0.tar.gz) = 4a012a59942f4f190f7e970854ab496ebc550e2330f2553b503bcdbf49b517e4
