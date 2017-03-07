@@ -3,7 +3,7 @@
 
 PORTNAME=	bitmarkd
 PORTVERSION=	3.29
-#PORTREVISION=	1
+PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -28,7 +28,7 @@ GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen \
 		bitmark-inc:exitwithstatus:v1.1:exitwithstatus \
 		bitmark-inc:getoptions:v1.0:getoptions \
-		bitmark-inc:go-argon2:v1.0:go_argon2 \
+		bitmark-inc:go-argon2:v1.1:go_argon2 \
 		bitmark-inc:go-libucl:v1.0:go_libucl \
 		bitmark-inc:listener:v1.2:listener \
 		bitmark-inc:logger:v1.0:logger \

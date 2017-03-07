@@ -1,4 +1,4 @@
-TIMESTAMP = 1488332899
+TIMESTAMP = 1488865468
 SHA256 (bitmark-inc-bitmarkd-v3.29_GH0.tar.gz) = 04e1a733f8294535806c30355cae13f19015717a59de3dc5208e66a1b440434d
 SIZE (bitmark-inc-bitmarkd-v3.29_GH0.tar.gz) = 232676
 SHA256 (bitmark-inc-certgen-v1.0_GH0.tar.gz) = ed0fa1d610cc9784ed05c808c04164745a56e9e36b63e33a74f3ac57863caa83
@@ -7,8 +7,8 @@ SHA256 (bitmark-inc-exitwithstatus-v1.1_GH0.tar.gz) = 4a012a59942f4f190f7e970854
 SIZE (bitmark-inc-exitwithstatus-v1.1_GH0.tar.gz) = 1742
 SHA256 (bitmark-inc-getoptions-v1.0_GH0.tar.gz) = 1e51818dd31a67df8aafc564e838a9f326c7df0474257e435f7be75018b6d600
 SIZE (bitmark-inc-getoptions-v1.0_GH0.tar.gz) = 3993
-SHA256 (bitmark-inc-go-argon2-v1.0_GH0.tar.gz) = 2bec3f7bf7e39b71230761aee8b5d6355ab2272b2558d6365f90597505e3ac8b
-SIZE (bitmark-inc-go-argon2-v1.0_GH0.tar.gz) = 7340
+SHA256 (bitmark-inc-go-argon2-v1.1_GH0.tar.gz) = ad127e585bf662c57f1f4fd291c68926fce1d13584ed1e3fa788b81460b27f09
+SIZE (bitmark-inc-go-argon2-v1.1_GH0.tar.gz) = 7412
 SHA256 (bitmark-inc-go-libucl-v1.0_GH0.tar.gz) = bdf80633edcf852c7521cf17c4ea459b6689b6528e64c28f73f7abbff357e28c
 SIZE (bitmark-inc-go-libucl-v1.0_GH0.tar.gz) = 9758
 SHA256 (bitmark-inc-listener-v1.2_GH0.tar.gz) = b2fa300de5b69b44b7b95d50472b435de359f253ea382a769732cba69823c67c
