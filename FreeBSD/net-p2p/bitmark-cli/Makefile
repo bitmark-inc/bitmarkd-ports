@@ -3,6 +3,7 @@
 
 PORTNAME=	bitmark-cli
 PORTVERSION=	3.4
+PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -22,9 +23,9 @@ ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:bitmarkd:v3.21:bitmarkd \
+GH_TUPLE=	bitmark-inc:bitmarkd:v3.29:bitmarkd \
 		bitmark-inc:exitwithstatus:v1.1:exitwithstatus \
-		bitmark-inc:go-argon2:v1.0:go_argon2 \
+		bitmark-inc:go-argon2:v1.1:go_argon2 \
 		bitmark-inc:go-libucl:v1.0:go_libucl \
 		bitmark-inc:logger:v1.0:logger \
 		cihub:seelog:7bfb793:seelog \
