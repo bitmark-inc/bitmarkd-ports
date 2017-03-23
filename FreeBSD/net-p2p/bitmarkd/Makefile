@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	3.29
-PORTREVISION=	1
+PORTVERSION=	3.30
+#PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -99,6 +99,7 @@ BITMARKD_ITEMS=	account \
 		merkle \
 		messagebus \
 		mode \
+		pay \
 		payment \
 		peer \
 		proof \
