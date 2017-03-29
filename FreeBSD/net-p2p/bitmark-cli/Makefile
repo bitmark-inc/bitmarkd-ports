@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark-cli
-PORTVERSION=	3.4
-PORTREVISION=	1
+PORTVERSION=	3.5
+#PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -23,7 +23,7 @@ ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:bitmarkd:v3.29:bitmarkd \
+GH_TUPLE=	bitmark-inc:bitmarkd:v3.32:bitmarkd \
 		bitmark-inc:exitwithstatus:v1.1:exitwithstatus \
 		bitmark-inc:go-argon2:v1.1:go_argon2 \
 		bitmark-inc:go-libucl:v1.0:go_libucl \

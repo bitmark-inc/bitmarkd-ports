@@ -1,8 +1,8 @@
-TIMESTAMP = 1488865565
-SHA256 (bitmark-inc-bitmark-cli-v3.4_GH0.tar.gz) = 993d423390adbf6a0d79bbd77c6ed9fc65b9220e8e4fb74e572bd66e4dd858a7
-SIZE (bitmark-inc-bitmark-cli-v3.4_GH0.tar.gz) = 19595
-SHA256 (bitmark-inc-bitmarkd-v3.29_GH0.tar.gz) = 04e1a733f8294535806c30355cae13f19015717a59de3dc5208e66a1b440434d
-SIZE (bitmark-inc-bitmarkd-v3.29_GH0.tar.gz) = 232676
+TIMESTAMP = 1490756824
+SHA256 (bitmark-inc-bitmark-cli-v3.5_GH0.tar.gz) = 0088dba844935fedeb113a8c252b3110bd0dbb55242a223db28a56045729a046
+SIZE (bitmark-inc-bitmark-cli-v3.5_GH0.tar.gz) = 20156
+SHA256 (bitmark-inc-bitmarkd-v3.32_GH0.tar.gz) = 7cc2fc8534259f190d27f89c50a0452f4070d0559d930c213565f3d2ff49d747
+SIZE (bitmark-inc-bitmarkd-v3.32_GH0.tar.gz) = 236745
 SHA256 (bitmark-inc-exitwithstatus-v1.1_GH0.tar.gz) = 4a012a59942f4f190f7e970854ab496ebc550e2330f2553b503bcdbf49b517e4
 SIZE (bitmark-inc-exitwithstatus-v1.1_GH0.tar.gz) = 1742
 SHA256 (bitmark-inc-go-argon2-v1.1_GH0.tar.gz) = ad127e585bf662c57f1f4fd291c68926fce1d13584ed1e3fa788b81460b27f09
