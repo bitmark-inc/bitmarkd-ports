@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark-cli
-PORTVERSION=	3.5
+PORTVERSION=	3.6
 #PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
@@ -23,11 +23,11 @@ ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:bitmarkd:v3.32:bitmarkd \
+GH_TUPLE=	bitmark-inc:bitmarkd:v3.33:bitmarkd \
 		bitmark-inc:exitwithstatus:v1.1:exitwithstatus \
 		bitmark-inc:go-argon2:v1.1:go_argon2 \
 		bitmark-inc:go-libucl:v1.0:go_libucl \
-		bitmark-inc:logger:v1.0:logger \
+		bitmark-inc:logger:v2.0:logger \
 		cihub:seelog:7bfb793:seelog \
 		codegangsta:cli:55f715e:cli \
 		golang:snappy:d9eb7a3:snappy \
@@ -41,16 +41,20 @@ PLIST_FILES+=	bin/bitmark-cli
 
 BITMARK_CLI_ITEMS=	\
 		agent.go \
+		batch.go \
 		configuration \
 		fault \
 		check_commands.go \
 		doc.go \
-		issue.go \
-		issue_test.go \
+		commands.go \
+		connect_test.go \
 		keypair.go \
 		keypair_test.go \
 		main.go \
+		printjson.go \
 		proof.go \
+		rpccalls.go \
+		support.go \
 		version.go
 
 post-patch:
