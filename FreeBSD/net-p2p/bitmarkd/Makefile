@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	3.32
+PORTVERSION=	3.33
 #PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
@@ -31,7 +31,7 @@ GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen \
 		bitmark-inc:go-argon2:v1.1:go_argon2 \
 		bitmark-inc:go-libucl:v1.0:go_libucl \
 		bitmark-inc:listener:v1.2:listener \
-		bitmark-inc:logger:v1.0:logger \
+		bitmark-inc:logger:v2.0:logger \
 		cihub:seelog:7bfb793:seelog \
 		golang:snappy:d9eb7a3:snappy \
 		pebbe:zmq4:86a3013:zmq4 \
