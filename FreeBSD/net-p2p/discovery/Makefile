@@ -3,6 +3,7 @@
 
 PORTNAME=	discovery
 PORTVERSION=	0.3
+PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -28,8 +29,8 @@ USERS=	discovery
 GROUPS=	discovery
 DISCOVERY_DATA=	/var/lib/discovery
 
-PLIST_SUB+=	DISCOVERY_USER=generator \
-		DISCOVERY_GROUP=generator \
+PLIST_SUB+=	DISCOVERY_USER=discovery \
+		DISCOVERY_GROUP=discovery \
 		DISCOVERY_DATA=${DISCOVERY_DATA}
 PLIST_FILES+=	bin/${PORTNAME}
 PLIST_FILES+=	"@sample etc/${PORTNAME}.conf.sample"
