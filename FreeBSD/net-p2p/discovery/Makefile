@@ -11,6 +11,9 @@ COMMENT=	N/A
 LIB_DEPENDS=	libzmq.so:net/libzmq4
 BUILD_DEPENDS=	go:lang/go
 
+USES=		pkgconfig
+ONLY_FOR_ARCHS=	i386 amd64
+
 USE_GITHUB=		yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_PROJECT=	discovery
