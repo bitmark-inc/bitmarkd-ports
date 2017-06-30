@@ -23,13 +23,16 @@ GH_TUPLE= cihub:seelog:7bfb793:seelog \
 		hashicorp:hcl:392dba7:hcl \
 		pebbe:zmq4:86a3013:zmq4
 
-# USERS=	discovery
-# GROUPS=	discovery
+USERS=	discovery
+GROUPS=	discovery
 DISCOVERY_DATA=	/var/lib/discovery
 
+PLIST_SUB+=	DISCOVERY_USER=generator \
+		DISCOVERY_GROUP=generator \
+		DISCOVERY_DATA=${DISCOVERY_DATA}
 PLIST_FILES+=	bin/${PORTNAME}
 PLIST_FILES+=	"@sample etc/${PORTNAME}.conf.sample"
-PLIST_FILES+=	"@dir /var/lib/discovery"
+PLIST_FILES+=	"@dir(%%DISCOVERY_USER%%,%%DISCOVERY_GROUP%%,) %%DISCOVERY_DATA%%"
 PLIST_FILES+=	"@dir /var/lib"
 
 post-patch:
@@ -48,8 +51,6 @@ do-build:
 do-install:
 	${INSTALL_PROGRAM} ${WRKDIR}/bin/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${WRKDIR}/src/github.com/bitmark-inc/discovery/discovery.conf.sample ${STAGEDIR}${PREFIX}/etc/discovery.conf.sample
-
-post-install:
 	${MKDIR} ${STAGEDIR}${DISCOVERY_DATA}
 
 .include <bsd.port.mk>
