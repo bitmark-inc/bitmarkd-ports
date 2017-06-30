@@ -3,7 +3,7 @@
 
 PORTNAME=	discovery
 PORTVERSION=	0.3
-PORTREVISION=	5
+PORTREVISION=	6
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -28,6 +28,7 @@ GROUPS=	discovery
 DISCOVERY_DATA=	/var/lib/discovery
 DISCOVERY_RUN=	/var/run/discovery
 
+USE_RC_SUBR=discovery
 PLIST_SUB+=	DISCOVERY_USER=discovery \
 		DISCOVERY_GROUP=discovery \
 		DISCOVERY_DATA=${DISCOVERY_DATA} \
