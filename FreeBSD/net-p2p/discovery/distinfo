@@ -1,0 +1,11 @@
+TIMESTAMP = 1498787532
+SHA256 (bitmark-inc-discovery-0.1-8bac8ed_GH0.tar.gz) = 6b3f0bc8883140612140f27384eb4575504d577420403ae0c2e166ab2b2b106f
+SIZE (bitmark-inc-discovery-0.1-8bac8ed_GH0.tar.gz) = 7284
+SHA256 (cihub-seelog-7bfb793_GH0.tar.gz) = c870116605e605278e88909f9a46420264b9f453846214d2b7d8f23befcbd4c7
+SIZE (cihub-seelog-7bfb793_GH0.tar.gz) = 66205
+SHA256 (bitmark-inc-logger-v2.0_GH0.tar.gz) = 0ae9055baf7112ab54de11c7dfdd09988d9e4e9f73194f701c9c3e4f0a50a9ff
+SIZE (bitmark-inc-logger-v2.0_GH0.tar.gz) = 5025
+SHA256 (hashicorp-hcl-392dba7_GH0.tar.gz) = a9ec781e8590fe45a11f84833cb3a6ad56d7da069ee95750f53f8e133bc679e8
+SIZE (hashicorp-hcl-392dba7_GH0.tar.gz) = 69728
+SHA256 (pebbe-zmq4-86a3013_GH0.tar.gz) = 50a1746e66f2c0e2fd938c9540873a90e47aff3809e4ad5b81806a23a7fc8bb9
+SIZE (pebbe-zmq4-86a3013_GH0.tar.gz) = 87735

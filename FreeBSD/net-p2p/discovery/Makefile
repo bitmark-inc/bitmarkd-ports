@@ -3,73 +3,50 @@
 
 PORTNAME=	discovery
 PORTVERSION=	0.1
-DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
 MAINTAINER=	linzy@bitmark.com
-COMMENT=	monitors various crypto-currencies for Bitmark transfer payments
-
-LICENSE=	BITMARK
-LICENSE_NAME=	Bitmark License
-LICENSE_FILE=	${WRKDIR}/LICENSE
-LICENSE_PERMS=	auto-accept
+COMMENT=	N/A
 
 LIB_DEPENDS=	libzmq.so:net/libzmq4
 BUILD_DEPENDS=	go:lang/go
 
-USES=		pkgconfig
-ONLY_FOR_ARCHS=	i386 amd64
-
-USE_GITHUB=	yes
+USE_GITHUB=		yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	cihub:seelog:7bfb793:seelog \
+GH_PROJECT=	discovery
+GH_TAGNAME=	8bac8ed
+GH_TUPLE= cihub:seelog:7bfb793:seelog \
 		bitmark-inc:logger:v2.0:logger \
 		hashicorp:hcl:392dba7:hcl \
 		pebbe:zmq4:86a3013:zmq4
 
-STRIP=		# stripping can break go binaries
-
-USERS=		discovery
-GROUPS=		discovery
+# USERS=	discovery
+# GROUPS=	discovery
 DISCOVERY_DATA=	/var/lib/discovery
 
+PLIST_FILES+=	bin/${PORTNAME}
 PLIST_FILES+=	"@sample etc/${PORTNAME}.conf.sample"
-PLIST_FILES+=	sbin/${PORTNAME}
-PLIST_FILES+=	"@dir(%%UPDATERD_USER%%,%%UPDATERD_GROUP%%,) %%DISCOVERY_DATA%%"
+PLIST_FILES+=	"@dir /var/lib/discovery"
 PLIST_FILES+=	"@dir /var/lib"
 
-USE_RC_SUBR=	${PORTNAME}
-SUB_LIST+=	DISCOVERY_USER=discovery \
-		DISCOVERY_GROUP=discovery \
-		DISCOVERY_DATA=${DISCOVERY_DATA}
-PLIST_SUB+=	DISCOVERY_USER=discovery \
-		DISCOVERY_GROUP=discovery \
-		DISCOVERY_DATA=${DISCOVERY_DATA}
-
-# preserve the licence file before it is moved
-post-extract:
-	@${CP} -p ${WRKSRC_go_programs}/LICENSE ${WRKDIR}/LICENSE
-
 post-patch:
-.for account in bitmark-inc cihub pebbe
-	@${MKDIR} ${WRKSRC}/src/github.com/${account}
+.for account in bitmark-inc cihub hashicorp pebbe
+	@${MKDIR} ${WRKDIR}/src/github.com/${account}
 .endfor
-
-	@${MKDIR} ${WRKSRC}/src/golang.org/x
-
-	@${MV} ${WRKSRC_seelog} ${WRKSRC}/src/github.com/cihub/seelog
-	@${MV} ${WRKSRC_logger} ${WRKSRC}/src/github.com/bitmark-inc/logger
-	@${MV} ${WRKSRC_logger} ${WRKSRC}/src/github.com/hashicorp/hcl"
-	@${MV} ${WRKSRC_zmq4} ${WRKSRC}/src/github.com/pebbe/zmq4
+	@${MV} ${WRKSRC_logger} ${WRKDIR}/src/github.com/bitmark-inc/logger
+	@${MV} ${WRKSRC_seelog} ${WRKDIR}/src/github.com/cihub/seelog
+	@${MV} ${WRKSRC_hcl} ${WRKDIR}/src/github.com/hashicorp/hcl
+	@${MV} ${WRKSRC_zmq4} ${WRKDIR}/src/github.com/pebbe/zmq4
+	@${MV} ${WRKSRC} ${WRKDIR}/src/github.com/bitmark-inc/discovery
 
 do-build:
-	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME} && ${SETENV} GOPATH=${WRKSRC} go "install" .
+	@cd ${WRKDIR}/src/github.com/bitmark-inc/discovery && ${SETENV} GOPATH=${WRKDIR} go "install" .
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/${PORTNAME} ${STAGEDIR}${PREFIX}/sbin
+	${INSTALL_PROGRAM} ${WRKDIR}/bin/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${WRKDIR}/src/github.com/bitmark-inc/discovery/discovery.conf.sample ${STAGEDIR}${PREFIX}/etc/discovery.conf.sample
 
-	${INSTALL_DATA} ${WRKSRC}/src/github.com/bitmark-inc/${PORTNAME}/${PORTNAME}.conf.sample ${STAGEDIR}${PREFIX}/etc/${PORTNAME}.conf.sample
-
+post-install:
 	${MKDIR} ${STAGEDIR}${DISCOVERY_DATA}
 
 .include <bsd.port.mk>
