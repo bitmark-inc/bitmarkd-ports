@@ -59,18 +59,14 @@ load_rc_config ${name}
 start_precmd="${name}_precmd"
 restart_precmd="${name}_checkconfig"
 stop_postcmd="${name}_poststop"
-keygen_cmd="${name}_keygen"
-keygen_precmd="${name}_checkconfig"
 
 pidfile="${discovery_run_dir}/${name}.pid"
-
-# discovery creates it own PID file so need to remove  if stale
 lock_file="${discovery_data_dir}/${name}.pid"
 
 required_files="${discovery_config_file}"
 
 _discovery_program="%%PREFIX%%/bin/discovery"
-_discovery_arguments="--quiet --config-file=${discovery_config_file}"
+_discovery_arguments="--config-file=${discovery_config_file}"
 
 command="/usr/sbin/daemon"
 command_args="-f -P ${pidfile} -r -- ${_discovery_program} ${_discovery_arguments}"
@@ -89,9 +85,6 @@ discovery_checkdirs()
 discovery_checkconfig()
 {
   discovery_checkdirs
-
-  #echo "Performing sanity check on discovery configuration:"
-  #eval ${command} ${discovery_flags} -t
 }
 
 discovery_precmd()
