@@ -54,5 +54,6 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKDIR}/bin/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${WRKDIR}/src/github.com/bitmark-inc/discovery/discovery.conf.sample ${STAGEDIR}${PREFIX}/etc/discovery.conf.sample
 	${MKDIR} ${STAGEDIR}${DISCOVERY_DATA}
+	${MKDIR} ${STAGEDIR}${DISCOVERY_RUN}
 
 .include <bsd.port.mk>
