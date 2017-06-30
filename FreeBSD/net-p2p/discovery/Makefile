@@ -3,7 +3,7 @@
 
 PORTNAME=	discovery
 PORTVERSION=	0.3
-PORTREVISION=	1
+PORTREVISION=	2
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -18,8 +18,6 @@ ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=		yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_PROJECT=	discovery
-# GH_TAGNAME=	8bac8ed
 GH_TUPLE= cihub:seelog:7bfb793:seelog \
 		bitmark-inc:logger:v2.0:logger \
 		hashicorp:hcl:392dba7:hcl \
@@ -28,6 +26,7 @@ GH_TUPLE= cihub:seelog:7bfb793:seelog \
 USERS=	discovery
 GROUPS=	discovery
 DISCOVERY_DATA=	/var/lib/discovery
+DISCOVERY_RUN=	/var/run/discovery
 
 PLIST_SUB+=	DISCOVERY_USER=discovery \
 		DISCOVERY_GROUP=discovery \
@@ -35,6 +34,7 @@ PLIST_SUB+=	DISCOVERY_USER=discovery \
 PLIST_FILES+=	bin/${PORTNAME}
 PLIST_FILES+=	"@sample etc/${PORTNAME}.conf.sample"
 PLIST_FILES+=	"@dir(%%DISCOVERY_USER%%,%%DISCOVERY_GROUP%%,) %%DISCOVERY_DATA%%"
+PLIST_FILES+=	"@dir(%%DISCOVERY_USER%%,%%DISCOVERY_GROUP%%,) %%DISCOVERY_RUN%%"
 PLIST_FILES+=	"@dir /var/lib"
 
 post-patch:

@@ -1,0 +1,126 @@
+#!/bin/sh
+# $FreeBSD$
+
+# PROVIDE: discovery
+# REQUIRE: LOGIN cleanvar
+# KEYWORD: shutdown
+
+# Configuration settings in /etc/rc.conf:
+#
+# discovery_enable (bool):
+#   Set to "NO" by default.
+#   Set it to "YES" to enable discovery
+#
+# discovery_user (str):
+#   Set to "%%DISCOVERY_USER%%" by default.
+#   User to run process as and for data ownership.
+#
+# discovery_group (str):
+#   Set to "%%DISCOVERY_GROUP%%" by default.
+#   Group for data file ownership.
+#
+# discovery_config_file (str):
+#   Set to "%%PREFIX%%/etc/${name}.conf" by default.
+#   The master configuration file.
+#
+# discovery_data_dir (str):
+#   Set to "%%DISCOVERY_DATA%%" by default.
+#   The root of the data store.
+#
+# discovery_run_dir (str):
+#   Set to "%%DISCOVERY_RUN%%" by default.
+#   The root for the pid and socket files.
+#
+# discoverylimits_enable (bool):
+#   Set to "NO" by default.
+#   Set it to yes to run `limits ${discoverylimits_args}` just before
+#   discovery starts.
+#
+# discoverylimits_args (str):
+#   Default to "-e -U %%DISCOVERY_USER%%"
+#   Arguments of pre-start limits run.
+
+. /etc/rc.subr
+
+name="discovery"
+rcvar=discovery_enable
+
+load_rc_config ${name}
+
+: ${discovery_enable:="NO"}
+: ${discovery_user:="%%DISCOVERY_USER%%"}
+: ${discovery_group:="%%DISCOVERY_GROUP%%"}
+: ${discovery_config_file:="%%PREFIX%%/etc/${name}.conf"}
+: ${discovery_data_dir:="%%DISCOVERY_DATA%%"}
+: ${discovery_run_dir:="%%DISCOVERY_RUN%%"}
+: ${discoverylimits_enable:="NO"}
+: ${discoverylimits_args:="-e -U ${discovery_user}"}
+
+start_precmd="${name}_precmd"
+restart_precmd="${name}_checkconfig"
+stop_postcmd="${name}_poststop"
+keygen_cmd="${name}_keygen"
+keygen_precmd="${name}_checkconfig"
+
+pidfile="${discovery_run_dir}/${name}.pid"
+
+# discovery creates it own PID file so need to remove  if stale
+lock_file="${discovery_data_dir}/${name}.pid"
+
+required_files="${discovery_config_file}"
+
+_discovery_program="%%PREFIX%%/bin/discovery"
+_discovery_arguments="--quiet --config-file=${discovery_config_file}"
+
+command="/usr/sbin/daemon"
+command_args="-f -P ${pidfile} -r -- ${_discovery_program} ${_discovery_arguments}"
+
+
+discovery_checkdirs()
+{
+  local dir
+  for dir in "${discovery_data_dir}" "${discovery_run_dir}"
+  do
+    [ -d "${dir}" ] || install -d -o "${discovery_user}" -g "${discovery_group}" -m 770 "${dir}"
+  done
+  cd "${discovery_data_dir}"
+}
+
+discovery_checkconfig()
+{
+  discovery_checkdirs
+
+  #echo "Performing sanity check on discovery configuration:"
+  #eval ${command} ${discovery_flags} -t
+}
+
+discovery_precmd()
+{
+  discovery_checkconfig
+
+  if [ -e "${lock_file}" ]
+  then
+    pid=$(check_pidfile "${lock_file}" "${_discovery_program}")
+    if [ -n "${pid}" ]
+    then
+      echo "another discovery is ruunning on pid: ${pid}"
+    else
+      rm -f "${lock_file}"
+    fi
+  fi
+
+  if checkyesno discoverylimits_enable
+  then
+    eval $(/usr/bin/limits ${discoverylimits_args}) 2>/dev/null
+  else
+    return 0
+  fi
+}
+
+discovery_poststop()
+{
+    rm -f "${pidfile}"
+    rm -f "${lock_file}"
+}
+
+run_rc_command "$1"
