@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	discovery
-PORTVERSION=	0.4
-PORTREVISION=	1
+PORTVERSION=	0.5
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -19,7 +18,7 @@ ONLY_FOR_ARCHS=	i386 amd64
 USE_GITHUB=		yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_TUPLE= cihub:seelog:7bfb793:seelog \
-		bitmark-inc:logger:v2.0:logger \
+		bitmark-inc:logger:v3.2:logger \
 		hashicorp:hcl:392dba7:hcl \
 		pebbe:zmq4:86a3013:zmq4
 
