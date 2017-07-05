@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	4.9
-PORTREVISION=	1
+PORTVERSION=	4.11
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -18,25 +17,24 @@ LIB_DEPENDS=	libucl.so:textproc/libucl \
 		libzmq.so:net/libzmq4
 BUILD_DEPENDS=	go:lang/go
 
-CONFLICTS_INSTALL=	bitmarkd-1.*
-
 USES=		pkgconfig
 ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen \
-		bitmark-inc:exitwithstatus:v1.1:exitwithstatus \
-		bitmark-inc:getoptions:v1.0:getoptions \
-		bitmark-inc:go-argon2:v1.1:go_argon2 \
-		bitmark-inc:go-libucl:v1.0:go_libucl \
-		bitmark-inc:listener:v1.2:listener \
-		bitmark-inc:logger:v2.0:logger \
-		cihub:seelog:7bfb793:seelog \
-		golang:snappy:d9eb7a3:snappy \
-		pebbe:zmq4:86a3013:zmq4 \
-		syndtr:goleveldb:23851d9:goleveldb \
-		golang:crypto:7c6cc32:crypto
+GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen/src/github.com/bitmark-inc/certgen \
+		bitmark-inc:exitwithstatus:v1.1:exitwithstatus/src/github.com/bitmark-inc/exitwithstatus \
+		bitmark-inc:getoptions:v1.0:getoptions/src/github.com/bitmark-inc/getoptions \
+		bitmark-inc:go-argon2:v1.1:go_argon2/src/github.com/bitmark-inc/go-argon2 \
+		bitmark-inc:go-libucl:v1.0:go_libucl/src/github.com/bitmark-inc/go-libucl \
+		bitmark-inc:listener:v1.2:listener/src/github.com/bitmark-inc/listener \
+		bitmark-inc:logger:v3.2:logger/src/github.com/bitmark-inc/logger \
+		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
+		golang:snappy:d9eb7a3:snappy/src/github.com/golang/snappy \
+		pebbe:zmq4:86a3013:zmq4/src/github.com/pebbe/zmq4 \
+		syndtr:goleveldb:23851d9:goleveldb/src/github.com/syndtr/goleveldb \
+		codegangsta:cli:b892ba3:cli/src/github.com/codegangsta/cli \
+		golang:crypto:7c6cc32:crypto/src/golang.org/x/crypto
 
 STRIP=		# stripping can break go binaries
 
@@ -46,10 +44,12 @@ BITMARKD_RUN=	/var/run/bitmarkd
 BITMARKD_DATA=	/var/lib/bitmarkd
 PROOFERD_RUN=	/var/run/prooferd
 PROOFERD_DATA=	/var/lib/prooferd
-BINARY_COMMANDS=	bitmarkd prooferd
+
+SERVER_LIST=	bitmarkd prooferd
+COMMAND_LIST=	bitmark-cli
 
 #PLIST_FILES=	"@sample %%ETCDIR%%/bitmarkd.conf.sample" ## if want etc/Bitmarkd/bitmarkd.conf.sample
-.for command in ${BINARY_COMMANDS}
+.for command in ${SERVER_LIST}
 PLIST_FILES+=	"@sample etc/${command}.conf.sample"
 PLIST_FILES+=	sbin/${command}
 .endfor
@@ -77,75 +77,32 @@ PLIST_SUB+=	BITMARKD_USER=bitmarkd \
 		PROOFERD_RUN=${PROOFERD_RUN} \
 		PROOFERD_DATA=${PROOFERD_DATA}
 
-BITMARKD_ITEMS=	account \
-		announce \
-		asset \
-		avl \
-		background \
-		block \
-		blockdigest \
-		blockrecord \
-		blockring \
-		chain \
-		command \
-		configuration \
-		constants \
-		counter \
-		currency \
-		debian \
-		difficulty \
-		fault \
-		genesis \
-		merkle \
-		messagebus \
-		mode \
-		pay \
-		payment \
-		peer \
-		proof \
-		reservoir \
-		rpc \
-		storage \
-		transactionrecord \
-		util \
-		version \
-		zmqutil
-
 post-patch:
-.for account in bitmark-inc cihub golang pebbe syndtr
-	@${MKDIR} ${WRKSRC}/src/github.com/${account}
-.endfor
-
-	${MKDIR} ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME}
-.for src in ${BITMARKD_ITEMS}
-	@${MV} ${WRKSRC}/${src} ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME}
-.endfor
-
-	${MKDIR} ${WRKSRC}/src/golang.org/x
-
-	@${MV} ${WRKSRC_certgen} ${WRKSRC}/src/github.com/bitmark-inc/certgen
-	@${MV} ${WRKSRC_exitwithstatus} ${WRKSRC}/src/github.com/bitmark-inc/exitwithstatus
-	@${MV} ${WRKSRC_getoptions} ${WRKSRC}/src/github.com/bitmark-inc/getoptions
-	@${MV} ${WRKSRC_go_argon2} ${WRKSRC}/src/github.com/bitmark-inc/go-argon2
-	@${MV} ${WRKSRC_go_libucl} ${WRKSRC}/src/github.com/bitmark-inc/go-libucl
-	@${MV} ${WRKSRC_listener} ${WRKSRC}/src/github.com/bitmark-inc/listener
-	@${MV} ${WRKSRC_logger} ${WRKSRC}/src/github.com/bitmark-inc/logger
-	@${MV} ${WRKSRC_seelog} ${WRKSRC}/src/github.com/cihub/seelog
-	@${MV} ${WRKSRC_snappy} ${WRKSRC}/src/github.com/golang/snappy
-	@${MV} ${WRKSRC_zmq4} ${WRKSRC}/src/github.com/pebbe/zmq4
-	@${MV} ${WRKSRC_goleveldb} ${WRKSRC}/src/github.com/syndtr/goleveldb
-	@${MV} ${WRKSRC_crypto} ${WRKSRC}/src/golang.org/x/crypto
+	@${MKDIR} ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}
+	@for f in ${WRKSRC}/*; \
+	 do \
+	   bn=$$(basename "$${f}") ; \
+	   [ X"$${bn}" = X"src" ] && continue ; \
+	   [ X"$${bn}" = X"LICENSE" ] && continue ; \
+	   ${MV} "$${f}" "${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}/" ; \
+	 done
 
 do-build:
-.for command in ${BINARY_COMMANDS}
-	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT}/${PORTNAME}/command/${command} && ${SETENV} GOPATH=${WRKSRC} go "install" .
+.for command in ${SERVER_LIST} ${COMMAND_LIST}
+	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}/command/${command} && \
+	  ${SETENV} GOPATH=${WRKSRC} go 'install' --ldflags "-X main.version=${DISTVERSION}" .
 .endfor
 
 do-install:
-.for command in ${BINARY_COMMANDS}
+.for command in ${SERVER_LIST}
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/${command} ${STAGEDIR}${PREFIX}/sbin
 #	${INSTALL_MAN} ${WRKSRC}/man/${command}.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
 	${INSTALL_DATA} ${WRKSRC}/src/github.com/bitmark-inc/bitmarkd/command/${command}/${command}.conf.sample ${STAGEDIR}${PREFIX}/etc/${command}.conf.sample
+.endfor
+.for command in ${COMMAND_LIST}
+	${INSTALL_PROGRAM} ${WRKSRC}/bin/${command} ${STAGEDIR}${PREFIX}/bin
+#	${INSTALL_MAN} ${WRKSRC}/man/${command}.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
+#	${INSTALL_DATA} ${WRKSRC}/src/github.com/bitmark-inc/bitmarkd/command/${command}/${command}.conf.sample ${STAGEDIR}${PREFIX}/etc/${command}.conf.sample
 .endfor
 	${MKDIR} ${STAGEDIR}${BITMARKD_RUN}
 	${MKDIR} ${STAGEDIR}${BITMARKD_DATA}
