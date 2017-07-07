@@ -65,7 +65,7 @@ lock_file="${discovery_data_dir}/${name}.pid"
 
 required_files="${discovery_config_file}"
 
-_discovery_program="%%PREFIX%%/bin/discovery"
+_discovery_program="%%PREFIX%%/sbin/discovery"
 _discovery_arguments="-conf=${discovery_config_file}"
 
 command="/usr/sbin/daemon"
