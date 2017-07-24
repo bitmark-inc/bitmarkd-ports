@@ -1,0 +1,5 @@
+This is a general purposed hd-wallet. Bitmark use this
+wallet to pay for transferring. Currently, it supports
+both bitcoin and litecoin.
+
+WWW: https://github.com/bitmark-inc/bitmark-wallet
