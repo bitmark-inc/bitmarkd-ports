@@ -96,7 +96,7 @@ discovery_precmd()
     pid=$(check_pidfile "${lock_file}" "${_discovery_program}")
     if [ -n "${pid}" ]
     then
-      echo "another discovery is ruunning on pid: ${pid}"
+      echo "another discovery is running on pid: ${pid}"
     else
       rm -f "${lock_file}"
     fi

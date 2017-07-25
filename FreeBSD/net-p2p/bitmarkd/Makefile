@@ -53,6 +53,10 @@ COMMAND_LIST=	bitmark-cli
 PLIST_FILES+=	"@sample etc/${command}.conf.sample"
 PLIST_FILES+=	sbin/${command}
 .endfor
+.for command in ${COMMAND_LIST}
+#PLIST_FILES+=	"@sample etc/${command}.conf.sample"
+PLIST_FILES+=	bin/${command}
+.endfor
 PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_DATA%%"
 PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_RUN%%"
 PLIST_FILES+=	"@dir(%%PROOFERD_USER%%,%%PROOFERD_GROUP%%,) %%PROOFERD_DATA%%"
