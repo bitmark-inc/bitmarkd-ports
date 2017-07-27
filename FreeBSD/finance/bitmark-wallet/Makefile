@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark-wallet
-PORTVERSION=	0.1
+PORTVERSION=	0.2
 DISTVERSIONPREFIX=	v
 CATEGORIES=	finance
 
