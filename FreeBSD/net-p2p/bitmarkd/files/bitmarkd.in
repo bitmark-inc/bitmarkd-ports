@@ -169,4 +169,9 @@ bitmarkd_keygen()
   done
 }
 
+bitmarkd_dns()
+{
+  su -m "${bitmarkd_user}" -c "${_bitmarkd_program} ${_bitmarkd_arguments} dns"
+}
+
 run_rc_command "$1"
