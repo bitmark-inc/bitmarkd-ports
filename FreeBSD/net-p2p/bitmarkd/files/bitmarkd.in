@@ -31,6 +31,18 @@
 #   Set to "%%BITMARKD_RUN%%" by default.
 #   The root for the pid and socket files.
 #
+# bitmarkd_ec2_ipv4_enable (bool):
+#   Set to NO by default.
+#   Enables fetching of EC2 public IPv4.
+#
+# bitmarkd_ec2_url (str)
+#   Set to "http://169.254.169.254/2016-09-02/meta-data/public-ipv4" by default.
+#   Expects this to return just the IPv4 address.
+#
+# bitmarkd_ec2_cmd (str)
+#   Set to "fetch -o -" by default.
+#   Command to fetch the above URL.
+#
 # bitmarkdlimits_enable (bool):
 #   Set to "NO" by default.
 #   Set it to yes to run `limits ${bitmarkdlimits_args}` just before
@@ -53,6 +65,11 @@ load_rc_config ${name}
 : ${bitmarkd_config_file:="%%PREFIX%%/etc/${name}.conf"}
 : ${bitmarkd_data_dir:="%%BITMARKD_DATA%%"}
 : ${bitmarkd_run_dir:="%%BITMARKD_RUN%%"}
+
+: ${bitmarkd_ec2_ipv4_enable:="NO"}
+: ${bitmarkd_ec2_url:="http://169.254.169.254/2016-09-02/meta-data/public-ipv4"}
+: ${bitmarkd_ec2_cmd:="fetch -o -"}
+
 : ${bitmarkdlimits_enable:="NO"}
 : ${bitmarkdlimits_args:="-e -U ${bitmarkd_user}"}
 
@@ -119,6 +136,13 @@ bitmarkd_precmd()
     else
       rm -f "${lock_file}"
     fi
+  fi
+
+  # set environment for bitmarkd to access the currently addigned EC2 public IPv4
+  if checkyesno bitmarkd_ec2_ipv4_enable
+  then
+    EC2_IPV4=$(${bitmarkd_ec2_cmd} "${bitmarkd_ec2_url}")
+    export EC2_IPV4
   fi
 
   if checkyesno bitmarkdlimits_enable
