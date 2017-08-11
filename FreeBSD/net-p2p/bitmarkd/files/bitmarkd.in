@@ -78,9 +78,10 @@ restart_precmd="${name}_checkconfig"
 stop_postcmd="${name}_poststop"
 keygen_cmd="${name}_keygen"
 keygen_precmd="${name}_checkconfig"
+dns_cmd="${name}_dns"
+dns_precmd="${name}_checkconfig"
 
-#extra_commands='initialise reload configtest'
-extra_commands='keygen'
+extra_commands='keygen dns'
 
 pidfile="${bitmarkd_run_dir}/${name}.pid"
 
@@ -121,6 +122,13 @@ bitmarkd_checkconfig()
 
   #echo "Performing sanity check on bitmarkd configuration:"
   #eval ${command} ${bitmarkd_flags} -t
+
+  # set environment for bitmarkd to access the currently assigned EC2 public IPv4
+  if checkyesno bitmarkd_ec2_ipv4_enable
+  then
+    EC2_IPV4=$(${bitmarkd_ec2_cmd} "${bitmarkd_ec2_url}")
+    export EC2_IPV4
+  fi
 }
 
 bitmarkd_precmd()
@@ -133,16 +141,10 @@ bitmarkd_precmd()
     if [ -n "${pid}" ]
     then
       echo "another bitmarkd is running on pid: ${pid}"
+      return 1
     else
       rm -f "${lock_file}"
     fi
-  fi
-
-  # set environment for bitmarkd to access the currently addigned EC2 public IPv4
-  if checkyesno bitmarkd_ec2_ipv4_enable
-  then
-    EC2_IPV4=$(${bitmarkd_ec2_cmd} "${bitmarkd_ec2_url}")
-    export EC2_IPV4
   fi
 
   if checkyesno bitmarkdlimits_enable
