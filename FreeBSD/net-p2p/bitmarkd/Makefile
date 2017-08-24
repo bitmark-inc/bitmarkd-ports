@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	5.4
+PORTVERSION=	5.5
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -46,7 +46,7 @@ PROOFERD_RUN=	/var/run/prooferd
 PROOFERD_DATA=	/var/lib/prooferd
 
 SERVER_LIST=	bitmarkd prooferd
-COMMAND_LIST=	bitmark-cli
+COMMAND_LIST=	bitmark-cli bitmark-dumpdb
 
 #PLIST_FILES=	"@sample %%ETCDIR%%/bitmarkd.conf.sample" ## if want etc/Bitmarkd/bitmarkd.conf.sample
 .for command in ${SERVER_LIST}
