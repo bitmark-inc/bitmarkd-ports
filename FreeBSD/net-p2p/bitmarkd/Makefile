@@ -4,6 +4,7 @@
 PORTNAME=	bitmarkd
 PORTVERSION=	5.6
 DISTVERSIONPREFIX=	v
+PORTREVISION=	1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -31,7 +32,7 @@ GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen/src/github.com/bitmark-inc/certgen \
 		bitmark-inc:logger:v3.2:logger/src/github.com/bitmark-inc/logger \
 		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
 		golang:snappy:d9eb7a3:snappy/src/github.com/golang/snappy \
-		pebbe:zmq4:86a3013:zmq4/src/github.com/pebbe/zmq4 \
+		pebbe:zmq4:3e878cf:zmq4/src/github.com/pebbe/zmq4 \
 		syndtr:goleveldb:23851d9:goleveldb/src/github.com/syndtr/goleveldb \
 		codegangsta:cli:b892ba3:cli/src/github.com/codegangsta/cli \
 		golang:crypto:7c6cc32:crypto/src/golang.org/x/crypto

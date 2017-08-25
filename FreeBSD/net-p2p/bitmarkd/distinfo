@@ -1,4 +1,4 @@
-TIMESTAMP = 1503553110
+TIMESTAMP = 1503627254
 SHA256 (bitmark-inc-bitmarkd-v5.6_GH0.tar.gz) = 7964ddd982a573528b5fa85a75a69b473f45ea693eee26e27a6bda9ccc812a62
 SIZE (bitmark-inc-bitmarkd-v5.6_GH0.tar.gz) = 268647
 SHA256 (bitmark-inc-certgen-v1.0_GH0.tar.gz) = ed0fa1d610cc9784ed05c808c04164745a56e9e36b63e33a74f3ac57863caa83
@@ -19,8 +19,8 @@ SHA256 (cihub-seelog-f561c5e_GH0.tar.gz) = 0972fc2ee4ca965f90ab75d168ae39a2577eb
 SIZE (cihub-seelog-f561c5e_GH0.tar.gz) = 66512
 SHA256 (golang-snappy-d9eb7a3_GH0.tar.gz) = 857fd1a142bc62ed05610c9daec12c6f6e4ff68b6cd5594311496b96bd8cbc2d
 SIZE (golang-snappy-d9eb7a3_GH0.tar.gz) = 62041
-SHA256 (pebbe-zmq4-86a3013_GH0.tar.gz) = 50a1746e66f2c0e2fd938c9540873a90e47aff3809e4ad5b81806a23a7fc8bb9
-SIZE (pebbe-zmq4-86a3013_GH0.tar.gz) = 87735
+SHA256 (pebbe-zmq4-3e878cf_GH0.tar.gz) = fbcea4cee96e28f8c806fec4f98aee7d5a906edb79a52a833beaad3a6bd02940
+SIZE (pebbe-zmq4-3e878cf_GH0.tar.gz) = 87854
 SHA256 (syndtr-goleveldb-23851d9_GH0.tar.gz) = f476e8e57f73698ac3000d1bd23e94315963fc61938a61231a8bdd88df3ad03e
 SIZE (syndtr-goleveldb-23851d9_GH0.tar.gz) = 137202
 SHA256 (codegangsta-cli-b892ba3_GH0.tar.gz) = 973fd3ec0f55cd42cc90f1dba70a4e740d173f5686dccc5efbda5f42300242b2
