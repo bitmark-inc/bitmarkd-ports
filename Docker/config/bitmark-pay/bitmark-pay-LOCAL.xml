@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<configuration>
-	<data_directory>/home/bitmark/bitmark-pay/local</data_directory>
-	<bitcoin>
-		<peers>
-			<ip port="18444">127.0.0.1</ip>
-		</peers>
-	</bitcoin>
-</configuration>
