@@ -9,7 +9,7 @@ COMMENT=	Fast, easy to use, free, and open source web IRC client
 
 LICENSE=	GPLv2
 
-USES=		python twisted:run,conch,mail,names,web,words
+USES=		python:2 twisted:run,conch,mail,names,web,words
 NO_BUILD=	yes
 NO_ARCH=	yes
 PLIST_SUB+=	WWWOWN="${WWWOWN}"
