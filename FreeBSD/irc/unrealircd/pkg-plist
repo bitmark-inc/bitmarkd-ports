@@ -1,0 +1,191 @@
+%%ETCDIR%%/ircd.motd
+%%ETCDIR%%/ircd.rules
+lib/unrealircd/antirandom.so
+lib/unrealircd/blacklist.so
+lib/unrealircd/cap/link-security.so
+lib/unrealircd/cap/plaintext-policy.so
+lib/unrealircd/cap/sts.so
+lib/unrealircd/certfp.so
+lib/unrealircd/chanmodes/censor.so
+lib/unrealircd/chanmodes/delayjoin.so
+lib/unrealircd/chanmodes/floodprot.so
+lib/unrealircd/chanmodes/issecure.so
+lib/unrealircd/chanmodes/link.so
+lib/unrealircd/chanmodes/nocolor.so
+lib/unrealircd/chanmodes/noctcp.so
+lib/unrealircd/chanmodes/noinvite.so
+lib/unrealircd/chanmodes/nokick.so
+lib/unrealircd/chanmodes/noknock.so
+lib/unrealircd/chanmodes/nonickchange.so
+lib/unrealircd/chanmodes/nonotice.so
+lib/unrealircd/chanmodes/operonly.so
+lib/unrealircd/chanmodes/permanent.so
+lib/unrealircd/chanmodes/regonly.so
+lib/unrealircd/chanmodes/regonlyspeak.so
+lib/unrealircd/chanmodes/secureonly.so
+lib/unrealircd/chanmodes/stripcolor.so
+lib/unrealircd/cloak.so
+lib/unrealircd/extbans/account.so
+lib/unrealircd/extbans/certfp.so
+lib/unrealircd/extbans/inchannel.so
+lib/unrealircd/extbans/join.so
+lib/unrealircd/extbans/nickchange.so
+lib/unrealircd/extbans/operclass.so
+lib/unrealircd/extbans/quiet.so
+lib/unrealircd/extbans/realname.so
+lib/unrealircd/extbans/regnick.so
+lib/unrealircd/extbans/textban.so
+lib/unrealircd/hideserver.so
+lib/unrealircd/jointhrottle.so
+lib/unrealircd/jumpserver.so
+lib/unrealircd/m_addmotd.so
+lib/unrealircd/m_addomotd.so
+lib/unrealircd/m_admin.so
+lib/unrealircd/m_away.so
+lib/unrealircd/m_botmotd.so
+lib/unrealircd/m_cap.so
+lib/unrealircd/m_chghost.so
+lib/unrealircd/m_chgident.so
+lib/unrealircd/m_chgname.so
+lib/unrealircd/m_close.so
+lib/unrealircd/m_connect.so
+lib/unrealircd/m_cycle.so
+lib/unrealircd/m_dccallow.so
+lib/unrealircd/m_dccdeny.so
+lib/unrealircd/m_eos.so
+lib/unrealircd/m_globops.so
+lib/unrealircd/m_help.so
+lib/unrealircd/m_invite.so
+lib/unrealircd/m_ircops.so
+lib/unrealircd/m_ison.so
+lib/unrealircd/m_join.so
+lib/unrealircd/m_kick.so
+lib/unrealircd/m_kill.so
+lib/unrealircd/m_knock.so
+lib/unrealircd/m_lag.so
+lib/unrealircd/m_links.so
+lib/unrealircd/m_list.so
+lib/unrealircd/m_locops.so
+lib/unrealircd/m_lusers.so
+lib/unrealircd/m_map.so
+lib/unrealircd/m_md.so
+lib/unrealircd/m_message.so
+lib/unrealircd/m_mkpasswd.so
+lib/unrealircd/m_mode.so
+lib/unrealircd/m_motd.so
+lib/unrealircd/m_names.so
+lib/unrealircd/m_netinfo.so
+lib/unrealircd/m_nick.so
+lib/unrealircd/m_nopost.so
+lib/unrealircd/m_oper.so
+lib/unrealircd/m_opermotd.so
+lib/unrealircd/m_part.so
+lib/unrealircd/m_pass.so
+lib/unrealircd/m_pingpong.so
+lib/unrealircd/m_protoctl.so
+lib/unrealircd/m_quit.so
+lib/unrealircd/m_rules.so
+lib/unrealircd/m_sajoin.so
+lib/unrealircd/m_samode.so
+lib/unrealircd/m_sapart.so
+lib/unrealircd/m_sasl.so
+lib/unrealircd/m_sdesc.so
+lib/unrealircd/m_sendsno.so
+lib/unrealircd/m_sendumode.so
+lib/unrealircd/m_server.so
+lib/unrealircd/m_sethost.so
+lib/unrealircd/m_setident.so
+lib/unrealircd/m_setname.so
+lib/unrealircd/m_silence.so
+lib/unrealircd/m_sjoin.so
+lib/unrealircd/m_sqline.so
+lib/unrealircd/m_squit.so
+lib/unrealircd/m_staff.so
+lib/unrealircd/m_starttls.so
+lib/unrealircd/m_stats.so
+lib/unrealircd/m_svsfline.so
+lib/unrealircd/m_svsjoin.so
+lib/unrealircd/m_svskill.so
+lib/unrealircd/m_svslusers.so
+lib/unrealircd/m_svsmode.so
+lib/unrealircd/m_svsmotd.so
+lib/unrealircd/m_svsnick.so
+lib/unrealircd/m_svsnline.so
+lib/unrealircd/m_svsnolag.so
+lib/unrealircd/m_svsnoop.so
+lib/unrealircd/m_svspart.so
+lib/unrealircd/m_svssilence.so
+lib/unrealircd/m_svssno.so
+lib/unrealircd/m_svswatch.so
+lib/unrealircd/m_swhois.so
+lib/unrealircd/m_time.so
+lib/unrealircd/m_tkl.so
+lib/unrealircd/m_topic.so
+lib/unrealircd/m_trace.so
+lib/unrealircd/m_tsctl.so
+lib/unrealircd/m_umode2.so
+lib/unrealircd/m_undccdeny.so
+lib/unrealircd/m_unsqline.so
+lib/unrealircd/m_user.so
+lib/unrealircd/m_userhost.so
+lib/unrealircd/m_userip.so
+lib/unrealircd/m_vhost.so
+lib/unrealircd/m_wallops.so
+lib/unrealircd/m_watch.so
+lib/unrealircd/m_who.so
+lib/unrealircd/m_whois.so
+lib/unrealircd/m_whowas.so
+lib/unrealircd/nocodes.so
+lib/unrealircd/snomasks/dccreject.so
+lib/unrealircd/ssl_antidos.so
+lib/unrealircd/usermodes/bot.so
+lib/unrealircd/usermodes/censor.so
+lib/unrealircd/usermodes/noctcp.so
+lib/unrealircd/usermodes/nokick.so
+lib/unrealircd/usermodes/privacy.so
+lib/unrealircd/usermodes/privdeaf.so
+lib/unrealircd/usermodes/regonlymsg.so
+lib/unrealircd/usermodes/secureonlymsg.so
+lib/unrealircd/usermodes/servicebot.so
+lib/unrealircd/usermodes/showwhois.so
+lib/unrealircd/webirc.so
+lib/unrealircd/websocket.so
+@dir libexec/unrealircd
+libexec/unrealircd/ircd
+@sample %%EXAMPLESDIR%%/aliases/aliases.conf %%ETCDIR%%/aliases/aliases.conf
+@sample %%EXAMPLESDIR%%/aliases/anope.conf %%ETCDIR%%/aliases/anope.conf
+@sample %%EXAMPLESDIR%%/aliases/atheme.conf %%ETCDIR%%/aliases/atheme.conf
+@sample %%EXAMPLESDIR%%/aliases/auspice.conf %%ETCDIR%%/aliases/auspice.conf
+@sample %%EXAMPLESDIR%%/aliases/cygnus.conf %%ETCDIR%%/aliases/cygnus.conf
+@sample %%EXAMPLESDIR%%/aliases/epona.conf %%ETCDIR%%/aliases/epona.conf
+@sample %%EXAMPLESDIR%%/aliases/generic.conf %%ETCDIR%%/aliases/generic.conf
+@sample %%EXAMPLESDIR%%/aliases/genericstats.conf %%ETCDIR%%/aliases/genericstats.conf
+@sample %%EXAMPLESDIR%%/aliases/ircservices.conf %%ETCDIR%%/aliases/ircservices.conf
+@sample %%EXAMPLESDIR%%/aliases/operstats.conf %%ETCDIR%%/aliases/operstats.conf
+@sample %%EXAMPLESDIR%%/badwords.conf %%ETCDIR%%/badwords.conf
+@sample %%EXAMPLESDIR%%/dccallow.conf %%ETCDIR%%/dccallow.conf
+@sample %%EXAMPLESDIR%%/help/help.conf %%ETCDIR%%/help/help.conf
+@sample %%EXAMPLESDIR%%/help/help.de.conf %%ETCDIR%%/help/help.de.conf
+@sample %%EXAMPLESDIR%%/help/help.fr.conf %%ETCDIR%%/help/help.fr.conf
+@sample %%EXAMPLESDIR%%/help/help.it.conf %%ETCDIR%%/help/help.it.conf
+@sample %%EXAMPLESDIR%%/help/help.ru.conf %%ETCDIR%%/help/help.ru.conf
+@sample %%EXAMPLESDIR%%/help/help.tr.conf %%ETCDIR%%/help/help.tr.conf
+@sample %%EXAMPLESDIR%%/modules.default.conf %%ETCDIR%%/modules.default.conf
+@sample %%EXAMPLESDIR%%/modules.optional.conf %%ETCDIR%%/modules.optional.conf
+@sample %%EXAMPLESDIR%%/operclass.default.conf %%ETCDIR%%/operclass.default.conf
+@sample %%EXAMPLESDIR%%/spamfilter.conf %%ETCDIR%%/spamfilter.conf
+@sample %%EXAMPLESDIR%%/ssl/curl-ca-bundle.crt %%ETCDIR%%/ssl/curl-ca-bundle.crt
+@sample %%EXAMPLESDIR%%/unrealircd.conf %%ETCDIR%%/unrealircd.conf
+@owner ircd
+@group ircd
+@dir %%ETCDIR%%/aliases
+@dir %%ETCDIR%%/help
+@dir %%ETCDIR%%/ssl
+@dir %%ETCDIR%%
+@dir %%LOGDIR%%
+@dir %%TEMPDIR%%
+@dir %%RUNDIR%%
+@dir %%DATADIR%%
+@dir %%CACHEDIR%%
+@owner root
+@group wheel
