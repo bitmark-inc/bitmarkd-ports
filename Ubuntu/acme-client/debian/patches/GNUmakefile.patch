@@ -1,0 +1,38 @@
+Description: Adjust Makefile for debian building
+ and using the libressl-dev package from: ppa:strukturag/libressl
+ .
+ acme-client (0.1.16-1) unstable; urgency=medium
+ .
+   * Initial release.
+Author: Christopher Hall <hsw@bitmark.com>
+
+--- acme-client-0.1.16.orig/GNUmakefile
++++ acme-client-0.1.16/GNUmakefile
+@@ -1,7 +1,7 @@
+ # If you end up changing anything significant in this makefile that's
+ # not overly system-specific, please submit a bug report.
+ 
+-PREFIX	?= /usr/local
++PREFIX	?= /usr
+ MAN1DIR	?= $(PREFIX)/man/man1
+ BINDIR	?= $(PREFIX)/bin
+ CFLAGS	+= -g -W -Wall -DHAVE_CONFIG_H
+@@ -43,7 +43,9 @@ CFLAGS	+= -DMUSL_LIBC
+ endif
+ 
+ CFLAGS	+= -I/usr/local/include/libressl
++CFLAGS	+= -I/usr/include/libressl
+ LDFLAGS += -L/usr/local/lib
++LDFLAGS += -L/usr/lib
+ OBJS	+= util-portable.o
+ 
+ # Do we have libseccomp installed?
+@@ -124,7 +126,7 @@ endif
+ all: acme-client
+ 
+ acme-client: $(OBJS)
+-	$(CC) -o $@ $(OBJS) $(LDFLAGS) -ltls -lssl -lcrypto $(LIBADD)
++	$(CC) -o $@ $(OBJS) $(LDFLAGS) -lressl-tls -lressl-ssl -lressl-crypto $(LIBADD)
+ 
+ # This is for synchronising from -portable to the master.
+ rmerge:

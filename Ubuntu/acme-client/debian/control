@@ -1,0 +1,16 @@
+Source: acme-client
+Maintainer: Christopher Hall <hsw@bitmark.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.7
+Build-Depends: debhelper (>=9),
+               dh-autoreconf,
+               autoconf, automake, libtool, pkgconf,
+               libbsd-dev, libressl-dev
+
+Package: acme-client
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: acme-client is from the portable verion from:
+ .
+ WWW: https://kristaps.bsd.lv/acme-client
