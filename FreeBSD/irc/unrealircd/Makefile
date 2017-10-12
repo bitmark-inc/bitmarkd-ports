@@ -21,7 +21,7 @@ MODULESDIR=	${PREFIX}/lib/${PORTNAME}
 CONFIGDIR=	${PREFIX}/etc/${PORTNAME}
 SCRIPTDIR=	${PREFIX}/libexec/${PORTNAME}
 RUNDIR=		/var/run/${PORTNAME}
-TEMPDIR=	/var/run/${PORTNAME}/tmp
+RUNTEMPDIR=	${RUNDIR}/tmp
 CACHEDIR=	/var/cache/${PORTNAME}
 DATADIR=	/var/db/${PORTNAME}
 LOGDIR=		/var/log/${PORTNAME}
@@ -46,7 +46,7 @@ SUB_LIST+=	USERS=${USERS}
 SUB_LIST+=	GROUPS=${GROUPS}
 
 PLIST_SUB+=	RUNDIR=${RUNDIR}
-PLIST_SUB+=	TEMPDIR=${TEMPDIR}
+PLIST_SUB+=	TEMPDIR=${RUNTEMPDIR}
 PLIST_SUB+=	CACHEDIR=${CACHEDIR}
 PLIST_SUB+=	DATADIR=${DATADIR}
 PLIST_SUB+=	LOGDIR=${LOGDIR}
@@ -54,8 +54,8 @@ PLIST_SUB+=	LOGDIR=${LOGDIR}
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 CFLAGS+=	${CPPFLAGS}
-CONFIGURE_ARGS=	--with-listen=5 \
-		--with-dpath=${CONFIGDIR} \
+# with-tmpdir must be /tmp or configure will fail
+CONFIGURE_ARGS+= \
 		--with-bindir=${BINDIR} \
 		--with-scriptdir=${SCRIPTDIR} \
 		--with-pidfile=${RUNDIR}/ircd.pid \
@@ -63,12 +63,11 @@ CONFIGURE_ARGS=	--with-listen=5 \
 		--with-modulesdir=${MODULESDIR} \
 		--with-logdir=${LOGDIR} \
 		--with-cachedir=${CACHEDIR} \
-		--with-tmpdir=${TEMPDIR} \
 		--with-datadir=${DATADIR} \
 		--with-docdir=${DOCDIR} \
+		--with-tmpdir=/tmp \
 		--with-nick-history=2000 \
 		--with-sendq=3000000 \
-		--with-bufferpool=18 \
 		--with-permissions=0600 \
 		--with-fd-setsize=1024 \
 		--with-system-cares \
@@ -78,11 +77,8 @@ CONFIGURE_ARGS=	--with-listen=5 \
 
 USE_RC_SUBR=	unrealircd
 
-OPTIONS_DEFINE=	HUB NOSPOOF ZIPLINKS SSL IPV6 PREFIXAQ REMOTE DOCS
-OPTIONS_DEFAULT=	HUB SSL
-HUB_DESC=	Configure as a hub (otherwise configure as a leaf)
-NOSPOOF_DESC=	Enable anti-spoof protection
-ZIPLINKS_DESC=	Enable ziplinks support
+OPTIONS_DEFINE=	SSL PREFIXAQ REMOTE DOCS
+OPTIONS_DEFAULT=	SSL
 PREFIXAQ_DESC=	Enable prefixes for chanadmin and chanowner
 REMOTE_DESC=	Enable remote includes
 
@@ -99,15 +95,17 @@ DOCS=		doc/Authors \
 
 MODULES=	cap chanmodes extbans snomasks usermodes
 
-HUB_CONFIGURE_ENABLE=	hub
-NOSPOOF_CONFIGURE_ENABLE=	nospoof
-ZIPLINKS_CONFIGURE_ENABLE=	ziplinks
-IPV6_CONFIGURE_ENABLE=	inet6
 SSL_CONFIGURE_ENABLE=	ssl
 SSL_USES=		ssl
 REMOTE_LIB_DEPENDS=	libcurl.so:ftp/curl
-REMOTE_CONFIGURE_ENABLE=	--enable-libcurl=${LOCALBASE}
+REMOTE_CONFIGURE_ENABLE=	libcurl=${LOCALBASE}
 PREFIXAQ_CONFIGURE_ENABLE=	prefixaq
+
+# with-tmpdir is mishandled in the unrealircd configure script
+# it sets both TMPDIR for conftest programs and setup.h define
+# patch setup.h to correct RUNTEMPDIR value
+post-configure:
+	@${SED} -i '' -E 's@^(#define TMPDIR) .*$$@\1 "${RUNTEMPDIR}"@'  ${WRKSRC}/include/setup.h
 
 do-install:
 	${MKDIR} ${STAGEDIR}${SCRIPTDIR}
@@ -137,8 +135,8 @@ do-install:
 	${INSTALL} ${WRKSRC}/src/modules/${dir}/*.so ${STAGEDIR}${MODULESDIR}/${dir}
 .endfor
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
-.for file in ${DOCS}
-	${INSTALL_DATA} ${WRKSRC}/${file} ${STAGEDIR}${DOCSDIR}
+.for doc in ${DOCS}
+	${INSTALL_DATA} ${WRKSRC}/${doc} ${STAGEDIR}${DOCSDIR}
 .endfor
 
 .include <bsd.port.mk>
