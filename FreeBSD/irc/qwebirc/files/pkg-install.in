@@ -8,7 +8,7 @@ case "${2}" in
   (POST-INSTALL)
     if [ -d "%%SCRIPTDIR%%" ]
     then
-      chown '%%USERS%%:%%GROUPS%%' "%%SCRIPTDIR%%"
+      chown -R '%%USERS%%:%%GROUPS%%' "%%SCRIPTDIR%%"
       cd "%%SCRIPTDIR%%" || exit 1
       su -m '%%USERS%%' -c 'python2.7 compile.py'
     fi

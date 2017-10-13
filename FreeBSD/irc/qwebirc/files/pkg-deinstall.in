@@ -7,6 +7,7 @@ case "${2}" in
       cd "%%SCRIPTDIR%%" || exit 1
       rm -f .compiled .checked
       find . -name '*.pyc' -delete
+      find ./static -name 'qui*' -delete
     fi
     ;;
 
