@@ -24,16 +24,20 @@ load_rc_config $name
 : ${qwebirc_user:=%%USERS%%}
 : ${qwebirc_group:=%%GROUPS%%}
 
-command=python2.7 %%SCRIPTDIR%%/${name}
+command=%%PREFIX%%/bin/python2.7
+command_args=run.py
 pidfile=%%RUNDIR%%/ircd.pid
 start_precmd=qwebirc_prestart
 
-required_files="%%PREFIX%%/www/qwebirc/config.py
+required_files="%%SCRIPTDIR%%/config.py"
+
+cd "%%SCRIPTDIR%%" || exit 1
+
 
 qwebirc_prestart()
 {
-	if [ ! -d ${pidfile%/*} ]; then
-		install -d -o %%USERS%% -g %%GROUPS%% ${pidfile%/*}
+	if [ ! -d "${pidfile%/*}" ]; then
+		install -d -o '%%USERS%%' -g '%%GROUPS%%' "${pidfile%/*}"
 	fi
 }
 
