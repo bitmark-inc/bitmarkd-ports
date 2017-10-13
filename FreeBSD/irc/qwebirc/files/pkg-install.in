@@ -6,10 +6,10 @@ case "${2}" in
     ;;
 
   (POST-INSTALL)
-    if [ -d "%%SCRIPTDIR%%" ]
+    if [ -d '%%SCRIPTDIR%%' ]
     then
-      chown -R '%%USERS%%:%%GROUPS%%' "%%SCRIPTDIR%%"
-      cd "%%SCRIPTDIR%%" || exit 1
+      chown -R '%%USERS%%:%%GROUPS%%' '%%SCRIPTDIR%%'
+      cd '%%SCRIPTDIR%%' || exit 1
       su -m '%%USERS%%' -c './compile.py'
     fi
     ;;

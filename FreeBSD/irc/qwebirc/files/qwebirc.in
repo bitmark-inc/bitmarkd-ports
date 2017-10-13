@@ -12,6 +12,8 @@
 # qwebirc_enable (bool):	Set to "NO" by default.
 #				Set it to "YES" to enable qwebirc
 #
+# qwebirc_ip (string):		Set to "127.0.0.1" by default.
+# qwebirc_port (string):	Set to "9090" by default.
 
 . /etc/rc.subr
 
@@ -22,9 +24,11 @@ load_rc_config $name
 : ${qwebirc_enable:=NO}
 : ${qwebirc_user:=%%USERS%%}
 : ${qwebirc_group:=%%GROUPS%%}
+: ${qwebirc_ip:=127.0.0.1}
+: ${qwebirc_port:=9090}
 
 command_interpreter=%%PYTHON_CMD%%
-command=./run.py
+command="./run.py --ip=${qwebirc_ip} --port=${qwebirc_port}"
 pidfile=%%RUNDIR%%/qwebirc.pid
 start_precmd=qwebirc_prestart
 start_postcmd=qwebirc_poststart

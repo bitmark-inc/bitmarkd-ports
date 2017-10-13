@@ -2,9 +2,9 @@
 
 case "${2}" in
   (DEINSTALL)
-    if [ -d "%%SCRIPTDIR%%" ]
+    if [ -d '%%SCRIPTDIR%%' ]
     then
-      cd "%%SCRIPTDIR%%" || exit 1
+      cd '%%SCRIPTDIR%%' || exit 1
       rm -f .compiled .checked
       find . -name '*.pyc' -delete
       find static -name 'qui*' -delete
