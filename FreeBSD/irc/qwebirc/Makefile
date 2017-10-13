@@ -2,7 +2,7 @@
 
 PORTNAME=	qwebirc
 PORTVERSION=	20171006
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	irc www
 
 MAINTAINER=	hsw@bitmark.com
@@ -11,7 +11,8 @@ COMMENT=	Fast, easy to use, free, and open source web IRC client
 LICENSE=	GPLv2
 
 RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}twisted>=0:devel/py-twisted \
-		${PYTHON_PKGNAMEPREFIX}autobahn>=0:www/py-autobahn
+		${PYTHON_PKGNAMEPREFIX}autobahn>=0:www/py-autobahn \
+		${PYTHON_PKGNAMEPREFIX}service_identity>=0:security/py-service_identity
 
 USES=		python:2.7
 NO_BUILD=	yes
