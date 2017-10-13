@@ -8,6 +8,8 @@ case "${2}" in
       rm -f .compiled .checked
       find . -name '*.pyc' -delete
       find ./static -name 'qui*' -delete
+      rmdir ./static/css
+      rmdir ./static
     fi
     ;;
 
