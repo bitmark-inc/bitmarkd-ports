@@ -28,7 +28,8 @@ load_rc_config $name
 : ${qwebirc_port:=9090}
 
 command_interpreter=%%PYTHON_CMD%%
-command="./run.py --ip=${qwebirc_ip} --port=${qwebirc_port}"
+command=./run.py
+command_args="--ip=${qwebirc_ip} --port=${qwebirc_port}"
 pidfile=%%RUNDIR%%/qwebirc.pid
 start_precmd=qwebirc_prestart
 start_postcmd=qwebirc_poststart
