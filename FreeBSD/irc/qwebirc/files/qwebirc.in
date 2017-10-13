@@ -24,9 +24,10 @@ load_rc_config $name
 : ${qwebirc_group:=%%GROUPS%%}
 
 command_interpreter=%%PYTHON_CMD%%
-command=run.py
+command=./run.py
 pidfile=%%RUNDIR%%/qwebirc.pid
 start_precmd=qwebirc_prestart
+start_postcmd=qwebirc_poststart
 
 required_files="%%SCRIPTDIR%%/config.py"
 
@@ -39,6 +40,12 @@ qwebirc_prestart()
   then
     install -d -o '%%USERS%%' -g '%%GROUPS%%' "${pidfile%/*}"
   fi
+}
+
+qwebirc_poststart(){
+  pid=$( check_process "${command}" "${command_interpreter}" )
+  [ -z "${pid}" ] && exit 1
+  printf '%s\n' "${pid}" > "${pidfile}"
 }
 
 run_rc_command "$1"
