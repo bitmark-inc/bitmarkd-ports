@@ -2,7 +2,7 @@
 
 PORTNAME=	qwebirc
 PORTVERSION=	20171006
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	irc www
 
 MAINTAINER=	hsw@bitmark.com
@@ -17,8 +17,6 @@ RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}twisted>=0:devel/py-twisted \
 USES=		python:2.7
 NO_BUILD=	yes
 NO_ARCH=	yes
-PLIST_SUB+=	WWWOWN="${WWWOWN}"
-PLIST_SUB+=	WWWGRP="${WWWGRP}"
 SUB_LIST+=	USERS=${WWWOWN}
 SUB_LIST+=	GROUPS=${WWWGRP}
 SUB_LIST+=	RUNDIR=/var/run/${PORTNAME}
@@ -38,5 +36,6 @@ do-install:
 post-install:
 	${MV} ${STAGEDIR}${WWWDIR}/config.py.example \
 		${STAGEDIR}${WWWDIR}/config.py.sample
+	chown -R '${WWWOWN}:${WWWGRP}' ${STAGEDIR}${WWWDIR}
 
 .include <bsd.port.mk>

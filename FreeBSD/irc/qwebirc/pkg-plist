@@ -1,5 +1,3 @@
-@owner %%WWWOWN%%
-@group %%WWWGRP%%
 %%WWWDIR%%/AUTHORS
 %%WWWDIR%%/LICENCE
 %%WWWDIR%%/README.md
@@ -173,5 +171,3 @@
 %%WWWDIR%%/requirements.txt
 %%WWWDIR%%/twisted/plugins/webirc.py
 %%WWWDIR%%/util/syslog.py
-@group
-@owner
