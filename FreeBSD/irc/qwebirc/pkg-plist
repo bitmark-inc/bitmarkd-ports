@@ -1,5 +1,5 @@
-@comment @owner %%WWWOWN%%
-@comment @group %%WWWGRP%%
+@owner %%WWWOWN%%
+@group %%WWWGRP%%
 %%WWWDIR%%/AUTHORS
 %%WWWDIR%%/LICENCE
 %%WWWDIR%%/README.md
