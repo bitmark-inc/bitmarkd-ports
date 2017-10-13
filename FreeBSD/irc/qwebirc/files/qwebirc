@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+
+# PROVIDE: qwebird
+# REQUIRE: NETWORKING SERVERS
+# BEFORE: DAEMON
+# KEYWORD: shutdown
+
+#
+# Add the following line to /etc/rc.conf to enable qwebirc:
+# qwebirc_enable (bool):	Set to "NO" by default.
+#				Set it to "YES" to enable qwebirc
+#
+
+. /etc/rc.subr
+
+name=qwebirc
+rcvar=qwebirc_enable
+load_rc_config $name
+
+: ${qwebirc_enable:=NO}
+: ${qwebirc_user:=%%USERS%%}
+: ${qwebirc_group:=%%GROUPS%%}
+
+command=python2.7 %%SCRIPTDIR%%/${name}
+pidfile=%%RUNDIR%%/ircd.pid
+start_precmd=qwebirc_prestart
+
+required_files="%%PREFIX%%/www/qwebirc/config.py
+
+qwebirc_prestart()
+{
+	if [ ! -d ${pidfile%/*} ]; then
+		install -d -o %%USERS%% -g %%GROUPS%% ${pidfile%/*}
+	fi
+}
+
+run_rc_command "$1"
