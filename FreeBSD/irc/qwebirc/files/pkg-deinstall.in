@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case "${2}" in
+  (DEINSTALL)
+    if [ -d "%%PREFIX%%/www/${1}" ]
+    then
+      cd "%%PREFIX%%/www/${1}" || exit 1
+      rm -f .compiled .checked
+      find . -name '*.pyc' -delete
+    fi
+    ;;
+
+  (POST-DEINSTALL)
+    true
+    ;;
+
+esac

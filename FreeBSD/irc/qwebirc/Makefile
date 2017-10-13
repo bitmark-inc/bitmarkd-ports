@@ -2,7 +2,7 @@
 
 PORTNAME=	qwebirc
 PORTVERSION=	20171006
-PORTREVISION=	4
+PORTREVISION=	6
 CATEGORIES=	irc www
 
 MAINTAINER=	hsw@bitmark.com
@@ -26,6 +26,11 @@ USE_GITHUB=	yes
 GH_PROJECT=	qwebirc
 GH_ACCOUNT=	qwebirc
 GH_TAGNAME=	a6c1592
+
+PKGINSTALL=     ${WRKDIR}/pkg-install
+PKGDEINSTALL=   ${WRKDIR}/pkg-deinstall
+SUB_FILES+=     pkg-install
+SUB_FILES+=     pkg-deinstall
 
 USE_RC_SUBR=	qwebirc
 
