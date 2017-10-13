@@ -9,7 +9,7 @@ case "${2}" in
       find . -name '*.pyc' -delete
       find static -name 'qui*' -delete
       rm -f twisted/plugins/dropin.cache twistd.log
-      rmdir -p static/css twisted
+      rmdir static/css
     fi
     ;;
 
