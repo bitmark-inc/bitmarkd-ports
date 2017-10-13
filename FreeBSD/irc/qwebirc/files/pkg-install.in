@@ -10,7 +10,7 @@ case "${2}" in
     then
       chown -R '%%USERS%%:%%GROUPS%%' "%%SCRIPTDIR%%"
       cd "%%SCRIPTDIR%%" || exit 1
-      su -m '%%USERS%%' -c 'python2.7 compile.py'
+      su -m '%%USERS%%' -c './compile.py'
     fi
     ;;
 

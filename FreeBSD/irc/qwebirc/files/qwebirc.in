@@ -23,7 +23,7 @@ load_rc_config $name
 : ${qwebirc_user:=%%USERS%%}
 : ${qwebirc_group:=%%GROUPS%%}
 
-command_interpreter=%%PREFIX%%/bin/python2.7
+command_interpreter=%%PYTHON_CMD%%
 command=run.py
 pidfile=%%RUNDIR%%/qwebirc.pid
 start_precmd=qwebirc_prestart

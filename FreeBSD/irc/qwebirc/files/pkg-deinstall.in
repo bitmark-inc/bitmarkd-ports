@@ -9,6 +9,7 @@ case "${2}" in
       find . -name '*.pyc' -delete
       find ./static -name 'qui*' -delete
       rmdir ./static/css
+      ls -la ./static
       rmdir ./static
     fi
     ;;
