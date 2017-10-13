@@ -8,8 +8,8 @@ case "${2}" in
   (POST-INSTALL)
     if [ -d "%%PREFIX%%/www/${1}" ]
     then
+      chown '%%USERS%%:%%GROUPS%%' "%%PREFIX%%/www/${1}"
       cd "%%PREFIX%%/www/${1}" || exit 1
-      chown '%%USERS%%:GROUPS%%' "%%PREFIX%%/www/${1}"
       su -m '%%USERS%%' -c 'python2.7 compile.py'
     fi
     ;;
