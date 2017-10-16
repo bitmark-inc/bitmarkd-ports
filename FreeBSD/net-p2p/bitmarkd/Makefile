@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	5.6
+PORTVERSION=	6.0
 DISTVERSIONPREFIX=	v
 PORTREVISION=	1
 CATEGORIES=	net-p2p
@@ -26,27 +26,27 @@ GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen/src/github.com/bitmark-inc/certgen \
 		bitmark-inc:exitwithstatus:v1.1:exitwithstatus/src/github.com/bitmark-inc/exitwithstatus \
 		bitmark-inc:getoptions:v1.0:getoptions/src/github.com/bitmark-inc/getoptions \
-		bitmark-inc:go-argon2:v1.1:go_argon2/src/github.com/bitmark-inc/go-argon2 \
+		bitmark-inc:go-argon2:v1.2:go_argon2/src/github.com/bitmark-inc/go-argon2 \
 		bitmark-inc:go-libucl:v1.2:go_libucl/src/github.com/bitmark-inc/go-libucl \
 		bitmark-inc:listener:v1.2:listener/src/github.com/bitmark-inc/listener \
-		bitmark-inc:logger:v3.2:logger/src/github.com/bitmark-inc/logger \
+		bitmark-inc:logger:v3.3:logger/src/github.com/bitmark-inc/logger \
 		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
-		golang:snappy:d9eb7a3:snappy/src/github.com/golang/snappy \
-		pebbe:zmq4:3e878cf:zmq4/src/github.com/pebbe/zmq4 \
-		syndtr:goleveldb:23851d9:goleveldb/src/github.com/syndtr/goleveldb \
 		codegangsta:cli:b892ba3:cli/src/github.com/codegangsta/cli \
-		golang:crypto:7c6cc32:crypto/src/golang.org/x/crypto
+		golang:snappy:d9eb7a3:snappy/src/github.com/golang/snappy \
+		pebbe:zmq4:90d69e4:zmq4/src/github.com/pebbe/zmq4 \
+		syndtr:goleveldb:b89cc31:goleveldb/src/github.com/syndtr/goleveldb \
+		golang:crypto:7f7c0c2:crypto/src/golang.org/x/crypto
 
 STRIP=		# stripping can break go binaries
 
-USERS=		bitmarkd prooferd
-GROUPS=		bitmarkd prooferd
+USERS=		bitmarkd recorderd
+GROUPS=		bitmarkd recorderd
 BITMARKD_RUN=	/var/run/bitmarkd
 BITMARKD_DATA=	/var/lib/bitmarkd
-PROOFERD_RUN=	/var/run/prooferd
-PROOFERD_DATA=	/var/lib/prooferd
+RECORDERD_RUN=	/var/run/recorderd
+RECORDERD_DATA=	/var/lib/recorderd
 
-SERVER_LIST=	bitmarkd prooferd
+SERVER_LIST=	bitmarkd recorderd
 COMMAND_LIST=	bitmark-cli bitmark-dumpdb
 
 #PLIST_FILES=	"@sample %%ETCDIR%%/bitmarkd.conf.sample" ## if want etc/Bitmarkd/bitmarkd.conf.sample
@@ -60,27 +60,27 @@ PLIST_FILES+=	bin/${command}
 .endfor
 PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_DATA%%"
 PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_RUN%%"
-PLIST_FILES+=	"@dir(%%PROOFERD_USER%%,%%PROOFERD_GROUP%%,) %%PROOFERD_DATA%%"
-PLIST_FILES+=	"@dir(%%PROOFERD_USER%%,%%PROOFERD_GROUP%%,) %%PROOFERD_RUN%%"
+PLIST_FILES+=	"@dir(%%RECORDERD_USER%%,%%RECORDERD_GROUP%%,) %%RECORDERD_DATA%%"
+PLIST_FILES+=	"@dir(%%RECORDERD_USER%%,%%RECORDERD_GROUP%%,) %%RECORDERD_RUN%%"
 PLIST_FILES+=	"@dir /var/lib"
 
-USE_RC_SUBR=	bitmarkd prooferd
+USE_RC_SUBR=	bitmarkd recorderd
 SUB_LIST+=	BITMARKD_USER=bitmarkd \
 		BITMARKD_GROUP=bitmarkd \
 		BITMARKD_RUN=${BITMARKD_RUN} \
 		BITMARKD_DATA=${BITMARKD_DATA} \
-		PROOFERD_USER=prooferd \
-		PROOFERD_GROUP=prooferd \
-		PROOFERD_RUN=${PROOFERD_RUN} \
-		PROOFERD_DATA=${PROOFERD_DATA}
+		RECORDERD_USER=recorderd \
+		RECORDERD_GROUP=recorderd \
+		RECORDERD_RUN=${RECORDERD_RUN} \
+		RECORDERD_DATA=${RECORDERD_DATA}
 PLIST_SUB+=	BITMARKD_USER=bitmarkd \
 		BITMARKD_GROUP=bitmarkd \
 		BITMARKD_RUN=${BITMARKD_RUN} \
 		BITMARKD_DATA=${BITMARKD_DATA} \
-		PROOFERD_USER=prooferd \
-		PROOFERD_GROUP=prooferd \
-		PROOFERD_RUN=${PROOFERD_RUN} \
-		PROOFERD_DATA=${PROOFERD_DATA}
+		RECORDERD_USER=recorderd \
+		RECORDERD_GROUP=recorderd \
+		RECORDERD_RUN=${RECORDERD_RUN} \
+		RECORDERD_DATA=${RECORDERD_DATA}
 
 post-patch:
 	@${MKDIR} ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}
@@ -111,7 +111,7 @@ do-install:
 .endfor
 	${MKDIR} ${STAGEDIR}${BITMARKD_RUN}
 	${MKDIR} ${STAGEDIR}${BITMARKD_DATA}
-	${MKDIR} ${STAGEDIR}${PROOFERD_RUN}
-	${MKDIR} ${STAGEDIR}${PROOFERD_DATA}
+	${MKDIR} ${STAGEDIR}${RECORDERD_RUN}
+	${MKDIR} ${STAGEDIR}${RECORDERD_DATA}
 
 .include <bsd.port.mk>
