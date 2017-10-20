@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	5.7
+PORTVERSION=	6.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -38,14 +38,14 @@ GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen/src/github.com/bitmark-inc/certgen \
 
 STRIP=		# stripping can break go binaries
 
-USERS=		bitmarkd prooferd
-GROUPS=		bitmarkd prooferd
+USERS=		bitmarkd recorderd
+GROUPS=		bitmarkd recorderd
 BITMARKD_RUN=	/var/run/bitmarkd
 BITMARKD_DATA=	/var/lib/bitmarkd
-PROOFERD_RUN=	/var/run/prooferd
-PROOFERD_DATA=	/var/lib/prooferd
+RECORDERD_RUN=	/var/run/recorderd
+RECORDERD_DATA=	/var/lib/recorderd
 
-SERVER_LIST=	bitmarkd prooferd
+SERVER_LIST=	bitmarkd recorderd
 COMMAND_LIST=	bitmark-cli bitmark-dumpdb
 
 #PLIST_FILES=	"@sample %%ETCDIR%%/bitmarkd.conf.sample" ## if want etc/Bitmarkd/bitmarkd.conf.sample
@@ -59,27 +59,27 @@ PLIST_FILES+=	bin/${command}
 .endfor
 PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_DATA%%"
 PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_RUN%%"
-PLIST_FILES+=	"@dir(%%PROOFERD_USER%%,%%PROOFERD_GROUP%%,) %%PROOFERD_DATA%%"
-PLIST_FILES+=	"@dir(%%PROOFERD_USER%%,%%PROOFERD_GROUP%%,) %%PROOFERD_RUN%%"
+PLIST_FILES+=	"@dir(%%RECORDERD_USER%%,%%RECORDERD_GROUP%%,) %%RECORDERD_DATA%%"
+PLIST_FILES+=	"@dir(%%RECORDERD_USER%%,%%RECORDERD_GROUP%%,) %%RECORDERD_RUN%%"
 PLIST_FILES+=	"@dir /var/lib"
 
-USE_RC_SUBR=	bitmarkd prooferd
+USE_RC_SUBR=	bitmarkd recorderd
 SUB_LIST+=	BITMARKD_USER=bitmarkd \
 		BITMARKD_GROUP=bitmarkd \
 		BITMARKD_RUN=${BITMARKD_RUN} \
 		BITMARKD_DATA=${BITMARKD_DATA} \
-		PROOFERD_USER=prooferd \
-		PROOFERD_GROUP=prooferd \
-		PROOFERD_RUN=${PROOFERD_RUN} \
-		PROOFERD_DATA=${PROOFERD_DATA}
+		RECORDERD_USER=recorderd \
+		RECORDERD_GROUP=recorderd \
+		RECORDERD_RUN=${RECORDERD_RUN} \
+		RECORDERD_DATA=${RECORDERD_DATA}
 PLIST_SUB+=	BITMARKD_USER=bitmarkd \
 		BITMARKD_GROUP=bitmarkd \
 		BITMARKD_RUN=${BITMARKD_RUN} \
 		BITMARKD_DATA=${BITMARKD_DATA} \
-		PROOFERD_USER=prooferd \
-		PROOFERD_GROUP=prooferd \
-		PROOFERD_RUN=${PROOFERD_RUN} \
-		PROOFERD_DATA=${PROOFERD_DATA}
+		RECORDERD_USER=recorderd \
+		RECORDERD_GROUP=recorderd \
+		RECORDERD_RUN=${RECORDERD_RUN} \
+		RECORDERD_DATA=${RECORDERD_DATA}
 
 post-patch:
 	@${MKDIR} ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}
@@ -110,7 +110,7 @@ do-install:
 .endfor
 	${MKDIR} ${STAGEDIR}${BITMARKD_RUN}
 	${MKDIR} ${STAGEDIR}${BITMARKD_DATA}
-	${MKDIR} ${STAGEDIR}${PROOFERD_RUN}
-	${MKDIR} ${STAGEDIR}${PROOFERD_DATA}
+	${MKDIR} ${STAGEDIR}${RECORDERD_RUN}
+	${MKDIR} ${STAGEDIR}${RECORDERD_DATA}
 
 .include <bsd.port.mk>
