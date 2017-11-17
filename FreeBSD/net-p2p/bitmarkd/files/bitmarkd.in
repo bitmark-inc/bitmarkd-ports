@@ -11,6 +11,10 @@
 #   Set to "NO" by default.
 #   Set it to "YES" to enable bitmarkd
 #
+# bitmarkd_options (str):
+#   Set to empty by default.
+#   Additional options to append to command
+#
 # bitmarkd_user (str):
 #   Set to "%%BITMARKD_USER%%" by default.
 #   User to run process as and for data ownership.
@@ -60,6 +64,7 @@ rcvar=bitmarkd_enable
 load_rc_config ${name}
 
 : ${bitmarkd_enable:="NO"}
+: ${bitmarkd_options:=""}
 : ${bitmarkd_user:="%%BITMARKD_USER%%"}
 : ${bitmarkd_group:="%%BITMARKD_GROUP%%"}
 : ${bitmarkd_config_file:="%%PREFIX%%/etc/${name}.conf"}
@@ -95,7 +100,7 @@ stderr_file="${bitmarkd_data_dir}/${name}.stderr"
 required_files="${bitmarkd_config_file}"
 
 _bitmarkd_program="%%PREFIX%%/sbin/bitmarkd"
-_bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file}"
+_bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file} ${bitmarkd_options}"
 
 command="/usr/sbin/daemon"
 #command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"

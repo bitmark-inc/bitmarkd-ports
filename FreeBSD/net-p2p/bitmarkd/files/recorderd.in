@@ -11,6 +11,10 @@
 #   Set to "NO" by default.
 #   Set it to "YES" to enable recorderd
 #
+# recorderd_options (str):
+#   Set to empty by default.
+#   Additional options to append to command
+#
 # recorderd_user (str):
 #   Set to "%%RECORDERD_USER%%" by default.
 #   User to run process as and for data ownership.
@@ -48,6 +52,7 @@ rcvar=recorderd_enable
 load_rc_config ${name}
 
 : ${recorderd_enable:="NO"}
+: ${recorderd_options:=""}
 : ${recorderd_user:="%%RECORDERD_USER%%"}
 : ${recorderd_group:="%%RECORDERD_GROUP%%"}
 : ${recorderd_config_file:="%%PREFIX%%/etc/${name}.conf"}
@@ -77,7 +82,7 @@ stderr_file="${recorderd_data_dir}/${name}.stderr"
 required_files="${recorderd_config_file}"
 
 _recorderd_program="%%PREFIX%%/sbin/recorderd"
-_recorderd_arguments="--quiet --config-file=${recorderd_config_file}"
+_recorderd_arguments="--quiet --config-file=${recorderd_config_file} ${recorderd_options}"
 
 command="/usr/sbin/daemon"
 #command_args="-f -P ${pidfile} -r -- ${_recorderd_program} ${_recorderd_arguments}"
