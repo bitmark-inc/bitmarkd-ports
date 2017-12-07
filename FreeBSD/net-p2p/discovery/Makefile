@@ -4,6 +4,7 @@
 PORTNAME=	discovery
 PORTVERSION=	0.8
 DISTVERSIONPREFIX=	v
+PORTREVISION=	1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	linzy@bitmark.com
@@ -12,14 +13,14 @@ COMMENT=	Currency proxy for bitmarkd
 LIB_DEPENDS=	libzmq.so:net/libzmq4
 BUILD_DEPENDS=	go:lang/go
 
-USES=		pkgconfig
 ONLY_FOR_ARCHS=	i386 amd64
+USES=		pkgconfig
 
 USE_GITHUB=		yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:logger:v3.2:logger/src/github.com/bitmark-inc/logger \
+GH_TUPLE=	bitmark-inc:logger:v3.3:logger/src/github.com/bitmark-inc/logger \
 		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
-		pebbe:zmq4:86a3013:zmq4/src/github.com/pebbe/zmq4 \
+		pebbe:zmq4:90d69e4:zmq4/src/github.com/pebbe/zmq4 \
 		hashicorp:hcl:392dba7:hcl/src/github.com/hashicorp/hcl
 
 USERS=	discovery
