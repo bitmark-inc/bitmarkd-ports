@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	6.7
+PORTVERSION=	6.9
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -12,13 +12,13 @@ COMMENT=	Bitmark distributed property daemon
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+ONLY_FOR_ARCHS=	amd64 i386
 LIB_DEPENDS=	libucl.so:textproc/libucl \
 		libargon2.so:security/libargon2 \
 		libzmq.so:net/libzmq4
 BUILD_DEPENDS=	go:lang/go
 
 USES=		pkgconfig
-ONLY_FOR_ARCHS=	i386 amd64
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
@@ -41,10 +41,11 @@ STRIP=		# stripping can break go binaries
 
 USERS=		bitmarkd recorderd
 GROUPS=		bitmarkd recorderd
-BITMARKD_RUN=	/var/run/bitmarkd
-BITMARKD_DATA=	/var/lib/bitmarkd
-RECORDERD_RUN=	/var/run/recorderd
-RECORDERD_DATA=	/var/lib/recorderd
+VAR_DIR=	/var
+BITMARKD_RUN=	${VAR_DIR}/run/bitmarkd
+BITMARKD_DATA=	${VAR_DIR}/lib/bitmarkd
+RECORDERD_RUN=	${VAR_DIR}/run/recorderd
+RECORDERD_DATA=	${VAR_DIR}/lib/recorderd
 
 SERVER_LIST=	bitmarkd recorderd
 COMMAND_LIST=	bitmark-cli bitmark-dumpdb
@@ -62,7 +63,7 @@ PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_DATA%%"
 PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_RUN%%"
 PLIST_FILES+=	"@dir(%%RECORDERD_USER%%,%%RECORDERD_GROUP%%,) %%RECORDERD_DATA%%"
 PLIST_FILES+=	"@dir(%%RECORDERD_USER%%,%%RECORDERD_GROUP%%,) %%RECORDERD_RUN%%"
-PLIST_FILES+=	"@dir /var/lib"
+PLIST_FILES+=	"@dir ${VAR_DIR}/lib"
 
 USE_RC_SUBR=	bitmarkd recorderd
 SUB_LIST+=	BITMARKD_USER=bitmarkd \
