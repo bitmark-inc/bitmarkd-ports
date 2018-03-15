@@ -44,7 +44,7 @@
 #   Expects this to return just the IPv4 address.
 #
 # bitmarkd_ec2_cmd (str)
-#   Set to "fetch -o -" by default.
+#   Set to "fetch -q -o -" by default.
 #   Command to fetch the above URL.
 #
 # bitmarkdlimits_enable (bool):
@@ -73,7 +73,7 @@ load_rc_config ${name}
 
 : ${bitmarkd_ec2_ipv4_enable:="NO"}
 : ${bitmarkd_ec2_url:="http://169.254.169.254/2016-09-02/meta-data/public-ipv4"}
-: ${bitmarkd_ec2_cmd:="fetch -o -"}
+: ${bitmarkd_ec2_cmd:="fetch -q -o -"}
 
 : ${bitmarkdlimits_enable:="NO"}
 : ${bitmarkdlimits_args:="-e -U ${bitmarkd_user}"}

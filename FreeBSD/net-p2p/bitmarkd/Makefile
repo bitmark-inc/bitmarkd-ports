@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	6.9
+PORTVERSION=	7.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -30,12 +30,12 @@ GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen/src/github.com/bitmark-inc/certgen \
 		bitmark-inc:listener:v1.2:listener/src/github.com/bitmark-inc/listener \
 		bitmark-inc:logger:v3.3:logger/src/github.com/bitmark-inc/logger \
 		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
-		urfave:cli:119bb65:cli/src/github.com/urfave/cli \
+		urfave:cli:75104e9:cli/src/github.com/urfave/cli \
 		golang:snappy:553a641:snappy/src/github.com/golang/snappy \
-		pebbe:zmq4:90d69e4:zmq4/src/github.com/pebbe/zmq4 \
-		syndtr:goleveldb:adf24ef:goleveldb/src/github.com/syndtr/goleveldb \
-		golang:crypto:94eea52:crypto/src/golang.org/x/crypto \
-		golang:sys:8b4580a:sys/src/golang.org/x/sys
+		pebbe:zmq4:230ecd8:zmq4/src/github.com/pebbe/zmq4 \
+		syndtr:goleveldb:34011bf:goleveldb/src/github.com/syndtr/goleveldb \
+		golang:crypto:0fcca48:crypto/src/golang.org/x/crypto \
+		golang:sys:1792d66:sys/src/golang.org/x/sys
 
 STRIP=		# stripping can break go binaries
 
@@ -59,10 +59,10 @@ PLIST_FILES+=	sbin/${command}
 #PLIST_FILES+=	"@sample etc/${command}.conf.sample"
 PLIST_FILES+=	bin/${command}
 .endfor
-PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_DATA%%"
-PLIST_FILES+=	"@dir(%%BITMARKD_USER%%,%%BITMARKD_GROUP%%,) %%BITMARKD_RUN%%"
-PLIST_FILES+=	"@dir(%%RECORDERD_USER%%,%%RECORDERD_GROUP%%,) %%RECORDERD_DATA%%"
-PLIST_FILES+=	"@dir(%%RECORDERD_USER%%,%%RECORDERD_GROUP%%,) %%RECORDERD_RUN%%"
+PLIST_FILES+=	"@dir(bitmarkd,bitmarkd,) ${BITMARKD_DATA}"
+PLIST_FILES+=	"@dir(bitmarkd,bitmarkd,) ${BITMARKD_RUN}"
+PLIST_FILES+=	"@dir(recorderd,recorderd,) ${RECORDERD_DATA}"
+PLIST_FILES+=	"@dir(recorderd,recorderd,) ${RECORDERD_RUN}"
 PLIST_FILES+=	"@dir ${VAR_DIR}/lib"
 
 USE_RC_SUBR=	bitmarkd recorderd
