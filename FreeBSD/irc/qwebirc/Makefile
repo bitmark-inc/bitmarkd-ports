@@ -2,7 +2,7 @@
 
 PORTNAME=	qwebirc
 PORTVERSION=	20171006
-PORTREVISION=	19
+PORTREVISION=	20
 CATEGORIES=	irc www
 
 MAINTAINER=	hsw@bitmark.com
@@ -10,11 +10,11 @@ COMMENT=	Fast, easy to use, free, and open source web IRC client
 
 LICENSE=	GPLv2
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}twisted>=0:devel/py-twisted \
-		${PYTHON_PKGNAMEPREFIX}autobahn>=0:www/py-autobahn \
-		${PYTHON_PKGNAMEPREFIX}service_identity>=0:security/py-service_identity
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}twisted>=0:devel/py-twisted@${FLAVOR} \
+		${PYTHON_PKGNAMEPREFIX}autobahn>=0:www/py-autobahn@${FLAVOR} \
+		${PYTHON_PKGNAMEPREFIX}service_identity>=0:security/py-service_identity@${FLAVOR}
 
-USES=		python:2.7 shebangfix
+USES=		python:3.4+ shebangfix
 SHEBANG_FILES=  run.py compile.py
 NO_BUILD=	yes
 NO_ARCH=	yes
