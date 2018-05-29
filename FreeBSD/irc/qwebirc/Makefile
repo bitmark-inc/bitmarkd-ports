@@ -2,7 +2,7 @@
 
 PORTNAME=	qwebirc
 PORTVERSION=	20171006
-PORTREVISION=	20
+PORTREVISION=	21
 CATEGORIES=	irc www
 
 MAINTAINER=	hsw@bitmark.com
@@ -14,7 +14,7 @@ RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}twisted>=0:devel/py-twisted@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}autobahn>=0:www/py-autobahn@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}service_identity>=0:security/py-service_identity@${PY_FLAVOR}
 
-USES=		python:3.4+ shebangfix
+USES=		python:2.7 shebangfix
 SHEBANG_FILES=  run.py compile.py
 NO_BUILD=	yes
 NO_ARCH=	yes
