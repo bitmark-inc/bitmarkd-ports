@@ -3,7 +3,7 @@
 
 PORTNAME=	bitmarkd
 DISTVERSIONPREFIX=	v
-DISTVERSION=	8.0beta2
+DISTVERSION=	8.0
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -24,11 +24,11 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen/src/github.com/bitmark-inc/certgen \
 		bitmark-inc:exitwithstatus:v1.1:exitwithstatus/src/github.com/bitmark-inc/exitwithstatus \
-		bitmark-inc:getoptions:v1.0:getoptions/src/github.com/bitmark-inc/getoptions \
-		bitmark-inc:go-argon2:v1.2:go_argon2/src/github.com/bitmark-inc/go-argon2 \
+		bitmark-inc:getoptions:v1.1:getoptions/src/github.com/bitmark-inc/getoptions \
+		bitmark-inc:go-argon2:v1.3:go_argon2/src/github.com/bitmark-inc/go-argon2 \
 		bitmark-inc:go-libucl:v1.2:go_libucl/src/github.com/bitmark-inc/go-libucl \
-		bitmark-inc:listener:v1.2:listener/src/github.com/bitmark-inc/listener \
-		bitmark-inc:logger:v3.3:logger/src/github.com/bitmark-inc/logger \
+		bitmark-inc:listener:v1.3:listener/src/github.com/bitmark-inc/listener \
+		bitmark-inc:logger:v3.4:logger/src/github.com/bitmark-inc/logger \
 		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
 		urfave:cli:75104e9:cli/src/github.com/urfave/cli \
 		golang:snappy:553a641:snappy/src/github.com/golang/snappy \
