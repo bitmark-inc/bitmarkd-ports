@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark-wallet
-PORTVERSION=	0.4
+PORTVERSION=	0.5
 DISTVERSIONPREFIX=	v
 CATEGORIES=	finance
 
@@ -12,39 +12,41 @@ COMMENT=	Bitmark HD Wallet
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+ONLY_FOR_ARCHS=	amd64 i386
+
 BUILD_DEPENDS=	go:lang/go
 
 MASTER_SITE_OVERRIDE=	https://repo.bitmark.com/gbvchnrdfttztpdfgcgftthfrbknddtzpmjfvqtxnmkcmvdqfvrfwvbjqzhgddcn/
 
 USES=		pkgconfig
-ONLY_FOR_ARCHS=	amd64 i386
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:bitmarkd:v4.10:bitmarkd/src/github.com/bitmark-inc/bitmarkd \
-		bitmark-inc:logger:v3.2:logger/src/github.com/bitmark-inc/logger \
-		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
-		NebulousLabs:entropy-mnemonics:7b01a64:entropy_mnemonics/src/github.com/NebulousLabs/entropy-mnemonics \
-		boltdb:bolt:v1.3.1:bolt/src/github.com/boltdb/bolt \
-		fsnotify:fsnotify:v1.4.2:fsnotify/src/github.com/fsnotify/fsnotify \
-		hashicorp:hcl:392dba7:hcl/src/github.com/hashicorp/hcl \
-		magiconair:properties:v1.7.3:properties/src/github.com/magiconair/properties \
-		mitchellh:mapstructure:d0303fe:mapstructure/src/github.com/mitchellh/mapstructure \
-		pelletier:go-toml:69d355d:go_toml/src/github.com/pelletier/go-toml \
-		spf13:afero:9be6508:afero/src/github.com/spf13/afero \
-		spf13:cast:acbeb36:cast/src/github.com/spf13/cast \
-		spf13:cobra:b4dbd37:cobra/src/github.com/spf13/cobra \
-		spf13:jWalterWeatherman:0efa520:jWalterWeatherman/src/github.com/spf13/jwalterweatherman \
-		spf13:pflag:e57e3ee:pflag/src/github.com/spf13/pflag \
-		spf13:viper:a1ecfa6:viper/src/github.com/spf13/viper \
-		golang:crypto:850760c:crypto/src/golang.org/x/crypto \
-		golang:sys:c4489fa:sys/src/golang.org/x/sys \
-		golang:text:3491b61:text/src/golang.org/x/text \
+GH_TUPLE=	bitgoin:address:ace0060:address/src/github.com/bitgoin/address \
 		bitgoin:packer:f44a7cc:packer/src/github.com/bitgoin/packer \
-		bitgoin:address:ace0060:address/src/github.com/bitgoin/address \
 		bitgoin:tx:4d366f3:tx/src/github.com/bitgoin/tx \
+		bitmark-inc:bitmarkd:v8.0:bitmarkd/src/github.com/bitmark-inc/bitmarkd \
+		bitmark-inc:logger:v3.4:logger/src/github.com/bitmark-inc/logger \
+		boltdb:bolt:v1.3.1:bolt/src/github.com/boltdb/bolt \
 		btcsuite:fastsha256:637e656:fastsha256/src/github.com/btcsuite/fastsha256 \
-		go-yaml:yaml:v2:yaml/src/gopkg.in/yaml.v2
+		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
+		fsnotify:fsnotify:ccc981b:fsnotify/src/github.com/fsnotify/fsnotify \
+		golang:crypto:0fcca48:crypto/src/golang.org/x/crypto \
+		golang:crypto:182538f:crypto/src/golang.org/x/crypto \
+		golang:sys:fa5fdf9:sys/src/golang.org/x/sys \
+		golang:text:6e3c4e7:text/src/golang.org/x/text \
+		hashicorp:hcl:v1.0.0:hcl/src/github.com/hashicorp/hcl \
+		magiconair:properties:v1.8.0:properties/src/github.com/magiconair/properties \
+		mitchellh:mapstructure:v1.0.0:mapstructure/src/github.com/mitchellh/mapstructure \
+		NebulousLabs:entropy-mnemonics:7b01a64:entropy_mnemonics/src/github.com/NebulousLabs/entropy-mnemonics \
+		pelletier:go-toml:c2dbbc2:go_toml/src/github.com/pelletier/go-toml \
+		spf13:afero:v1.1.1:afero/src/github.com/spf13/afero \
+		spf13:cast:v1.2.0:cast/src/github.com/spf13/cast \
+		spf13:cobra:99dc123:cobra/src/github.com/spf13/cobra \
+		spf13:jWalterWeatherman:14d3d4c:jWalterWeatherman/src/github.com/spf13/jwalterweatherman \
+		spf13:pflag:298182f:pflag/src/github.com/spf13/pflag \
+		spf13:viper:0ac2068:viper/src/github.com/spf13/viper
+GH_TUPLE+=	go-yaml:yaml:v2:yaml/src/gopkg.in/yaml.v2
 
 SHARE_FILES=	README.md
 PLIST_FILES=	bin/${PORTNAME}
@@ -52,9 +54,13 @@ PLIST_FILES+=	"@sample etc/${PORTNAME}.conf.sample"
 
 post-patch:
 	@${MKDIR} ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}
-	@${MV} ${WRKSRC}/*.go ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}
-	@${MV} ${WRKSRC}/agent ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}
-	@${MV} ${WRKSRC}/command ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}
+	@for f in ${WRKSRC}/*; \
+	 do \
+	   bn=$$(basename "$${f}") ; \
+	   [ X"$${bn}" = X"src" ] && continue ; \
+	   [ X"$${bn}" = X"LICENSE" ] && continue ; \
+	   ${MV} "$${f}" "${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}/" ; \
+	 done
 
 do-build:
 	cd ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${PORTNAME}/command/${PORTNAME} && \
