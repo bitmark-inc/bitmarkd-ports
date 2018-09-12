@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
+PORTVERSION=	8.1
 DISTVERSIONPREFIX=	v
-DISTVERSION=	8.0
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
