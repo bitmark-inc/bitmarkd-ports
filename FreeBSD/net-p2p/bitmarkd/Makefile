@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	8.1
+PORTVERSION=	8.2
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -30,12 +30,12 @@ GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen/src/github.com/bitmark-inc/certgen \
 		bitmark-inc:listener:v1.3:listener/src/github.com/bitmark-inc/listener \
 		bitmark-inc:logger:v3.4:logger/src/github.com/bitmark-inc/logger \
 		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
-		urfave:cli:75104e9:cli/src/github.com/urfave/cli \
-		golang:snappy:553a641:snappy/src/github.com/golang/snappy \
-		pebbe:zmq4:230ecd8:zmq4/src/github.com/pebbe/zmq4 \
-		syndtr:goleveldb:34011bf:goleveldb/src/github.com/syndtr/goleveldb \
-		golang:crypto:0fcca48:crypto/src/golang.org/x/crypto \
-		golang:sys:1792d66:sys/src/golang.org/x/sys
+		golang:crypto:e363607:crypto/src/golang.org/x/crypto \
+		golang:snappy:2e65f85:snappy/src/github.com/golang/snappy \
+		golang:sys:4497e2d:sys/src/golang.org/x/sys \
+		pebbe:zmq4:3515f4e:zmq4/src/github.com/pebbe/zmq4 \
+		syndtr:goleveldb:ae2bd5e:goleveldb/src/github.com/syndtr/goleveldb \
+		urfave:cli:934abfb:cli/src/github.com/urfave/cli
 
 STRIP=		# stripping can break go binaries
 
