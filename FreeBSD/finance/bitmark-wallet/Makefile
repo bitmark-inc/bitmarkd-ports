@@ -16,9 +16,9 @@ ONLY_FOR_ARCHS=	amd64 i386
 
 BUILD_DEPENDS=	go:lang/go
 
-MASTER_SITE_OVERRIDE=	https://repo.bitmark.com/gbvchnrdfttztpdfgcgftthfrbknddtzpmjfvqtxnmkcmvdqfvrfwvbjqzhgddcn/
-
 USES=		pkgconfig
+
+MASTER_SITE_OVERRIDE=	https://repo.bitmark.com/gbvchnrdfttztpdfgcgftthfrbknddtzpmjfvqtxnmkcmvdqfvrfwvbjqzhgddcn/
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
