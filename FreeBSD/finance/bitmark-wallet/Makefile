@@ -3,6 +3,7 @@
 
 PORTNAME=	bitmark-wallet
 PORTVERSION=	0.5
+PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	finance
 
@@ -25,27 +26,26 @@ GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_TUPLE=	bitgoin:address:ace0060:address/src/github.com/bitgoin/address \
 		bitgoin:packer:f44a7cc:packer/src/github.com/bitgoin/packer \
 		bitgoin:tx:4d366f3:tx/src/github.com/bitgoin/tx \
-		bitmark-inc:bitmarkd:v8.0:bitmarkd/src/github.com/bitmark-inc/bitmarkd \
+		bitmark-inc:bitmarkd:v8.3:bitmarkd/src/github.com/bitmark-inc/bitmarkd \
 		bitmark-inc:logger:v3.4:logger/src/github.com/bitmark-inc/logger \
 		boltdb:bolt:v1.3.1:bolt/src/github.com/boltdb/bolt \
 		btcsuite:fastsha256:637e656:fastsha256/src/github.com/btcsuite/fastsha256 \
 		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
 		fsnotify:fsnotify:ccc981b:fsnotify/src/github.com/fsnotify/fsnotify \
-		golang:crypto:0fcca48:crypto/src/golang.org/x/crypto \
-		golang:crypto:182538f:crypto/src/golang.org/x/crypto \
-		golang:sys:fa5fdf9:sys/src/golang.org/x/sys \
+		golang:crypto:0c41d7a:crypto/src/golang.org/x/crypto \
+		golang:sys:fa43e7b:sys/src/golang.org/x/sys \
 		golang:text:6e3c4e7:text/src/golang.org/x/text \
 		hashicorp:hcl:v1.0.0:hcl/src/github.com/hashicorp/hcl \
 		magiconair:properties:v1.8.0:properties/src/github.com/magiconair/properties \
-		mitchellh:mapstructure:v1.0.0:mapstructure/src/github.com/mitchellh/mapstructure \
+		mitchellh:mapstructure:v1.1.2:mapstructure/src/github.com/mitchellh/mapstructure \
 		NebulousLabs:entropy-mnemonics:7b01a64:entropy_mnemonics/src/github.com/NebulousLabs/entropy-mnemonics \
 		pelletier:go-toml:c2dbbc2:go_toml/src/github.com/pelletier/go-toml \
-		spf13:afero:v1.1.1:afero/src/github.com/spf13/afero \
+		spf13:afero:v1.1.2:afero/src/github.com/spf13/afero \
 		spf13:cast:v1.2.0:cast/src/github.com/spf13/cast \
 		spf13:cobra:99dc123:cobra/src/github.com/spf13/cobra \
-		spf13:jWalterWeatherman:14d3d4c:jWalterWeatherman/src/github.com/spf13/jwalterweatherman \
-		spf13:pflag:298182f:pflag/src/github.com/spf13/pflag \
-		spf13:viper:0ac2068:viper/src/github.com/spf13/viper
+		spf13:jwalterweatherman:103a6da:jwalterweatherman/src/github.com/spf13/jwalterweatherman \
+		spf13:pflag:v1.0.3:pflag/src/github.com/spf13/pflag \
+		spf13:viper:62edee3:viper/src/github.com/spf13/viper
 GH_TUPLE+=	go-yaml:yaml:v2:yaml/src/gopkg.in/yaml.v2
 
 SHARE_FILES=	README.md
