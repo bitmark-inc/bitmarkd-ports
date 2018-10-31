@@ -85,8 +85,10 @@ keygen_cmd="${name}_keygen"
 keygen_precmd="${name}_checkconfig"
 dns_cmd="${name}_dns"
 dns_precmd="${name}_checkconfig"
+clearcache_cmd="${name}_clearcache"
+clearcache_precmd="${name}_precmd"
 
-extra_commands='keygen dns'
+extra_commands='keygen dns clearcache'
 
 pidfile="${bitmarkd_run_dir}/${name}.pid"
 
@@ -140,16 +142,13 @@ bitmarkd_precmd()
 {
   bitmarkd_checkconfig
 
-  if [ -e "${lock_file}" ]
+  pid=$(check_pidfile "${pidfile}" "${command}")
+  if [ -n "${pid}" ]
   then
-    pid=$(check_pidfile "${lock_file}" "${_bitmarkd_program}")
-    if [ -n "${pid}" ]
-    then
-      echo "another bitmarkd is running on pid: ${pid}"
-      return 1
-    else
-      rm -f "${lock_file}"
-    fi
+    echo "another bitmarkd is running on pid: ${pid}"
+    return 1
+  else
+    rm -f "${pidfile}"
   fi
 
   if checkyesno bitmarkdlimits_enable
@@ -177,6 +176,15 @@ bitmarkd_keygen()
 bitmarkd_dns()
 {
   su -m "${bitmarkd_user}" -c "${_bitmarkd_program} ${_bitmarkd_arguments} dns-txt"
+}
+
+bitmarkd_clearcache()
+{
+  local file
+  for file in "${bitmarkd_data_dir}/"*.cache
+  do
+    [ -f "${file}" ] && rm "${file}"
+  done
 }
 
 run_rc_command "$1"
