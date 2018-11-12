@@ -2,9 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	8.4
+PORTVERSION=	8.5
 DISTVERSIONPREFIX=	v
-PORTREVISION=	1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -23,20 +22,21 @@ USES=		pkgconfig
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:certgen:v1.0:certgen/src/github.com/bitmark-inc/certgen \
-		bitmark-inc:exitwithstatus:v1.1:exitwithstatus/src/github.com/bitmark-inc/exitwithstatus \
-		bitmark-inc:getoptions:v1.1:getoptions/src/github.com/bitmark-inc/getoptions \
+GH_TUPLE=	bitmark-inc:certgen:v0.1.1:certgen/src/github.com/bitmark-inc/certgen \
+		bitmark-inc:exitwithstatus:v0.1.2:exitwithstatus/src/github.com/bitmark-inc/exitwithstatus \
+		bitmark-inc:getoptions:v0.1.1:getoptions/src/github.com/bitmark-inc/getoptions \
 		bitmark-inc:go-argon2:v1.3:go_argon2/src/github.com/bitmark-inc/go-argon2 \
 		bitmark-inc:go-libucl:v1.2:go_libucl/src/github.com/bitmark-inc/go-libucl \
-		bitmark-inc:listener:v1.3:listener/src/github.com/bitmark-inc/listener \
-		bitmark-inc:logger:v3.4:logger/src/github.com/bitmark-inc/logger \
+		bitmark-inc:listener:v0.2.0:listener/src/github.com/bitmark-inc/listener \
+		bitmark-inc:logger:v0.3.4:logger/src/github.com/bitmark-inc/logger \
 		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
-		golang:crypto:e363607:crypto/src/golang.org/x/crypto \
+		golang:crypto:e4dc69e:crypto/src/golang.org/x/crypto \
 		golang:snappy:2e65f85:snappy/src/github.com/golang/snappy \
-		golang:sys:4497e2d:sys/src/golang.org/x/sys \
-		pebbe:zmq4:3515f4e:zmq4/src/github.com/pebbe/zmq4 \
-		syndtr:goleveldb:ae2bd5e:goleveldb/src/github.com/syndtr/goleveldb \
-		urfave:cli:934abfb:cli/src/github.com/urfave/cli
+		golang:sys:66b7b13:sys/src/golang.org/x/sys \
+		golang:time:85acf8d:time/src/golang.org/x/time \
+		pebbe:zmq4:v1.0.0:zmq4/src/github.com/pebbe/zmq4 \
+		syndtr:goleveldb:f908035:goleveldb/src/github.com/syndtr/goleveldb \
+		urfave:cli:v1.20.0:cli/src/github.com/urfave/cli
 
 STRIP=		# stripping can break go binaries
 
