@@ -133,8 +133,8 @@ bitmarkd_checkconfig()
   # set environment for bitmarkd to access the currently assigned EC2 public IPv4
   if checkyesno bitmarkd_ec2_ipv4_enable
   then
-    EC2_IPV4=$(${bitmarkd_ec2_cmd} "${bitmarkd_ec2_url}")
-    export EC2_IPV4
+    PUBLIC_IPV4=$(${bitmarkd_ec2_cmd} "${bitmarkd_ec2_url}")
+    export PUBLIC_IPV4
   fi
 }
 

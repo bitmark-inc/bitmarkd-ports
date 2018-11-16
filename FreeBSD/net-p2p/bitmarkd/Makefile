@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	8.5
+PORTVERSION=	0.9.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -22,21 +22,24 @@ USES=		pkgconfig
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
-GH_TUPLE=	bitmark-inc:certgen:v0.1.1:certgen/src/github.com/bitmark-inc/certgen \
-		bitmark-inc:exitwithstatus:v0.1.2:exitwithstatus/src/github.com/bitmark-inc/exitwithstatus \
-		bitmark-inc:getoptions:v0.1.1:getoptions/src/github.com/bitmark-inc/getoptions \
-		bitmark-inc:go-argon2:v1.3:go_argon2/src/github.com/bitmark-inc/go-argon2 \
-		bitmark-inc:go-libucl:v1.2:go_libucl/src/github.com/bitmark-inc/go-libucl \
-		bitmark-inc:listener:v0.2.0:listener/src/github.com/bitmark-inc/listener \
-		bitmark-inc:logger:v0.3.4:logger/src/github.com/bitmark-inc/logger \
-		cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog \
-		golang:crypto:e4dc69e:crypto/src/golang.org/x/crypto \
-		golang:snappy:2e65f85:snappy/src/github.com/golang/snappy \
-		golang:sys:66b7b13:sys/src/golang.org/x/sys \
-		golang:time:85acf8d:time/src/golang.org/x/time \
-		pebbe:zmq4:v1.0.0:zmq4/src/github.com/pebbe/zmq4 \
-		syndtr:goleveldb:f908035:goleveldb/src/github.com/syndtr/goleveldb \
-		urfave:cli:v1.20.0:cli/src/github.com/urfave/cli
+GH_TUPLE=	bitmark-inc:certgen:v0.1.1:certgen/src/github.com/bitmark-inc/certgen
+GH_TUPLE+=	bitmark-inc:exitwithstatus:v0.1.2:exitwithstatus/src/github.com/bitmark-inc/exitwithstatus
+GH_TUPLE+=	bitmark-inc:getoptions:v0.1.1:getoptions/src/github.com/bitmark-inc/getoptions
+GH_TUPLE+=	bitmark-inc:go-argon2:v1.3:go_argon2/src/github.com/bitmark-inc/go-argon2
+GH_TUPLE+=	bitmark-inc:go-libucl:v1.2:go_libucl/src/github.com/bitmark-inc/go-libucl
+GH_TUPLE+=	bitmark-inc:listener:v0.2.0:listener/src/github.com/bitmark-inc/listener
+GH_TUPLE+=	bitmark-inc:logger:v0.3.4:logger/src/github.com/bitmark-inc/logger
+GH_TUPLE+=	cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog
+GH_TUPLE+=	golang:crypto:3d3f9f413869:crypto/src/golang.org/x/crypto
+GH_TUPLE+=	golang:snappy:2e65f85255db:snappy/src/github.com/golang/snappy
+GH_TUPLE+=	golang:sys:66b7b1311ac8:sys/src/golang.org/x/sys
+GH_TUPLE+=	golang:time:85acf8d2951c:time/src/golang.org/x/time
+GH_TUPLE+=	mitchellh:mapstructure:v1.1.2:mapstructure/src/github.com/mitchellh/mapstructure
+GH_TUPLE+=	pebbe:zmq4:v1.0.0:zmq4/src/github.com/pebbe/zmq4
+GH_TUPLE+=	syndtr:goleveldb:f9080354173f:goleveldb/src/github.com/syndtr/goleveldb
+GH_TUPLE+=	urfave:cli:v1.20.0:cli/src/github.com/urfave/cli
+GH_TUPLE+=	yuin:gluamapper:d836955830e7:gluamapper/src/github.com/yuin/gluamapper
+GH_TUPLE+=	yuin:gopher-lua:a0dfe84f6227:gopher_lua/src/github.com/yuin/gopher-lua
 
 STRIP=		# stripping can break go binaries
 
