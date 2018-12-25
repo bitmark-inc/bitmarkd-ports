@@ -95,18 +95,13 @@ pidfile="${bitmarkd_run_dir}/${name}.pid"
 # bitmarkd creates its own PID file so need to remove if stale
 lock_file="${bitmarkd_data_dir}/${name}.pid"
 
-# to record any outputs such as the stack trace on crash
-stdout_file="${bitmarkd_data_dir}/${name}.stdout"
-stderr_file="${bitmarkd_data_dir}/${name}.stderr"
-
 required_files="${bitmarkd_config_file}"
 
 _bitmarkd_program="%%PREFIX%%/sbin/bitmarkd"
 _bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file} ${bitmarkd_options}"
 
 command="/usr/sbin/daemon"
-#command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
-command_args="-P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments} 1>> ${stdout_file} 2>> ${stderr_file}"
+command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
 #procname=${_bitmarkd_program} # do not override procname as program runs under daemon
 
 # list of items for keygen
