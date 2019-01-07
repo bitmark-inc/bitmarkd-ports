@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	0.10.0
+PORTVERSION=	0.10.1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -25,8 +25,7 @@ GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_TUPLE=	bitmark-inc:certgen:v0.1.1:certgen/src/github.com/bitmark-inc/certgen
 GH_TUPLE+=	bitmark-inc:exitwithstatus:v0.1.2:exitwithstatus/src/github.com/bitmark-inc/exitwithstatus
 GH_TUPLE+=	bitmark-inc:getoptions:v0.1.1:getoptions/src/github.com/bitmark-inc/getoptions
-GH_TUPLE+=	bitmark-inc:go-argon2:v1.3:go_argon2/src/github.com/bitmark-inc/go-argon2
-GH_TUPLE+=	bitmark-inc:go-libucl:v1.2:go_libucl/src/github.com/bitmark-inc/go-libucl
+GH_TUPLE+=	bitmark-inc:go-argon2:v0.1.4:go_argon2/src/github.com/bitmark-inc/go-argon2
 GH_TUPLE+=	bitmark-inc:listener:v0.2.0:listener/src/github.com/bitmark-inc/listener
 GH_TUPLE+=	bitmark-inc:logger:v0.3.4:logger/src/github.com/bitmark-inc/logger
 GH_TUPLE+=	cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog
