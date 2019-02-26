@@ -4,6 +4,7 @@
 PORTNAME=	bitmarkd
 PORTVERSION=	0.10.1
 DISTVERSIONPREFIX=	v
+PORTREVISION=	1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -13,8 +14,7 @@ LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 ONLY_FOR_ARCHS=	amd64 i386
-LIB_DEPENDS=	libucl.so:textproc/libucl \
-		libargon2.so:security/libargon2 \
+LIB_DEPENDS=	libargon2.so:security/libargon2 \
 		libzmq.so:net/libzmq4
 BUILD_DEPENDS=	go:lang/go
 
