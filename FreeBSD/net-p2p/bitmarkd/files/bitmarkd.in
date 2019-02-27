@@ -164,7 +164,7 @@ bitmarkd_keygen()
 {
   for c in ${generate_list}
   do
-    su -m "${bitmarkd_user}" -c "${_bitmarkd_program} ${_bitmarkd_arguments} ${c}"
+    su -m "${bitmarkd_user}" -c "${_bitmarkd_program} ${_bitmarkd_arguments} ${c} ${bitmarkd_data_dir}"
   done
 }
 
