@@ -1,6 +1,6 @@
-TIMESTAMP = 1539765389
-SHA256 (bitmark-inc-bitmark-wallet-v0.5_GH0.tar.gz) = a56e5ea983d92b5e2a4157a16fce77a4e6699f9b457905b7fc1001e604c6922e
-SIZE (bitmark-inc-bitmark-wallet-v0.5_GH0.tar.gz) = 19146
+TIMESTAMP = 1552542499
+SHA256 (bitmark-inc-bitmark-wallet-v0.6.0_GH0.tar.gz) = 18de3bd43d2c294eb74d0372f87e7a2a6c3b205fa9c4bfba0020f0e5eb5cdfab
+SIZE (bitmark-inc-bitmark-wallet-v0.6.0_GH0.tar.gz) = 27572
 SHA256 (bitgoin-address-ace0060_GH0.tar.gz) = d086ffca04e5785c3e3203f99f3978ee7f995c68659ded0e20ca99cc620748c1
 SIZE (bitgoin-address-ace0060_GH0.tar.gz) = 997564
 SHA256 (bitgoin-packer-f44a7cc_GH0.tar.gz) = 1841324cfebac659d89c2309b53212c62d9f82e98802784ce36d29f0bcf9bf8c
