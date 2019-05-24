@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	0.10.6
+PORTVERSION=	0.10.7
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -28,16 +28,16 @@ GH_TUPLE+=	bitmark-inc:go-argon2:v0.1.4:go_argon2/src/github.com/bitmark-inc/go-
 GH_TUPLE+=	bitmark-inc:listener:v0.2.0:listener/src/github.com/bitmark-inc/listener
 GH_TUPLE+=	bitmark-inc:logger:v0.3.4:logger/src/github.com/bitmark-inc/logger
 GH_TUPLE+=	cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog
-GH_TUPLE+=	golang:crypto:3d3f9f413869:crypto/src/golang.org/x/crypto
-GH_TUPLE+=	golang:snappy:2e65f85255db:snappy/src/github.com/golang/snappy
-GH_TUPLE+=	golang:sys:66b7b1311ac8:sys/src/golang.org/x/sys
-GH_TUPLE+=	golang:time:85acf8d2951c:time/src/golang.org/x/time
+GH_TUPLE+=	golang:crypto:a5d413f7728c:crypto/src/golang.org/x/crypto
+GH_TUPLE+=	golang:snappy:v0.0.1:snappy/src/github.com/golang/snappy
+GH_TUPLE+=	golang:sys:e4093980e83e:sys/src/golang.org/x/sys
+GH_TUPLE+=	golang:time:9d24e82272b4:time/src/golang.org/x/time
 GH_TUPLE+=	mitchellh:mapstructure:v1.1.2:mapstructure/src/github.com/mitchellh/mapstructure
 GH_TUPLE+=	pebbe:zmq4:v1.0.0:zmq4/src/github.com/pebbe/zmq4
-GH_TUPLE+=	syndtr:goleveldb:f9080354173f:goleveldb/src/github.com/syndtr/goleveldb
+GH_TUPLE+=	syndtr:goleveldb:v1.0.0:goleveldb/src/github.com/syndtr/goleveldb
 GH_TUPLE+=	urfave:cli:v1.20.0:cli/src/github.com/urfave/cli
 GH_TUPLE+=	yuin:gluamapper:d836955830e7:gluamapper/src/github.com/yuin/gluamapper
-GH_TUPLE+=	yuin:gopher-lua:a0dfe84f6227:gopher_lua/src/github.com/yuin/gopher-lua
+GH_TUPLE+=	yuin:gopher-lua:8bfc7677f583:gopher_lua/src/github.com/yuin/gopher-lua
 
 STRIP=		# stripping can break go binaries
 
