@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	bitmarkd
-PORTVERSION=	0.10.7
 DISTVERSIONPREFIX=	v
+DISTVERSION=	0.11.0-alpha.1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -17,7 +17,7 @@ LIB_DEPENDS=	libargon2.so:security/libargon2 \
 		libzmq.so:net/libzmq4
 BUILD_DEPENDS=	go:lang/go
 
-USES=		pkgconfig
+USES=		pkgconfig go:modules
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
@@ -28,11 +28,14 @@ GH_TUPLE+=	bitmark-inc:go-argon2:v0.1.4:go_argon2/src/github.com/bitmark-inc/go-
 GH_TUPLE+=	bitmark-inc:listener:v0.2.0:listener/src/github.com/bitmark-inc/listener
 GH_TUPLE+=	bitmark-inc:logger:v0.3.4:logger/src/github.com/bitmark-inc/logger
 GH_TUPLE+=	cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog
+GH_TUPLE+=	fsnotify:fsnotify:v1.4.7:fsnotify/src/github.com/fsnotify/fsnotify
 GH_TUPLE+=	golang:crypto:a5d413f7728c:crypto/src/golang.org/x/crypto
 GH_TUPLE+=	golang:snappy:v0.0.1:snappy/src/github.com/golang/snappy
 GH_TUPLE+=	golang:sys:e4093980e83e:sys/src/golang.org/x/sys
 GH_TUPLE+=	golang:time:9d24e82272b4:time/src/golang.org/x/time
+GH_TUPLE+=	miekg:dns:v1.1.9:dns/src/github.com/miekg/dns
 GH_TUPLE+=	mitchellh:mapstructure:v1.1.2:mapstructure/src/github.com/mitchellh/mapstructure
+GH_TUPLE+=	patrickmn:go-cache:v2.1.0:go_chche/src/github.com/patrickmn/go-cache
 GH_TUPLE+=	pebbe:zmq4:v1.0.0:zmq4/src/github.com/pebbe/zmq4
 GH_TUPLE+=	syndtr:goleveldb:v1.0.0:goleveldb/src/github.com/syndtr/goleveldb
 GH_TUPLE+=	urfave:cli:v1.20.0:cli/src/github.com/urfave/cli
