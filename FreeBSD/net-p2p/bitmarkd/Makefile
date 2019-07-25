@@ -3,7 +3,7 @@
 
 PORTNAME=	bitmarkd
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.11.0-alpha.2
+DISTVERSION=	0.11.0-alpha.3
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -27,20 +27,20 @@ GH_TUPLE+=	bitmark-inc:getoptions:v0.1.1:getoptions/src/github.com/bitmark-inc/g
 GH_TUPLE+=	bitmark-inc:go-argon2:v0.1.4:go_argon2/src/github.com/bitmark-inc/go-argon2
 GH_TUPLE+=	bitmark-inc:listener:v0.2.0:listener/src/github.com/bitmark-inc/listener
 GH_TUPLE+=	bitmark-inc:logger:v0.3.4:logger/src/github.com/bitmark-inc/logger
-GH_TUPLE+=	cihub:seelog:f561c5e:seelog/src/github.com/cihub/seelog
+GH_TUPLE+=	cihub:seelog:f561c5e57575:seelog/src/github.com/cihub/seelog
 GH_TUPLE+=	fsnotify:fsnotify:v1.4.7:fsnotify/src/github.com/fsnotify/fsnotify
-GH_TUPLE+=	golang:crypto:a5d413f7728c:crypto/src/golang.org/x/crypto
+GH_TUPLE+=	golang:crypto:4def268fd1a4:crypto/src/golang.org/x/crypto
 GH_TUPLE+=	golang:snappy:v0.0.1:snappy/src/github.com/golang/snappy
-GH_TUPLE+=	golang:sys:e4093980e83e:sys/src/golang.org/x/sys
+GH_TUPLE+=	golang:sys:fae7ac547cb7:sys/src/golang.org/x/sys
 GH_TUPLE+=	golang:time:9d24e82272b4:time/src/golang.org/x/time
-GH_TUPLE+=	miekg:dns:v1.1.9:dns/src/github.com/miekg/dns
+GH_TUPLE+=	miekg:dns:v1.1.15:dns/src/github.com/miekg/dns
 GH_TUPLE+=	mitchellh:mapstructure:v1.1.2:mapstructure/src/github.com/mitchellh/mapstructure
 GH_TUPLE+=	patrickmn:go-cache:v2.1.0:go_chche/src/github.com/patrickmn/go-cache
 GH_TUPLE+=	pebbe:zmq4:v1.0.0:zmq4/src/github.com/pebbe/zmq4
 GH_TUPLE+=	syndtr:goleveldb:v1.0.0:goleveldb/src/github.com/syndtr/goleveldb
 GH_TUPLE+=	urfave:cli:v1.20.0:cli/src/github.com/urfave/cli
 GH_TUPLE+=	yuin:gluamapper:d836955830e7:gluamapper/src/github.com/yuin/gluamapper
-GH_TUPLE+=	yuin:gopher-lua:8bfc7677f583:gopher_lua/src/github.com/yuin/gopher-lua
+GH_TUPLE+=	yuin:gopher-lua:1cd887cd7036:gopher_lua/src/github.com/yuin/gopher-lua
 
 STRIP=		# stripping can break go binaries
 
