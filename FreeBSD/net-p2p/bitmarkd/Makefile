@@ -3,7 +3,7 @@
 
 PORTNAME=	bitmarkd
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.11.0-alpha.3
+DISTVERSION=	0.11.0-alpha.4
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
