@@ -4,8 +4,9 @@ MASTERDIR=	${.CURDIR}/../bitmark
 PKGNAMESUFFIX=	-cli
 
 COMMENT=	Bitmark distributed property system cli
-S
-LAVE_PORT=	yes
+
+CONFLICTS?=	bitmark
+SLAVE_PORT=	yes
 
 OPTIONS_DEFINE=		CLI
 OPTIONS_DEFAULT=	CLI
