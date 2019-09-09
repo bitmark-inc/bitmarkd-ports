@@ -3,6 +3,7 @@
 PORTNAME=	bitmark
 PORTVERSION=	0.11.1
 DISTVERSIONPREFIX=	v
+PORTREVISION=	1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -17,10 +18,10 @@ ONLY_FOR_ARCHS_REASON=	depends on go which is not supported in this architecture
 LIB_DEPENDS=	libargon2.so:security/libargon2
 LIB_DEPENDS+=	libzmq.so:net/libzmq4
 
+USES=		pkgconfig go:modules
+
 CONFLICTS?=	bitmark-{daemon,cli,recorder,dumper}
 SLAVE_PORT?=    no
-
-USES=		pkgconfig go:modules
 
 OPTIONS_DEFINE?=	DAEMON CLI DUMPER RECORDER
 OPTIONS_DEFAULT?=	DAEMON CLI RECORDER
@@ -71,8 +72,8 @@ BITMARKD_RUN=	${VAR_DIR}/run/bitmarkd
 BITMARKD_DATA=	${VAR_DIR}/lib/bitmarkd
 SERVER_LIST+=	bitmarkd
 USE_RC_SUBR+=	bitmarkd
-SUB_LIST+=	BITMARKD_USER=bitmarkd \
-		BITMARKD_GROUP=bitmarkd \
+SUB_LIST+=	BITMARKD_USER=bitmark \
+		BITMARKD_GROUP=bitmark \
 		BITMARKD_RUN=${BITMARKD_RUN} \
 		BITMARKD_DATA=${BITMARKD_DATA}
 .endif
@@ -84,8 +85,8 @@ RECORDERD_RUN=	${VAR_DIR}/run/recorderd
 RECORDERD_DATA=	${VAR_DIR}/lib/recorderd
 SERVER_LIST+=	recorderd
 USE_RC_SUBR+=	recorderd
-SUB_LIST+=	RECORDERD_USER=recorderd \
-		RECORDERD_GROUP=recorderd \
+SUB_LIST+=	RECORDERD_USER=bitmark-recorder \
+		RECORDERD_GROUP=bitmark-recorder \
 		RECORDERD_RUN=${RECORDERD_RUN} \
 		RECORDERD_DATA=${RECORDERD_DATA}
 .endif
