@@ -1,9 +1,9 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark
-PORTVERSION=	0.11.1
+#PORTVERSION=	0.11.2
 DISTVERSIONPREFIX=	v
-PORTREVISION=	2
+DISTVERSION=	0.11.2-beta.1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -21,7 +21,7 @@ LIB_DEPENDS+=	libzmq.so:net/libzmq4
 USES=		pkgconfig go:modules
 
 CONFLICTS?=	bitmark-{daemon,cli,recorder,dumper}
-SLAVE_PORT?=    no
+SLAVE_PORT?=	no
 
 OPTIONS_DEFINE?=	DAEMON CLI DUMPER RECORDER
 OPTIONS_DEFAULT?=	DAEMON CLI RECORDER
