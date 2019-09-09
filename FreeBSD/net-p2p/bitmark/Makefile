@@ -3,7 +3,7 @@
 PORTNAME=	bitmark
 PORTVERSION=	0.11.1
 DISTVERSIONPREFIX=	v
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -108,12 +108,12 @@ PLIST_FILES+=	sbin/${command}
 PLIST_FILES+=	bin/${command}
 .endfor
 .if ${PORT_OPTIONS:MDAEMON}
-PLIST_FILES+=	"@dir(bitmarkd,bitmarkd,) ${BITMARKD_DATA}"
-PLIST_FILES+=	"@dir(bitmarkd,bitmarkd,) ${BITMARKD_RUN}"
+PLIST_FILES+=	"@dir(bitmark,bitmark,) ${BITMARKD_DATA}"
+PLIST_FILES+=	"@dir(bitmark,bitmark,) ${BITMARKD_RUN}"
 .endif
 .if ${PORT_OPTIONS:MRECORDER}
-PLIST_FILES+=	"@dir(recorderd,recorderd,) ${RECORDERD_DATA}"
-PLIST_FILES+=	"@dir(recorderd,recorderd,) ${RECORDERD_RUN}"
+PLIST_FILES+=	"@dir(bitmark-recorder,bitmark-recorder,) ${RECORDERD_DATA}"
+PLIST_FILES+=	"@dir(bitmark-recorder,bitmark-recorder,) ${RECORDERD_RUN}"
 PLIST_FILES+=	"@dir ${VAR_DIR}/lib"
 .endif
 
