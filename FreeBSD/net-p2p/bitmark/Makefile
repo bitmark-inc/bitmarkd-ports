@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark
-PORTVERSION=	0.11.0
+PORTVERSION=	0.11.1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -121,14 +121,6 @@ GO_BUILDFLAGS+=	--ldflags "-X main.version=${DISTVERSION}"
 .for command in ${SERVER_LIST} ${COMMAND_LIST}
 GO_TARGET+=	./command/${command}
 .endfor
-
-# do-build:
-# .for command in ${SERVER_LIST} ${COMMAND_LIST}
-# 	@cd ${WRKSRC}/src/github.com/${GH_ACCOUNT_DEFAULT}/${GH_PROJECT}/command/${command} && \
-# 	  ${SETENV} ${GOENV} go 'install' --ldflags "-X main.version=${DISTVERSION}" .
-# .endfor
-#	(cd ${GO_WRKSRC}; \
-#		${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} install ${GO_BUILDFLAGS} ${GO_TARGET:S/^${PORTNAME}$/./})
 
 do-install:
 .for command in ${SERVER_LIST}
