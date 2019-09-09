@@ -124,14 +124,14 @@ GO_TARGET+=	./command/${command}
 
 do-install:
 .for command in ${SERVER_LIST}
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/${command} ${STAGEDIR}${PREFIX}/sbin
+	${INSTALL_PROGRAM} ${WRKDIR}/bin/${command} ${STAGEDIR}${PREFIX}/sbin
 #	${INSTALL_MAN} ${WRKSRC}/man/${command}.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
-	${INSTALL_DATA} ${WRKSRC}/src/github.com/bitmark-inc/bitmarkd/command/${command}/${command}.conf.sample ${STAGEDIR}${PREFIX}/etc/${command}.conf.sample
+	${INSTALL_DATA} ${WRKSRC}/command/${command}/${command}.conf.sample ${STAGEDIR}${PREFIX}/etc/${command}.conf.sample
 .endfor
 .for command in ${COMMAND_LIST}
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/${command} ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKDIR}/bin/${command} ${STAGEDIR}${PREFIX}/bin
 #	${INSTALL_MAN} ${WRKSRC}/man/${command}.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
-#	${INSTALL_DATA} ${WRKSRC}/src/github.com/bitmark-inc/bitmarkd/command/${command}/${command}.conf.sample ${STAGEDIR}${PREFIX}/etc/${command}.conf.sample
+#	${INSTALL_DATA} ${WRKSRC}/command/${command}/${command}.conf.sample ${STAGEDIR}${PREFIX}/etc/${command}.conf.sample
 .endfor
 .if ${PORT_OPTIONS:MDAEMON}
 	${MKDIR} ${STAGEDIR}${BITMARKD_RUN}
