@@ -35,6 +35,10 @@
 #   Set to "%%RECORDERD_RUN%%" by default.
 #   The root for the pid and socket files.
 #
+# recorderd_syslog_enable (bool):
+#   Set to "NO" by default.
+#   Enables sending stdout/stderr to syslog (via daemon)
+#
 # recorderdlimits_enable (bool):
 #   Set to "NO" by default.
 #   Set it to yes to run `limits ${recorderdlimits_args}` just before
@@ -58,6 +62,8 @@ load_rc_config ${name}
 : ${recorderd_config_file:="%%PREFIX%%/etc/${name}.conf"}
 : ${recorderd_data_dir:="%%RECORDERD_DATA%%"}
 : ${recorderd_run_dir:="%%RECORDERD_RUN%%"}
+: ${recorderd_syslog_enable:="NO"}
+
 : ${recorderdlimits_enable:="NO"}
 : ${recorderdlimits_args:="-e -U ${recorderd_user}"}
 
@@ -80,7 +86,9 @@ _recorderd_program="%%PREFIX%%/sbin/recorderd"
 _recorderd_arguments="--quiet --config-file=${recorderd_config_file} ${recorderd_options}"
 
 command="/usr/sbin/daemon"
-command_args="-f -P ${pidfile} -r -- ${_recorderd_program} ${_recorderd_arguments}"
+command_args="-f"
+checkyesno recorderd_syslog_enable && command_args="-S -T recorderd"
+command_args="${command_args} -P ${pidfile} -r -- ${_recorderd_program} ${_recorderd_arguments}"
 #procname=${_recorderd_program} # do not override procname as program runs under daemon
 
 

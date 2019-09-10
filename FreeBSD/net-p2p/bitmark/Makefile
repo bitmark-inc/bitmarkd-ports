@@ -3,6 +3,7 @@
 PORTNAME=	bitmark
 PORTVERSION=	0.11.2
 DISTVERSIONPREFIX=	v
+PORTREVISION=	1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -127,6 +128,8 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKDIR}/bin/${command} ${STAGEDIR}${PREFIX}/sbin
 #	${INSTALL_MAN} ${WRKSRC}/man/${command}.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
 	${INSTALL_DATA} ${WRKSRC}/command/${command}/${command}.conf.sample ${STAGEDIR}${PREFIX}/etc/${command}.conf.sample
+	${INSTALL_DATA} ${FILESDIR}/${command}.syslog ${STAGEDIR}${PREFIX}/etc/syslog.d/${command}.conf
+	${INSTALL_DATA} ${FILESDIR}/${command}.newsyslog ${STAGEDIR}${PREFIX}/etc/newsyslog.conf.d/${command}.conf
 .endfor
 .for command in ${COMMAND_LIST}
 	${INSTALL_PROGRAM} ${WRKDIR}/bin/${command} ${STAGEDIR}${PREFIX}/bin

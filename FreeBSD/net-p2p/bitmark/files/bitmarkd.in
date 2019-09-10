@@ -35,6 +35,10 @@
 #   Set to "%%BITMARKD_RUN%%" by default.
 #   The root for the pid and socket files.
 #
+# bitmarkd_syslog_enable (bool):
+#   Set to "NO" by default.
+#   Enables sending stdout/stderr to syslog (via daemon)
+#
 # bitmarkd_ec2_ipv4_enable (bool):
 #   Set to NO by default.
 #   Enables fetching of EC2 public IPv4.
@@ -70,6 +74,7 @@ load_rc_config ${name}
 : ${bitmarkd_config_file:="%%PREFIX%%/etc/${name}.conf"}
 : ${bitmarkd_data_dir:="%%BITMARKD_DATA%%"}
 : ${bitmarkd_run_dir:="%%BITMARKD_RUN%%"}
+: ${bitmarkd_syslog_enable:="NO"}
 
 : ${bitmarkd_ec2_ipv4_enable:="NO"}
 : ${bitmarkd_ec2_url:="http://169.254.169.254/2016-09-02/meta-data/public-ipv4"}
@@ -101,7 +106,9 @@ _bitmarkd_program="%%PREFIX%%/sbin/bitmarkd"
 _bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file} ${bitmarkd_options}"
 
 command="/usr/sbin/daemon"
-command_args="-f -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
+command_args="-f"
+checkyesno bitmarkd_syslog_enable && command_args="-S -T bitmarkd"
+command_args="${command_args} -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
 #procname=${_bitmarkd_program} # do not override procname as program runs under daemon
 
 # list of items for keygen

@@ -1,0 +1,2 @@
+# recorderd syslog rotation
+/var/lib/recorderd/recorderd.syslog               644  7	   1000	*     CJ
