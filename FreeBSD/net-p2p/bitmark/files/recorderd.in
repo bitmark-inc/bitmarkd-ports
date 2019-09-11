@@ -5,48 +5,20 @@
 # REQUIRE: LOGIN cleanvar
 # KEYWORD: shutdown
 
-# Configuration settings in /etc/rc.conf:
-#
-# recorderd_enable (bool):
-#   Set to "NO" by default.
-#   Set it to "YES" to enable recorderd
-#
-# recorderd_options (str):
-#   Set to empty by default.
-#   Additional options to append to command
-#
-# recorderd_user (str):
-#   Set to "%%RECORDERD_USER%%" by default.
-#   User to run process as and for data ownership.
-#
-# recorderd_group (str):
-#   Set to "%%RECORDERD_GROUP%%" by default.
-#   Group for data file ownership.
-#
-# recorderd_config_file (str):
-#   Set to "%%PREFIX%%/etc/${name}.conf" by default.
-#   The master configuration file.
-#
-# recorderd_data_dir (str):
-#   Set to "%%RECORDERD_DATA%%" by default.
-#   The root of the data store.
-#
-# recorderd_run_dir (str):
-#   Set to "%%RECORDERD_RUN%%" by default.
-#   The root for the pid and socket files.
-#
-# recorderd_syslog_enable (bool):
-#   Set to "NO" by default.
-#   Enables sending stdout/stderr to syslog (via daemon)
-#
-# recorderdlimits_enable (bool):
-#   Set to "NO" by default.
-#   Set it to yes to run `limits ${recorderdlimits_args}` just before
-#   recorderd starts.
-#
-# recorderdlimits_args (str):
-#   Default to "-e -U %%RECORDERD_USER%%"
-#   Arguments of pre-start limits run.
+# Add the following lines to /etc/rc.conf to enable:
+# recorderd_enable (bool)         Set to "NO" by default.
+#                                 Set it to "YES" to enable recorderd
+# recorderd_options (str)         Set to "" by default
+# recorderd_user (str)            Set to "%%RECORDERD_USER%%" by default.
+# recorderd_group (str)           Set to "%%RECORDERD_GROUP%%" by default.
+# recorderd_config_file (str)     Set to "%%PREFIX%%/etc/${name}.conf" by default.
+# recorderd_data_dir (str)        Set to "%%RECORDERD_DATA%%" by default.
+# recorderd_run_dir (str)         Set to "%%RECORDERD_RUN%%" by default.
+# recorderd_syslog_enable (bool)  Set to "NO" by default.
+#                                 Set it to "YES" to enable syslog stdout/stderr
+# recorderdlimits_enable (bool)   Set to "NO" by default.
+#                                 Set it to "YES" to enable recorderdlimits
+# recorderdlimits_args (str)      Set to "-e -U ${recorderd_user}" by default
 
 . /etc/rc.subr
 
