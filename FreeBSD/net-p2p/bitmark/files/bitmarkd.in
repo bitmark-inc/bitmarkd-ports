@@ -74,7 +74,7 @@ _bitmarkd_arguments="--quiet --config-file=${bitmarkd_config_file} ${bitmarkd_op
 command="/usr/sbin/daemon"
 command_args="-f"
 checkyesno bitmarkd_syslog_enable && command_args="-S -T bitmarkd"
-command_args="${command_args} -P ${pidfile} -r -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
+command_args="${command_args} -P ${pidfile} -R 60 -- ${_bitmarkd_program} ${_bitmarkd_arguments}"
 #procname=${_bitmarkd_program} # do not override procname as program runs under daemon
 
 # list of items for keygen

@@ -60,7 +60,7 @@ _recorderd_arguments="--quiet --config-file=${recorderd_config_file} ${recorderd
 command="/usr/sbin/daemon"
 command_args="-f"
 checkyesno recorderd_syslog_enable && command_args="-S -T recorderd"
-command_args="${command_args} -P ${pidfile} -r -- ${_recorderd_program} ${_recorderd_arguments}"
+command_args="${command_args} -P ${pidfile} -R 60 -- ${_recorderd_program} ${_recorderd_arguments}"
 #procname=${_recorderd_program} # do not override procname as program runs under daemon
 
 
