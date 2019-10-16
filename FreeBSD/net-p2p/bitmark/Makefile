@@ -3,7 +3,7 @@
 PORTNAME=	bitmark
 #PORTVERSION=	0.12.0
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.12.0-alpha.1
+DISTVERSION=	0.12.0-alpha.2
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -80,6 +80,7 @@ SUB_LIST+=	BITMARKD_USER=bitmark \
 		BITMARKD_GROUP=bitmark \
 		BITMARKD_RUN=${BITMARKD_RUN} \
 		BITMARKD_DATA=${BITMARKD_DATA}
+PLIST_FILES+=	"etc/${command}.conf.sub"
 .endif
 
 .if ${PORT_OPTIONS:MRECORDER}
@@ -142,6 +143,7 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKDIR}/bin/${command} ${STAGEDIR}${PREFIX}/bin
 .endfor
 .if ${PORT_OPTIONS:MDAEMON}
+	${INSTALL_DATA} ${WRKSRC}/command/${command}/${command}.conf.sub ${STAGEDIR}${PREFIX}/etc/${command}.conf.sub
 	${MKDIR} ${STAGEDIR}${BITMARKD_RUN}
 	${MKDIR} ${STAGEDIR}${BITMARKD_DATA}
 .endif
