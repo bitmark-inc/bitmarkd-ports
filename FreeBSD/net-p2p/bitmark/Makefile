@@ -80,7 +80,7 @@ SUB_LIST+=	BITMARKD_USER=bitmark \
 		BITMARKD_GROUP=bitmark \
 		BITMARKD_RUN=${BITMARKD_RUN} \
 		BITMARKD_DATA=${BITMARKD_DATA}
-PLIST_FILES+=	"etc/${command}.conf.sub"
+PLIST_FILES+=	"etc/bitmarkd.conf.sub"
 .endif
 
 .if ${PORT_OPTIONS:MRECORDER}
@@ -143,7 +143,7 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKDIR}/bin/${command} ${STAGEDIR}${PREFIX}/bin
 .endfor
 .if ${PORT_OPTIONS:MDAEMON}
-	${INSTALL_DATA} ${WRKSRC}/command/${command}/${command}.conf.sub ${STAGEDIR}${PREFIX}/etc/${command}.conf.sub
+	${INSTALL_DATA} ${WRKSRC}/command/bitmarkd/bitmarkd.conf.sub ${STAGEDIR}${PREFIX}/etc/bitmarkd.conf.sub
 	${MKDIR} ${STAGEDIR}${BITMARKD_RUN}
 	${MKDIR} ${STAGEDIR}${BITMARKD_DATA}
 .endif
