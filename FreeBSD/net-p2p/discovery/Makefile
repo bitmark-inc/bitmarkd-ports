@@ -30,7 +30,7 @@ VAR_DIR=	/var
 DISCOVERY_DATA=	${VAR_DIR}/lib/discovery
 DISCOVERY_RUN=	${VAR_DIR}/run/discovery
 
-USE_RC_SUBR=discovery
+USE_RC_SUBR=	discovery
 SUB_LIST+=	DISCOVERY_USER=discovery \
 		DISCOVERY_GROUP=discovery \
 		DISCOVERY_DATA=${DISCOVERY_DATA} \
