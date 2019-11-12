@@ -1,9 +1,8 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark
-#PORTVERSION=	0.12.0
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.12.0-alpha.3
+DISTVERSION=	0.12.2
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -37,31 +36,34 @@ RECORDER_DESC=	Hashing program
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_PROJECT=	bitmarkd
-GH_TUPLE=	bitmark-inc:certgen:v0.1.1:certgen/vendor/github.com/bitmark-inc/certgen \
-		bitmark-inc:exitwithstatus:v0.1.2:exitwithstatus/vendor/github.com/bitmark-inc/exitwithstatus \
-		bitmark-inc:getoptions:v0.1.1:getoptions/vendor/github.com/bitmark-inc/getoptions \
-		bitmark-inc:go-argon2:v0.1.4:go_argon2/vendor/github.com/bitmark-inc/go-argon2 \
-		bitmark-inc:logger:v0.3.4:logger/vendor/github.com/bitmark-inc/logger \
-		btcsuite:btcd:c26ffa870fd8:btcd/vendor/github.com/btcsuite/btcd \
-		btcsuite:btclog:84c8d2346e9f:btclog/vendor/github.com/btcsuite/btclog \
-		btcsuite:btcutil:9e5f4b9a998d:btcutil/vendor/github.com/btcsuite/btcutil \
-		btcsuite:go-socks:4720035b7bfd:go_socks/vendor/github.com/btcsuite/go-socks \
-		cihub:seelog:f561c5e57575:seelog/vendor/github.com/cihub/seelog \
-		davecgh:go-spew:v1.1.1:go_spew/vendor/github.com/davecgh/go-spew \
-		fsnotify:fsnotify:v1.4.7:fsnotify/vendor/github.com/fsnotify/fsnotify \
-		golang:crypto:4def268fd1a4:crypto/vendor/golang.org/x/crypto \
-		golang:net:ba9fcec4b297:net/vendor/golang.org/x/net \
-		golang:snappy:v0.0.1:snappy/vendor/github.com/golang/snappy \
-		golang:sys:749cb33beabd:sys/vendor/golang.org/x/sys \
-		golang:time:9d24e82272b4:time/vendor/golang.org/x/time \
-		miekg:dns:v1.1.16:dns/vendor/github.com/miekg/dns \
-		mitchellh:mapstructure:v1.1.2:mapstructure/vendor/github.com/mitchellh/mapstructure \
-		patrickmn:go-cache:v2.1.0:go_chche/vendor/github.com/patrickmn/go-cache \
-		pebbe:zmq4:v1.0.0:zmq4/vendor/github.com/pebbe/zmq4 \
-		syndtr:goleveldb:v1.0.0:goleveldb/vendor/github.com/syndtr/goleveldb \
-		urfave:cli:v1.21.0:cli/vendor/github.com/urfave/cli \
-		yuin:gluamapper:d836955830e7:gluamapper/vendor/github.com/yuin/gluamapper \
-		yuin:gopher-lua:1cd887cd7036:gopher_lua/vendor/github.com/yuin/gopher-lua
+GH_TUPLE=	\
+		bitmark-inc:certgen:v0.1.1:bitmark_inc_certgen/vendor/github.com/bitmark-inc/certgen \
+		bitmark-inc:exitwithstatus:v0.1.2:bitmark_inc_exitwithstatus/vendor/github.com/bitmark-inc/exitwithstatus \
+		bitmark-inc:getoptions:v0.1.1:bitmark_inc_getoptions/vendor/github.com/bitmark-inc/getoptions \
+		bitmark-inc:go-argon2:v0.1.4:bitmark_inc_go_argon2/vendor/github.com/bitmark-inc/go-argon2 \
+		bitmark-inc:logger:v0.3.4:bitmark_inc_logger/vendor/github.com/bitmark-inc/logger \
+		btcsuite:btcd:c26ffa870fd8:btcsuite_btcd/vendor/github.com/btcsuite/btcd \
+		btcsuite:btclog:84c8d2346e9f:btcsuite_btclog/vendor/github.com/btcsuite/btclog \
+		btcsuite:btcutil:9e5f4b9a998d:btcsuite_btcutil/vendor/github.com/btcsuite/btcutil \
+		btcsuite:go-socks:4720035b7bfd:btcsuite_go_socks/vendor/github.com/btcsuite/go-socks \
+		cihub:seelog:f561c5e57575:cihub_seelog/vendor/github.com/cihub/seelog \
+		davecgh:go-spew:v1.1.0:davecgh_go_spew/vendor/github.com/davecgh/go-spew \
+		fsnotify:fsnotify:v1.4.7:fsnotify_fsnotify/vendor/github.com/fsnotify/fsnotify \
+		go-yaml:yaml:v2.2.2:go_yaml_yaml/vendor/gopkg.in/yaml.v2 \
+		golang:crypto:9756ffdc2472:golang_crypto/vendor/golang.org/x/crypto \
+		golang:net:ba9fcec4b297:golang_net/vendor/golang.org/x/net \
+		golang:snappy:v0.0.1:golang_snappy/vendor/github.com/golang/snappy \
+		golang:sync:112230192c58:golang_sync/vendor/golang.org/x/sync \
+		golang:sys:749cb33beabd:golang_sys/vendor/golang.org/x/sys \
+		golang:time:9d24e82272b4:golang_time/vendor/golang.org/x/time \
+		miekg:dns:v1.1.16:miekg_dns/vendor/github.com/miekg/dns \
+		mitchellh:mapstructure:v1.1.2:mitchellh_mapstructure/vendor/github.com/mitchellh/mapstructure \
+		patrickmn:go-cache:v2.1.0:patrickmn_go_cache/vendor/github.com/patrickmn/go-cache \
+		pebbe:zmq4:v1.0.0:pebbe_zmq4/vendor/github.com/pebbe/zmq4 \
+		syndtr:goleveldb:v1.0.0:syndtr_goleveldb/vendor/github.com/syndtr/goleveldb \
+		urfave:cli:v1.21.0:urfave_cli/vendor/github.com/urfave/cli \
+		yuin:gluamapper:d836955830e7:yuin_gluamapper/vendor/github.com/yuin/gluamapper \
+		yuin:gopher-lua:1cd887cd7036:yuin_gopher_lua/vendor/github.com/yuin/gopher-lua
 
 STRIP=		# stripping can break go binaries
 
