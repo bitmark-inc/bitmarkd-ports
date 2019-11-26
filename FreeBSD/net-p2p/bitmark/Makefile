@@ -3,6 +3,7 @@
 PORTNAME=	bitmark
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.12.3
+PORTREVISION=	1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -126,7 +127,7 @@ PLIST_FILES+=	"@dir(bitmark-recorder,bitmark-recorder,) ${RECORDERD_DATA}" \
 PLIST_FILES+=	"@dir ${VAR_DIR}/lib"
 .endif
 
-GO_BUILDFLAGS+=	--ldflags "-X main.version=${DISTVERSION}"
+GO_BUILDFLAGS+=	-ldflags="-X main.version=${DISTVERSION}"
 
 .for command in ${SERVER_LIST} ${COMMAND_LIST}
 GO_TARGET+=	./command/${command}
