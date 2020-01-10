@@ -2,7 +2,7 @@
 
 PORTNAME=	bitmark
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.12.4-beta.5
+DISTVERSION=	0.12.4-rc.1
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
