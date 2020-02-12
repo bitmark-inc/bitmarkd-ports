@@ -13,18 +13,19 @@ LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 ONLY_FOR_ARCHS=	amd64 armv6 armv7 i386
-ONLY_FOR_ARCHS_REASON=	depends on go which is not supported in this architecture
+ONLY_FOR_ARCHS_REASON=	depends on go which is not supported in this \
+			architecture
 
 LIB_DEPENDS=	libargon2.so:security/libargon2 \
 		libzmq.so:net/libzmq4
 
-USES=		pkgconfig go:modules
+USES=		go:modules pkgconfig
 
 CONFLICTS?=	bitmark-p2p-{daemon,cli,recorder,dumper},bitmark-{daemon,cli,recorder,dumper},bitmark
 SLAVE_PORT?=	no
 
-OPTIONS_DEFINE?=	DAEMON CLI DUMPER RECORDER
-OPTIONS_DEFAULT?=	DAEMON CLI RECORDER
+OPTIONS_DEFINE?=	CLI DAEMON DUMPER RECORDER
+OPTIONS_DEFAULT?=	CLI DAEMON RECORDER
 OPTIONS_SUB=		yes
 
 DAEMON_DESC=	Main bitmarkd node server
@@ -140,7 +141,8 @@ GH_TUPLE=	\
 		yuin:gluamapper:d836955830e7:yuin_gluamapper/vendor/github.com/yuin/gluamapper \
 		yuin:gopher-lua:1cd887cd7036:yuin_gopher_lua/vendor/github.com/yuin/gopher-lua
 
-STRIP=		# stripping can break go binaries
+# stripping can break go binaries
+STRIP=
 
 SLAVE_PORT?=	NO
 
@@ -153,10 +155,10 @@ BITMARKD_RUN=	${VAR_DIR}/run/bitmarkd
 BITMARKD_DATA=	${VAR_DIR}/lib/bitmarkd
 SERVER_LIST+=	bitmarkd
 USE_RC_SUBR+=	bitmarkd
-SUB_LIST+=	BITMARKD_USER=bitmark \
+SUB_LIST+=	BITMARKD_DATA=${BITMARKD_DATA} \
 		BITMARKD_GROUP=bitmark \
 		BITMARKD_RUN=${BITMARKD_RUN} \
-		BITMARKD_DATA=${BITMARKD_DATA}
+		BITMARKD_USER=bitmark
 PLIST_FILES+=	"etc/bitmarkd.conf.sub"
 .endif
 
@@ -167,10 +169,10 @@ RECORDERD_RUN=	${VAR_DIR}/run/recorderd
 RECORDERD_DATA=	${VAR_DIR}/lib/recorderd
 SERVER_LIST+=	recorderd
 USE_RC_SUBR+=	recorderd
-SUB_LIST+=	RECORDERD_USER=bitmark-recorder \
+SUB_LIST+=	RECORDERD_DATA=${RECORDERD_DATA} \
 		RECORDERD_GROUP=bitmark-recorder \
 		RECORDERD_RUN=${RECORDERD_RUN} \
-		RECORDERD_DATA=${RECORDERD_DATA}
+		RECORDERD_USER=bitmark-recorder
 .endif
 
 .if ${PORT_OPTIONS:MCLI}
@@ -182,9 +184,9 @@ COMMAND_LIST+=	bitmark-dumpdb
 
 .for command in ${SERVER_LIST}
 PLIST_FILES+=	"@sample etc/${command}.conf.sample" \
-		sbin/${command} \
+		etc/newsyslog.conf.d/${command}.conf \
 		etc/syslog.d/${command}.conf \
-		etc/newsyslog.conf.d/${command}.conf
+		sbin/${command}
 .endfor
 .for command in ${COMMAND_LIST}
 PLIST_FILES+=	bin/${command}
