@@ -21,7 +21,9 @@ LIB_DEPENDS=	libargon2.so:security/libargon2 \
 
 USES=		go:modules pkgconfig
 
-CONFLICTS?=	bitmark-p2p-{daemon,cli,recorder,dumper},bitmark-{daemon,cli,recorder,dumper},bitmark
+CONFLICTS?=	bitmark-p2p-{daemon,cli,recorder,dumper} \
+		bitmark-{daemon,cli,recorder,dumper} \
+		bitmark
 SLAVE_PORT?=	no
 
 OPTIONS_DEFINE?=	CLI DAEMON DUMPER RECORDER
