@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	bitmark-p2p
-PORTVERSION=	20200212
+PORTVERSION=	20200217
 DISTVERSIONPREFIX=	v
 #DISTVERSION=	0.12.4
 CATEGORIES=	net-p2p
@@ -40,7 +40,7 @@ RECORDER_DESC=	Hashing program
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_PROJECT=	bitmarkd
-GH_TAGNAME=	43e88c4b5c2c
+GH_TAGNAME=	aa634b05ce3a
 GH_TUPLE=	\
 		alecthomas:kingpin:v2.2.6:alecthomas_kingpin/vendor/gopkg.in/alecthomas/kingpin.v2 \
 		alecthomas:template:fb15b899a751:alecthomas_template/vendor/github.com/alecthomas/template \
