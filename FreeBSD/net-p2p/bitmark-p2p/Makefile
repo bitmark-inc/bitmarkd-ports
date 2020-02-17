@@ -4,7 +4,7 @@ PORTNAME=	bitmark-p2p
 PORTVERSION=	20200217
 DISTVERSIONPREFIX=	v
 #DISTVERSION=	0.12.4
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -41,8 +41,7 @@ RECORDER_DESC=	Hashing program
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitmark-inc:DEFAULT
 GH_PROJECT=	bitmarkd
-GH_TAGNAME=	454a0ae88185
-
+GH_TAGNAME=	92afbbe0b2fa
 GH_TUPLE=	\
 		alecthomas:kingpin:v2.2.6:alecthomas_kingpin/vendor/gopkg.in/alecthomas/kingpin.v2 \
 		alecthomas:template:fb15b899a751:alecthomas_template/vendor/github.com/alecthomas/template \
