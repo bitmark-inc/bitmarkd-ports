@@ -1,6 +1,6 @@
-TIMESTAMP = 1582103279
-SHA256 (bitmark-inc-bitmarkd-v20200217-48ba9fb16dca_GH0.tar.gz) = dbd817970a995c37119877dbb7492e09369b054114fe1b2aeaf9924099641612
-SIZE (bitmark-inc-bitmarkd-v20200217-48ba9fb16dca_GH0.tar.gz) = 486264
+TIMESTAMP = 1582191101
+SHA256 (bitmark-inc-bitmarkd-v20200217-76f564eb7141_GH0.tar.gz) = 1a6f7faa5a7bde0117d59b92fe679a0f1eb9777026b72c6512f7a589803cb21a
+SIZE (bitmark-inc-bitmarkd-v20200217-76f564eb7141_GH0.tar.gz) = 486069
 SHA256 (alecthomas-kingpin-v2.2.6_GH0.tar.gz) = 4624eae43489de8a71ea60efaf6744c581b6bd62909f7514c484c1ea0efaba5a
 SIZE (alecthomas-kingpin-v2.2.6_GH0.tar.gz) = 44383
 SHA256 (alecthomas-template-fb15b899a751_GH0.tar.gz) = 2e2a44375eca48ce941182504b5d13aa98182b9a3f64ace33bfda52208bd0f5e
