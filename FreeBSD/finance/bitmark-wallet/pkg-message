@@ -1,0 +1,19 @@
+[
+{ type: install
+  message: <<EOM
+* Please keep all configuration and wallet data files files under the
+  configuration directory secure.  By default this directory is:
+
+  ${XDG_CONFIG_HOME}/bitmark-wallet/
+
+* Note that bitmark-wallet requires bitcoind and litecoind daemons to
+  be setup for localhost RPC access.  It is recommended that both the
+  net-p2p/bitcoin-daemon and the net-p2p/litecoin-daemon be installed
+  for a minimum configuration.
+
+* It is possible to use both main and test networks on both
+  cryptocurrency blockchains if all four configuration files are
+  create and each combination has its own working directory.
+EOM
+}
+]
