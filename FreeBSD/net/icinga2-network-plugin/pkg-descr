@@ -1,0 +1,6 @@
+A nagios interface to net/vnstat
+
+This allows gathering of network information from net/vnstat
+into a form suitable for use by icinga2 clients
+
+WWW: https://github.com/bitmark-inc/icinga2-network-plugin
