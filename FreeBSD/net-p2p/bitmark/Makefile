@@ -2,7 +2,7 @@
 
 PORTNAME=	bitmark
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.12.5-rc.2
+DISTVERSION=	0.12.5-rc.3
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -41,7 +41,7 @@ GH_TUPLE=	bitmark-inc:certgen:v0.1.1:bitmark_inc_certgen/vendor/github.com/bitma
 		bitmark-inc:exitwithstatus:v0.1.2:bitmark_inc_exitwithstatus/vendor/github.com/bitmark-inc/exitwithstatus \
 		bitmark-inc:getoptions:v0.1.1:bitmark_inc_getoptions/vendor/github.com/bitmark-inc/getoptions \
 		bitmark-inc:go-argon2:v0.1.5:bitmark_inc_go_argon2/vendor/github.com/bitmark-inc/go-argon2 \
-		bitmark-inc:logger:v0.3.4:bitmark_inc_logger/vendor/github.com/bitmark-inc/logger \
+		bitmark-inc:logger:v0.3.5:bitmark_inc_logger/vendor/github.com/bitmark-inc/logger \
 		btcsuite:btcd:v0.20.1-beta:btcsuite_btcd/vendor/github.com/btcsuite/btcd \
 		btcsuite:btclog:84c8d2346e9f:btcsuite_btclog/vendor/github.com/btcsuite/btclog \
 		btcsuite:btcutil:9e5f4b9a998d:btcsuite_btcutil/vendor/github.com/btcsuite/btcutil \
