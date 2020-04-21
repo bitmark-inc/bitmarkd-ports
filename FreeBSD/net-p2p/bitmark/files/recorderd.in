@@ -67,7 +67,6 @@ command_args="${command_args} -P ${pidfile} -R 60 -- ${_recorderd_program} ${_re
 export GODEBUG='madvdontneed=1'
 export MALLOC_CONF='abort:true,narenas:1'
 
-
 recorderd_checkdirs()
 {
   local dir
