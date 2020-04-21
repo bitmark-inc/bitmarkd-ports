@@ -1,5 +1,5 @@
 #!/bin/sh
-# $FreeBSD$
+# $FreeBSD: head/net-p2p/bitmark/files/bitmarkd.in 523293 2020-01-17 10:46:13Z araujo $
 
 # PROVIDE: bitmarkd
 # REQUIRE: LOGIN cleanvar
@@ -81,11 +81,10 @@ command_args="${command_args} -P ${pidfile} -R 60 -- ${_bitmarkd_program} ${_bit
 generate_list='gen-peer-identity gen-proof-identity gen-rpc-cert'
 
 # setup environment to reduce memory loading
-export GODEBUG='mdvdontneed=1'
+export GODEBUG='madvdontneed=1'
 export MALLOC_CONF='abort:true,narenas:1'
 
-
-Bitmarkd_checkdirs()
+bitmarkd_checkdirs()
 {
   local dir
   for dir in "${bitmarkd_data_dir}" "${bitmarkd_run_dir}"

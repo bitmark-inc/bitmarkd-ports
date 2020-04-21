@@ -1,5 +1,5 @@
 #!/bin/sh
-# $FreeBSD$
+# $FreeBSD: head/net-p2p/bitmark/files/recorderd.in 523293 2020-01-17 10:46:13Z araujo $
 
 # PROVIDE: recorderd
 # REQUIRE: LOGIN cleanvar
@@ -64,7 +64,7 @@ command_args="${command_args} -P ${pidfile} -R 60 -- ${_recorderd_program} ${_re
 #procname=${_recorderd_program} # do not override procname as program runs under daemon
 
 # setup environment to reduce memory loading
-export GODEBUG='mdvdontneed=1'
+export GODEBUG='madvdontneed=1'
 export MALLOC_CONF='abort:true,narenas:1'
 
 

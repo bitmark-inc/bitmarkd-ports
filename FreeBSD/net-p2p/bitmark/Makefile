@@ -1,4 +1,4 @@
-# $FreeBSD: head/net-p2p/bitmark/Makefile 523293 2020-01-17 10:46:13Z araujo $
+# $FreeBSD: head/net-p2p/bitmark/Makefile 530896 2020-04-06 17:26:08Z mikael $
 
 PORTNAME=	bitmark
 DISTVERSIONPREFIX=	v
@@ -11,7 +11,7 @@ COMMENT?=	Bitmark distributed property system programs
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-ONLY_FOR_ARCHS=	amd64 armv6 armv7 i386
+ONLY_FOR_ARCHS=	aarch64 amd64 armv6 armv7 i386
 ONLY_FOR_ARCHS_REASON=	depends on go which is not supported in this \
 			architecture
 
