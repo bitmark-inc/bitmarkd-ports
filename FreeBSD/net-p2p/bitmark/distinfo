@@ -1,4 +1,4 @@
-TIMESTAMP = 1589254493
+TIMESTAMP = 1589353954
 SHA256 (bitmark-inc-bitmarkd-v0.13.1_GH0.tar.gz) = d9e0ed33effa72f494bb9d5d317a3a73b76b1ab13ec15648396eba13c51487ec
 SIZE (bitmark-inc-bitmarkd-v0.13.1_GH0.tar.gz) = 483326
 SHA256 (bitmark-inc-certgen-v0.1.1_GH0.tar.gz) = 8f298113dc155afb0d8991afcc9611f9f6fa213d89c5d35a7fa7a526b1baaf7c
@@ -11,8 +11,8 @@ SHA256 (bitmark-inc-go-argon2-v0.1.5_GH0.tar.gz) = d69504d16237caad9c0b24f5c26c5
 SIZE (bitmark-inc-go-argon2-v0.1.5_GH0.tar.gz) = 7339
 SHA256 (bitmark-inc-logger-v0.3.5_GH0.tar.gz) = 87f9e9cea36363b594d1340f4aa499c5800ed2a22d4747005e032b58f7b37d65
 SIZE (bitmark-inc-logger-v0.3.5_GH0.tar.gz) = 7933
-SHA256 (bitmark-inc-btcd-170730d28039_GH0.tar.gz) = cf0be1ad53face7170eca5ca0cb4889d60fcf027d5d540aee32367dd94a9ff45
-SIZE (bitmark-inc-btcd-170730d28039_GH0.tar.gz) = 2845581
+SHA256 (bitmark-inc-btcd-7850dda8364f_GH0.tar.gz) = d38fd4191d3858cf071ed3cff14b5abe76252499a536d42a1c243a73d1f580d3
+SIZE (bitmark-inc-btcd-7850dda8364f_GH0.tar.gz) = 2845626
 SHA256 (btcsuite-btclog-84c8d2346e9f_GH0.tar.gz) = f31154671fc11e8731ef563f37a25dedc69819bc7f1c7d2395a58314e6b89ee1
 SIZE (btcsuite-btclog-84c8d2346e9f_GH0.tar.gz) = 7045
 SHA256 (btcsuite-btcutil-9e5f4b9a998d_GH0.tar.gz) = 32c79162921b370c7402ca22ad1c48c6fd60e7a64d433077267764ea4f53481b
