@@ -1,5 +1,3 @@
-# $FreeBSD: head/net-p2p/bitmark/Makefile 530896 2020-04-06 17:26:08Z mikael $
-
 PORTNAME=	bitmark
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.13.2
