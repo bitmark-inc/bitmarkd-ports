@@ -1,6 +1,6 @@
 PORTNAME=	bitmark
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.15.4
+DISTVERSION=	0.15.5
 CATEGORIES=	net-p2p
 
 MAINTAINER=	hsw@bitmark.com
@@ -16,12 +16,13 @@ ONLY_FOR_ARCHS_REASON=	depends on go which is not supported in this architecture
 LIB_DEPENDS=	libargon2.so:security/libargon2 \
 		libzmq.so:net/libzmq4
 
-USES=		go:modules pkgconfig
+USES=		go:modules pkgconfig cpe
+CPE_VENDOR=	bitmark-inc
+CPE_PRODUCT=	bitmarkd
+CONFLICTS?=	bitmark-cli bitmark-daemon bitmark-recorder
 
 GO_MODULE=	github.com/bitmark-inc/bitmarkd
 GO_BUILDFLAGS+=	-ldflags="-X main.version=${DISTVERSION}"
-
-CONFLICTS?=	bitmark-cli bitmark-daemon bitmark-recorder
 
 OPTIONS_DEFINE=		CLI DAEMON DUMPER RECORDER
 OPTIONS_DEFAULT?=	CLI DAEMON RECORDER
