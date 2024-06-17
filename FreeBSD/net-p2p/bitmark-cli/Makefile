@@ -1,3 +1,4 @@
+PORTREVISION=	5
 PKGNAMESUFFIX=	-cli
 
 COMMENT=	Bitmark distributed property system cli
